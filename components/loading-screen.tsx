@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import Image from "next/image"
 
 interface LoadingScreenProps {
   onComplete: () => void
@@ -13,8 +14,8 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false)
-      setTimeout(onComplete, 500) // Allow fade out animation to complete
-    }, 2000) // Show for 2 seconds minimum
+      setTimeout(onComplete, 500) // let fade-out complete
+    }, 2500) // show for ~2.5s
 
     return () => clearTimeout(timer)
   }, [onComplete])
@@ -22,52 +23,67 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   if (!isVisible) {
     return (
       <motion.div
-        className="loading-screen"
+        className="loading-screen fixed inset-0 bg-white z-50"
         initial={{ opacity: 1 }}
         animate={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
         style={{ pointerEvents: "none" }}
       />
     )
   }
 
   return (
-    <div className="loading-screen">
+    <div className="loading-screen fixed inset-0 flex items-center justify-center bg-white z-50">
       <motion.div
         className="text-center"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
+        {/* Animated Logo */}
         <motion.div
-          className="w-20 h-20 mx-auto mb-4 bg-primary rounded-lg flex items-center justify-center"
+          className="w-20 h-20 mx-auto mb-4 bg-primary rounded-xl flex items-center justify-center shadow-lg"
           animate={{
-            rotateY: [0, 360],
-            scale: [1, 1.1, 1],
+            scale: [1, 1.15, 1],
+            rotate: [0, 10, -10, 0],
           }}
           transition={{
-            duration: 2,
+            duration: 1.8,
             repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
           }}
         >
-          <span className="text-2xl font-bold text-primary-foreground">RE</span>
+          {/* <span className="text-2xl font-bold text-primary-foreground">
+            RE
+          </span> */}
+          <Image
+            src="/dostilogo.png"   
+            alt="Dosti Logo"
+            width={110}
+            height={110}
+            priority
+            className="rounded-lg shadow-md"
+          />
         </motion.div>
+
+        {/* Brand Name */}
         <motion.h1
-          className="text-2xl font-bold text-primary mb-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          className="text-2xl font-bold text-gray-900 mb-2"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
         >
-          Luxury Estates
+          Dostigreenscapes Estates
         </motion.h1>
+
+        {/* Tagline */}
         <motion.p
-          className="text-muted-foreground"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
+          className="text-gray-500"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
         >
-          Premium Real Estate Experience
+         Official Strategic Partners
         </motion.p>
       </motion.div>
     </div>
