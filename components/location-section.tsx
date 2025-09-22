@@ -44,6 +44,12 @@ export default function LocationSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
+  const directionsLink =
+    "https://www.google.com/maps/dir/?api=1&destination=Dosti+Greenscapes,+Indian+Hume+Pipe+Compound,+Near+Kirloskar+Company,+Near+Magarpatta+City,+Solapur+Road,+Upper+Camp,+Pune+411013"
+
+  const mapsLink =
+    "https://www.google.com/maps?q=Dosti+Greenscapes,+Indian+Hume+Pipe+Compound,+Near+Kirloskar+Company,+Near+Magarpatta+City,+Solapur+Road,+Upper+Camp,+Pune+411013"
+
   return (
     <section id="location" className="py-20 bg-background" ref={ref}>
       <div className="container mx-auto px-4">
@@ -69,31 +75,37 @@ export default function LocationSection() {
           >
             <Card className="overflow-hidden">
               <CardContent className="p-0">
-                <div className="relative h-96 bg-muted">
-                  {/* Placeholder for interactive map */}
-                  <img
-                    src="/placeholder.svg?height=400&width=600"
-                    alt="Location Map"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-primary text-primary-foreground p-4 rounded-full shadow-lg">
-                      <MapPin size={32} />
+                <a href={directionsLink} target="_blank" rel="noopener noreferrer" className="block">
+                  <div className="relative h-96 bg-muted cursor-pointer">
+                    <img
+                      src="dostilocation.png"
+                      alt="Location Map"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-primary text-primary-foreground p-4 rounded-full shadow-lg">
+                        <MapPin size={32} />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-lg">
+                      <div className="font-semibold text-primary">Dosti Greenscapes</div>
+                      <div className="text-sm text-muted-foreground">Satellite view</div>
                     </div>
                   </div>
-                  <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-lg">
-                    <div className="font-semibold text-primary">Luxury Estates</div>
-                    <div className="text-sm text-muted-foreground">123 Premium Avenue</div>
-                  </div>
-                </div>
+                </a>
               </CardContent>
             </Card>
 
             <div className="mt-6 flex gap-4">
-              <Button className="flex-1 bg-primary hover:bg-primary/90">Get Directions</Button>
-              <Button variant="outline" className="flex-1 bg-transparent">
-                View on Google Maps
-              </Button>
+              <a href={directionsLink} target="_blank" rel="noopener noreferrer" className="flex-1">
+                <Button className="w-full bg-primary hover:bg-primary/90">Get Directions</Button>
+              </a>
+
+              <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="flex-1">
+                <Button variant="outline" className="w-full bg-transparent">
+                  View on Google Maps
+                </Button>
+              </a>
             </div>
           </motion.div>
 
@@ -148,7 +160,10 @@ export default function LocationSection() {
                 <div className="space-y-2 text-muted-foreground">
                   <div className="flex items-center">
                     <MapPin className="w-4 h-4 mr-2" />
-                    <span>Dosti Greenscapes, Indian Hume Pipe Compound, Near Kirloskar Company, Near Magarpatta City, Solapur Road, Upper Camp, Pune - 411013</span>
+                    <span>
+                      Dosti Greenscapes, Indian Hume Pipe Compound, Near Kirloskar Company, Near Magarpatta City,
+                      Solapur Road, Upper Camp, Pune - 411013
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Clock className="w-4 h-4 mr-2" />
