@@ -11,7 +11,7 @@ const stats = [
   { icon: Award, value: "25+", label: "Years Experience" },
   { icon: Star, value: "4.9", label: "Client Rating" },
 ]
-
+ 
 export default function AboutSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
@@ -28,8 +28,8 @@ export default function AboutSection() {
           >
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">Redefining Luxury Living</h2>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              For over two decades, Luxury Estates has been at the forefront of premium real estate, curating
-              exceptional properties that embody sophistication, comfort, and timeless elegance.
+              Luxury Estates has been at the forefront of premium real estate, curating
+              exceptional properties that embody luxury, comfort, and timeless elegance.
             </p>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               Our commitment to excellence extends beyond mere transactions. We craft experiences, build relationships,
@@ -75,7 +75,7 @@ export default function AboutSection() {
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <div className="text-2xl font-bold text-card-foreground">$2.5M+</div>
+              <div className="text-2xl font-bold text-card-foreground">₹88 Lakh+</div>
               <div className="text-sm text-muted-foreground">Average Property Value</div>
             </motion.div>
           </motion.div>
