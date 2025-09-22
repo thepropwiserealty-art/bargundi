@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import ContactPopup from "./contact-popup"
+import Image from "next/image"
+
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -52,10 +54,16 @@ export default function Navigation() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <motion.div className="flex items-center space-x-2" whileHover={{ scale: 1.05 }}>
-              <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-                <span className="text-sm font-bold text-primary-foreground">RE</span>
+              <div className="rounded-md flex items-center justify-center">
+                {/* <span className="text-sm font-bold text-primary-foreground">RE</span> */}
+                 <img 
+                 src="/dostilogo.png" 
+                 alt="Dosti Logo" 
+                 className="h-10 w-auto rounded-md"  // adjust size as needed
+         />
+
               </div>
-              <span className="text-xl font-bold text-primary">Luxury Estates</span>
+              {/* <span className="text-xl font-bold text-primary">Dostig</span> */}
             </motion.div>
 
             {/* Desktop Navigation */}
