@@ -36,7 +36,7 @@ const galleryImages = [
   {
     id: 4,
     src: "/rooftop-infinity-pool-with-city-skyline-view.jpg",
-    alt: "Rooftop Pool",
+    alt: "Pool",
     category: "Amenities",
   },
   {
