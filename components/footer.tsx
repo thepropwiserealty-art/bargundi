@@ -30,10 +30,14 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 bg-primary-foreground rounded-md flex items-center justify-center">
-                <span className="text-sm font-bold text-primary">RE</span>
+              <div className="foreground rounded-md flex items-center justify-center">
+                {/* <span className="text-sm font-bold text-primary">RE</span> */} <img 
+                 src="/dostilogo.png" 
+                 alt="Dosti Logo" 
+                 className="h-10 w-auto rounded-md"  // adjust size as needed
+         />
               </div>
-              <span className="text-xl font-bold">Luxury Estates</span>
+              {/* <span className="text-xl font-bold">Luxury Estates</span> */}
             </div>
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">
               Redefining luxury living with exceptional properties and unparalleled service. Your dream home awaits.
@@ -41,15 +45,15 @@ export default function Footer() {
             <div className="space-y-2">
               <div className="flex items-center text-primary-foreground/80">
                 <MapPin className="w-4 h-4 mr-2" />
-                <span className="text-sm">123 Premium Avenue, Downtown</span>
+                <span className="text-sm">Dosti Greenscapes, Near Magarpatta City,Upper Camp, Pune - 411013</span>
               </div>
               <div className="flex items-center text-primary-foreground/80">
                 <Phone className="w-4 h-4 mr-2" />
-                <span className="text-sm">+1 (555) 123-4567</span>
+                <span className="text-sm">+91 987456123</span>
               </div>
               <div className="flex items-center text-primary-foreground/80">
                 <Mail className="w-4 h-4 mr-2" />
-                <span className="text-sm">info@luxuryestates.com</span>
+                <span className="text-sm">shobhalmt@gmail.com</span>
               </div>
             </div>
           </motion.div>
@@ -89,7 +93,7 @@ export default function Footer() {
           viewport={{ once: true }}
         >
           <div className="text-primary-foreground/80 text-sm mb-4 md:mb-0">
-            © 2024 Luxury Estates. All rights reserved.
+            © 2025 Greenscapes . All rights reserved.
           </div>
 
           {/* Social Links */}
