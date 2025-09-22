@@ -8,6 +8,10 @@ import { X, Phone, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { sendOtp } from "@/lib/otp/api/sendOtp"
+import { validateOtp, validatePhone } from "@/lib/utils";
+import { verifyOtp } from "@/lib/otp/api/verifyOtp"
+import { checkIfSubmitted } from "@/lib/checkIfSubmitted"
 
 export default function DiscountPopup() {
   const [isVisible, setIsVisible] = useState(false)
@@ -20,10 +24,11 @@ export default function DiscountPopup() {
 
   // Check if user has already submitted
   useEffect(() => {
-    const submitted = localStorage.getItem("discountCouponSubmitted")
-    if (submitted === "true") {
-      setIsSubmitted(true)
-    }
+    // const submitted = localStorage.getItem("discountCouponSubmitted")
+    // if (submitted === "true") {
+    //   setIsSubmitted(true)
+    // }
+    checkIfSubmitted(setIsSubmitted);
   }, [])
 
   // Timer logic for showing popup
@@ -34,15 +39,15 @@ export default function DiscountPopup() {
       setIsVisible(true)
     }
 
-    // Initial delay of 45 seconds
-    const initialTimer = setTimeout(showPopup, 45000)
+    // Initial delay of 20 seconds
+    const initialTimer = setTimeout(showPopup, 20000)
 
-    // Recurring timer every 45 seconds
+    // Recurring timer every 20 seconds
     const recurringTimer = setInterval(() => {
       if (!isSubmitted) {
         setIsVisible(true)
       }
-    }, 45000)
+    }, 20000)
 
     return () => {
       clearTimeout(initialTimer)
@@ -50,14 +55,8 @@ export default function DiscountPopup() {
     }
   }, [isSubmitted])
 
-  const validatePhone = (phone: string) => {
-    const phoneRegex = /^[6-9]\d{9}$/
-    return phoneRegex.test(phone)
-  }
 
-  const validateOtp = (otpValue: string) => {
-    return otpValue.length === 6 && /^\d+$/.test(otpValue)
-  }
+
 
   const handleSendOtp = async () => {
     setErrors({ phone: "", otp: "" })
@@ -69,10 +68,19 @@ export default function DiscountPopup() {
 
     setIsLoading(true)
     // Simulate OTP sending
-    setTimeout(() => {
+    const otpSent: boolean = await sendOtp(phoneNumber, setErrors);
+
+    if (otpSent) {
       setShowOtpField(true)
       setIsLoading(false)
-    }, 1500)
+    }
+    else {
+      setIsLoading(false)
+    }
+    // setTimeout(() => {
+    //   setShowOtpField(true)
+    //   setIsLoading(false)
+    // }, 1500)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -91,13 +99,24 @@ export default function DiscountPopup() {
 
     setIsLoading(true)
     // Simulate form submission
-    setTimeout(() => {
+    const isOtpValid = await verifyOtp(phoneNumber, otp, setErrors);
+
+    if (!isOtpValid) {
+      setIsLoading(false)
+    }
+    else {
       setIsSubmitted(true)
-      localStorage.setItem("discountCouponSubmitted", "true")
       setIsVisible(false)
       setIsLoading(false)
-      // You can add success notification here
-    }, 1500)
+    }
+
+    // setTimeout(() => {
+    //   setIsSubmitted(true)
+    //   // localStorage.setItem("discountCouponSubmitted", "true")
+    //   setIsVisible(false)
+    //   setIsLoading(false)
+    //   // You can add success notification here
+    // }, 1500)
   }
 
   const handleClose = () => {
@@ -169,7 +188,7 @@ export default function DiscountPopup() {
                         type="button"
                         onClick={handleSendOtp}
                         disabled={isLoading}
-                        className="w-full h-12 bg-luxury-gold hover:bg-luxury-gold/90 text-white font-semibold"
+                        className="w-full h-12 bg-gray-600 hover:bg-luxury-gold/90 text-white font-semibold"
                       >
                         {isLoading ? "Sending OTP..." : "Get Coupon"}
                       </Button>
@@ -203,7 +222,7 @@ export default function DiscountPopup() {
                       <Button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full h-12 bg-luxury-gold hover:bg-luxury-gold/90 text-white font-semibold"
+                        className="w-full h-12 bg-gray-600 hover:bg-luxury-gold/90 text-white font-semibold"
                       >
                         {isLoading ? "Verifying..." : "Claim Discount"}
                       </Button>
@@ -213,7 +232,7 @@ export default function DiscountPopup() {
               </div>
 
               {/* Right Side - Coupon Image */}
-              <div className="flex-1 bg-gradient-to-br from-luxury-gold to-luxury-gold/80 relative overflow-hidden">
+              <div className="flex-1 bg-gray-600 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/10"></div>
                 <div className="relative h-full flex items-center justify-center p-8">
                   <div className="text-center text-white">
@@ -221,7 +240,7 @@ export default function DiscountPopup() {
                       <div className="text-6xl font-bold mb-4">20%</div>
                       <div className="text-xl font-semibold mb-2">OFF</div>
                       <div className="text-sm opacity-90 mb-4">On Premium Properties</div>
-                      <div className="bg-white text-luxury-gold px-4 py-2 rounded-full text-sm font-semibold">
+                      <div className="bg-gray-600 text-luxury-gold px-4 py-2 rounded-full text-sm font-semibold">
                         Limited Time Offer
                       </div>
                     </div>
