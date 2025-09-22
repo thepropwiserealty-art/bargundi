@@ -11,11 +11,11 @@ const locationFeatures = [
   {
     icon: Car,
     title: "5 min drive",
-    description: "Downtown Business District",
+    description: "Maggarpatta",
   },
   {
     icon: Train,
-    title: "2 min walk",
+    title: "10 min drive",
     description: "Metro Station",
   },
   {
@@ -25,7 +25,7 @@ const locationFeatures = [
   },
   {
     icon: ShoppingBag,
-    title: "10 min drive",
+    title: "5 min walk",
     description: "Premium Shopping Mall",
   },
   {
@@ -148,7 +148,7 @@ export default function LocationSection() {
                 <div className="space-y-2 text-muted-foreground">
                   <div className="flex items-center">
                     <MapPin className="w-4 h-4 mr-2" />
-                    <span>123 Premium Avenue, Downtown District</span>
+                    <span>Dosti Greenscapes, Indian Hume Pipe Compound, Near Kirloskar Company, Near Magarpatta City, Solapur Road, Upper Camp, Pune - 411013</span>
                   </div>
                   <div className="flex items-center">
                     <Clock className="w-4 h-4 mr-2" />
