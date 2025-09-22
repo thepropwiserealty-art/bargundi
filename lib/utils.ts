@@ -10,5 +10,5 @@ export const validatePhone = (phone: string) => {
 };
 
 export const validateOtp = (otpValue: string) => {
-  return otpValue.length === 6 && /^\d+$/.test(otpValue)
+  return otpValue.length === 6; 
 };

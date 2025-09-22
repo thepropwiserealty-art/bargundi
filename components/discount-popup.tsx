@@ -8,8 +8,10 @@ import { X, Phone, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { sendOtp } from "@/app/api/auth/send_otp/send_otp"
+import { sendOtp } from "@/lib/otp/api/sendOtp"
 import { validateOtp, validatePhone } from "@/lib/utils";
+import { verifyOtp } from "@/lib/otp/api/verifyOtp"
+import { checkIfSubmitted } from "@/lib/checkIfSubmitted"
 
 export default function DiscountPopup() {
   const [isVisible, setIsVisible] = useState(false)
@@ -26,7 +28,7 @@ export default function DiscountPopup() {
     // if (submitted === "true") {
     //   setIsSubmitted(true)
     // }
-
+    checkIfSubmitted(setIsSubmitted);
   }, [])
 
   // Timer logic for showing popup
@@ -37,15 +39,15 @@ export default function DiscountPopup() {
       setIsVisible(true)
     }
 
-    // Initial delay of 45 seconds
-    const initialTimer = setTimeout(showPopup, 2000)
+    // Initial delay of 20 seconds
+    const initialTimer = setTimeout(showPopup, 20000)
 
-    // Recurring timer every 45 seconds
+    // Recurring timer every 20 seconds
     const recurringTimer = setInterval(() => {
       if (!isSubmitted) {
         setIsVisible(true)
       }
-    }, 2000)
+    }, 20000)
 
     return () => {
       clearTimeout(initialTimer)
@@ -66,13 +68,13 @@ export default function DiscountPopup() {
 
     setIsLoading(true)
     // Simulate OTP sending
-    const otpSent:boolean = await sendOtp(phoneNumber, setErrors);
+    const otpSent: boolean = await sendOtp(phoneNumber, setErrors);
 
-    if(otpSent){
+    if (otpSent) {
       setShowOtpField(true)
       setIsLoading(false)
     }
-    else{
+    else {
       setIsLoading(false)
     }
     // setTimeout(() => {
@@ -97,13 +99,24 @@ export default function DiscountPopup() {
 
     setIsLoading(true)
     // Simulate form submission
-    setTimeout(() => {
+    const isOtpValid = await verifyOtp(phoneNumber, otp, setErrors);
+
+    if (!isOtpValid) {
+      setIsLoading(false)
+    }
+    else {
       setIsSubmitted(true)
-      // localStorage.setItem("discountCouponSubmitted", "true")
       setIsVisible(false)
       setIsLoading(false)
-      // You can add success notification here
-    }, 1500)
+    }
+
+    // setTimeout(() => {
+    //   setIsSubmitted(true)
+    //   // localStorage.setItem("discountCouponSubmitted", "true")
+    //   setIsVisible(false)
+    //   setIsLoading(false)
+    //   // You can add success notification here
+    // }, 1500)
   }
 
   const handleClose = () => {
