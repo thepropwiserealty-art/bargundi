@@ -237,14 +237,14 @@ export default function DiscountPopup() {
                 <div className="relative h-full flex items-center justify-center p-8">
                   <div className="text-center text-white">
                     <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 border border-white/30">
-                      <div className="text-6xl font-bold mb-4">20%</div>
+                      <div className="text-6xl font-bold mb-4">20%*</div>
                       <div className="text-xl font-semibold mb-2">OFF</div>
                       <div className="text-sm opacity-90 mb-4">On Premium Properties</div>
                       <div className="bg-gray-600 text-luxury-gold px-4 py-2 rounded-full text-sm font-semibold">
                         Limited Time Offer
                       </div>
                     </div>
-                    <div className="mt-6 text-sm opacity-80">Valid until December 31, 2024</div>
+                    <div className="mt-6 text-sm opacity-80">Valid until December 31, 2025</div>
                   </div>
                 </div>
                 {/* Decorative elements */}
