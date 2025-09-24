@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { addPhoneno } from "@/lib/db";
 import generateOtp from "@/lib/otp/generateOtp";
 import hashOtp from "@/lib/otp/hashOtp";
 
@@ -16,11 +15,6 @@ export async function POST(req: NextRequest) {
       );
     }
     
-    const isPhonenoAdded = await addPhoneno(phone);
-    
-    if(!isPhonenoAdded.success){
-      return NextResponse.json({error: isPhonenoAdded.message},{status: 400});
-    }
     
     const otp = generateOtp();
 

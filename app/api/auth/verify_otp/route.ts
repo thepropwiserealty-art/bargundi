@@ -1,12 +1,13 @@
 import { generateJwtToken } from "@/lib/jwt";
 import verifyOtp from "@/lib/otp/verifyOtp";
+import { addPhoneno } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
-    const otp = searchParams.get("otp");
-    const phone = searchParams.get("phone");
+    const otp : string = searchParams.get("otp") || "";
+    const phone : string = searchParams.get("phone") || "";
 
     // if (!otp) {
     //     return NextResponse.json(
@@ -29,6 +30,13 @@ export async function GET(req: NextRequest) {
     //         { status: 400 }
     //     );
     // }
+
+    const isPhonenoAdded = await addPhoneno(phone);
+
+    if (!isPhonenoAdded.success) {
+        return NextResponse.json({ error: isPhonenoAdded.message }, { status: 500 });
+    }
+
     const response = NextResponse.json({ success: true }, { status: 200 });
 
     const token = generateJwtToken({ phone });
@@ -36,10 +44,10 @@ export async function GET(req: NextRequest) {
     response.cookies.set("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development",
-        maxAge: 30*24*60*60, //30 days
+        maxAge: 30 * 24 * 60 * 60, //30 days
         sameSite: "strict",
         path: "/",
     });
-    
+
     return response;
 }
