@@ -14,6 +14,7 @@ import Footer from "@/components/footer"
 import FloatingActionButtons from "@/components/floating-action-buttons"
 import DownloadBrochureButton from "@/components/download-brochure-button"
 import DiscountPopup from "@/components/discount-popup"
+import StickyForm from "@/components/StickyForm"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -68,6 +69,7 @@ export default function Home() {
         <Footer />
         <FloatingActionButtons />
         <DiscountPopup />
+        <StickyForm />
       </div>
     </>
   )
