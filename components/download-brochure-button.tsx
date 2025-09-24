@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button"
 
 export default function DownloadBrochureButton() {
   const downloadBrochure = () => {
-    // Create a dummy PDF download - in real app, this would be an actual brochure file
+    // Trigger brochure download from public folder
     const link = document.createElement("a")
-    link.href = "/placeholder.pdf" // Replace with actual brochure file path
-    link.download = "luxury-estates-brochure.pdf"
+    link.href = "/brochure.pdf" // 👈 Place your file in /public/brochure.pdf
+    link.download = "my-project-brochure.pdf" // 👈 File name user sees
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
