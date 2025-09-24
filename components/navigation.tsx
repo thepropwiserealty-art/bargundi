@@ -80,7 +80,7 @@ export default function Navigation() {
                 </motion.button>
               ))}
               <Button className="bg-primary hover:bg-primary/90" onClick={() => setIsContactPopupOpen(true)}>
-                Contact Us
+                Enquire Now
               </Button>
             </div>
 
