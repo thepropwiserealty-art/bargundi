@@ -12,6 +12,7 @@ import { sendOtp } from "@/lib/otp/api/sendOtp"
 import { validateOtp, validatePhone } from "@/lib/utils";
 import { verifyOtp } from "@/lib/otp/api/verifyOtp"
 import { checkIfSubmitted } from "@/lib/checkIfSubmitted"
+import toast from "react-hot-toast"
 
 export default function DiscountPopup() {
   const [isVisible, setIsVisible] = useState(false)
@@ -24,10 +25,6 @@ export default function DiscountPopup() {
 
   // Check if user has already submitted
   useEffect(() => {
-    // const submitted = localStorage.getItem("discountCouponSubmitted")
-    // if (submitted === "true") {
-    //   setIsSubmitted(true)
-    // }
     checkIfSubmitted(setIsSubmitted);
   }, [])
 
@@ -99,17 +96,22 @@ export default function DiscountPopup() {
 
     setIsLoading(true)
     // Simulate form submission
-    const isOtpValid = await verifyOtp(phoneNumber, otp, setErrors);
+    await toast.promise(verifyOtp(phoneNumber, otp, setErrors), {
+      loading: 'Verifying',
+      success: 'Success, check coupon on message',
+      error: (err: any) => {
+        setIsLoading(false)
+        return `${err.message}`;
+      }, // use the error message here
+    });
 
-    if (!isOtpValid) {
-      setIsLoading(false)
-    }
-    else {
+
+    if(!isLoading){
       setIsSubmitted(true)
       setIsVisible(false)
-      setIsLoading(false)
     }
 
+    setIsLoading(false);
     // setTimeout(() => {
     //   setIsSubmitted(true)
     //   // localStorage.setItem("discountCouponSubmitted", "true")

@@ -6,8 +6,8 @@ import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
-    const otp : string = searchParams.get("otp") || "";
-    const phone : string = searchParams.get("phone") || "";
+    const otp: string = searchParams.get("otp") || "";
+    const phone: string = searchParams.get("phone") || "";
 
     // if (!otp) {
     //     return NextResponse.json(

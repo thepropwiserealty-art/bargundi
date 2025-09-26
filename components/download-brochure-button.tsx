@@ -3,16 +3,32 @@
 import { motion } from "framer-motion"
 import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import toast from "react-hot-toast"
 
 export default function DownloadBrochureButton() {
-  const downloadBrochure = () => {
-    // Trigger brochure download from public folder
-    const link = document.createElement("a")
-    link.href = "/api/files/brochure.pdf" // 👈 Place your file in /public/brochure.pdf
-    link.download = "my-project-brochure.pdf" // 👈 File name user sees
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+  const downloadBrochure = async () => {
+    try {
+      const response = await fetch("/api/files/brochure.pdf");
+
+      if (!response.ok) {
+        const err = await response.json();
+        // console.log(err);
+        throw new Error(err.error);
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      // Trigger brochure download from public folder
+      const link = document.createElement("a")
+      link.href = url // 👈 Place your file in /public/brochure.pdf
+      link.download = "brochure.pdf" // 👈 File name user sees
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    } catch (error) {
+      throw new Error(error?.message);
+    }
   }
 
   return (
@@ -23,7 +39,13 @@ export default function DownloadBrochureButton() {
       transition={{ duration: 0.5, delay: 0.2 }}
     >
       <Button
-        onClick={downloadBrochure}
+        onClick={async () => {
+          toast.promise(downloadBrochure(), {
+            loading: 'Downloading',
+            success: 'Downloaded',
+            error: (err: any) => `${err.message}`,
+          });
+        }}
         className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
         size="sm"
       >

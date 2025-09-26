@@ -16,7 +16,7 @@ export async function verifyOtp(phone: string, otp: string, setErrors: React.Dis
         return true;
     } catch (error:any) {
         setErrors(prev => ({...prev, otp: error.message}));
-        return false;
+        throw new Error(error.message);
     }
 
 }
