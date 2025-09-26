@@ -1,20 +1,28 @@
-import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
+import * as jose from 'jose';
 
-const secret: string = process.env.JWT_SECRET || "secret";
+const secret = new TextEncoder().encode(process.env.JWT_SECRET || "secret");
 
-export interface CustomJwtPayload extends JwtPayload {
-  phone: string;
+export async function generateJwtToken(payload:any): Promise<string> {
+  const jwt = await new jose.SignJWT(payload)
+  .setProtectedHeader({ alg: 'HS256' })  
+  .setIssuedAt()                         
+  .setExpirationTime('30d')
+  .sign(secret);
+
+  return jwt;
 }
 
-export function generateJwtToken(payload: CustomJwtPayload): string {
-  const options: SignOptions = { expiresIn: "30d" };
-  return jwt.sign(payload, secret, options);
-}
+export async function verifyToken(token: string | null){
+  
+  if(!token){
+    return null;
+  }
 
-export function verifyToken(token: string): CustomJwtPayload | null {
   try {
-    return jwt.verify(token, secret) as CustomJwtPayload;
+   const { payload } = await jose.jwtVerify(token, secret);
+   return payload;
   } catch (error) {
+    console.log(error);
     return null;
   }
 }

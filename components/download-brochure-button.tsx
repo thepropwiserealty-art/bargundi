@@ -8,7 +8,7 @@ export default function DownloadBrochureButton() {
   const downloadBrochure = () => {
     // Trigger brochure download from public folder
     const link = document.createElement("a")
-    link.href = "/brochure.pdf" // 👈 Place your file in /public/brochure.pdf
+    link.href = "/api/files/brochure.pdf" // 👈 Place your file in /public/brochure.pdf
     link.download = "my-project-brochure.pdf" // 👈 File name user sees
     document.body.appendChild(link)
     link.click()

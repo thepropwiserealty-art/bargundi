@@ -10,7 +10,7 @@ export default function FloatingActionButtons() {
       icon: MessageCircle,
       label: "WhatsApp",
       color: "bg-green-500 hover:bg-green-600",
-      action: () => window.open("https://wa.me/1234567890", "_blank"),
+      action: () => window.open("https://wa.me/9604276698", "_blank"),
     },
     {
       icon: Phone,

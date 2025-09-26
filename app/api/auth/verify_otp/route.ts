@@ -39,7 +39,7 @@ export async function GET(req: NextRequest) {
 
     const response = NextResponse.json({ success: true }, { status: 200 });
 
-    const token = generateJwtToken({ phone });
+    const token = await generateJwtToken({ phone });
 
     response.cookies.set("token", token, {
         httpOnly: true,
