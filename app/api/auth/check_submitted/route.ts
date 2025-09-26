@@ -7,7 +7,7 @@ export async function GET(req:NextRequest){
         return NextResponse.json({error: "Not submitted"}, {status: 400});
     }
 
-    const isValid = verifyToken(token);
+    const isValid = await verifyToken(token);
     
     if(!isValid){
         const response = NextResponse.json({error: "Token not valid"}, {status: 400});
