@@ -8,14 +8,26 @@ import { X, Phone, Mail, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import toast from "react-hot-toast"
+import { checkIfSubmitted } from "@/lib/checkIfSubmitted"
+import signup from "@/lib/signup"
 
-export default function DiscountPopup() {
+
+type isSubmitProps = {
+  isSubmitted: boolean,
+  setIsSubmitted: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function DiscountPopup({isSubmitted, setIsSubmitted}: isSubmitProps) {
   const [isVisible, setIsVisible] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [errors, setErrors] = useState({ name: "", email: "", phone: "" })
+
+  useEffect(()=>{
+    checkIfSubmitted(setIsSubmitted);
+  },[]);
 
   // Timer logic for showing popup
   useEffect(() => {
@@ -38,13 +50,19 @@ export default function DiscountPopup() {
 
   const handleClose = () => setIsVisible(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setErrors({ name: "", email: "", phone: "" })
 
     if (!name) return setErrors((prev) => ({ ...prev, name: "Name is required" }))
     if (!email.includes("@")) return setErrors((prev) => ({ ...prev, email: "Invalid email" }))
     if (phone.length !== 10) return setErrors((prev) => ({ ...prev, phone: "Enter 10-digit number" }))
+    
+    await toast.promise(signup(name, email, phone), {
+      loading: "processing...",
+      success: "success",
+      error: (err) => `${err.toString()}`,
+    });
 
     const whatsappNumber = "9604276698" // <-- REPLACE WITH YOUR NUMBER
     const message = `Hi, I want to enquire about dosti estates.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}`

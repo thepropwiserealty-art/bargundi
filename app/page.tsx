@@ -18,6 +18,7 @@ import StickyForm from "@/components/StickyForm"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleLoadingComplete = () => {
     setIsLoading(false)
@@ -68,8 +69,8 @@ export default function Home() {
         </main>
         <Footer />
         <FloatingActionButtons />
-        <DiscountPopup />
-        <StickyForm />
+        <DiscountPopup isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />
+        <StickyForm isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />
       </div>
     </>
   )
