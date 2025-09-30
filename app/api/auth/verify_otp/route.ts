@@ -1,6 +1,6 @@
 import { generateJwtToken } from "@/lib/jwt";
 import verifyOtp from "@/lib/otp/verifyOtp";
-import { addPhoneno } from "@/lib/db";
+import { insertRecord } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
@@ -8,6 +8,8 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const otp: string = searchParams.get("otp") || "";
     const phone: string = searchParams.get("phone") || "";
+    const name: string = searchParams.get("name") || "";
+    const email: string = searchParams.get("email") || "";
 
     // if (!otp) {
     //     return NextResponse.json(
@@ -30,8 +32,8 @@ export async function GET(req: NextRequest) {
     //         { status: 400 }
     //     );
     // }
-
-    const isPhonenoAdded = await addPhoneno(phone);
+    
+    const isPhonenoAdded = await insertRecord(name, email, phone);
 
     if (!isPhonenoAdded.success) {
         return NextResponse.json({ error: isPhonenoAdded.message }, { status: 500 });
