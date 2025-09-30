@@ -4,29 +4,18 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Phone, Shield } from "lucide-react"
+import { X, Phone, Mail, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { sendOtp } from "@/lib/otp/api/sendOtp"
-import { validateOtp, validatePhone } from "@/lib/utils";
-import { verifyOtp } from "@/lib/otp/api/verifyOtp"
-import { checkIfSubmitted } from "@/lib/checkIfSubmitted"
-import toast from "react-hot-toast"
 
 export default function DiscountPopup() {
   const [isVisible, setIsVisible] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const [phoneNumber, setPhoneNumber] = useState("")
-  const [otp, setOtp] = useState("")
-  const [showOtpField, setShowOtpField] = useState(false)
-  const [errors, setErrors] = useState({ phone: "", otp: "" })
-  const [isLoading, setIsLoading] = useState(false)
-
-  // Check if user has already submitted
-  useEffect(() => {
-    checkIfSubmitted(setIsSubmitted);
-  }, [])
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [errors, setErrors] = useState({ name: "", email: "", phone: "" })
 
   // Timer logic for showing popup
   useEffect(() => {
@@ -36,14 +25,9 @@ export default function DiscountPopup() {
       setIsVisible(true)
     }
 
-    // Initial delay of 20 seconds
     const initialTimer = setTimeout(showPopup, 20000)
-
-    // Recurring timer every 20 seconds
     const recurringTimer = setInterval(() => {
-      if (!isSubmitted) {
-        setIsVisible(true)
-      }
+      if (!isSubmitted) setIsVisible(true)
     }, 20000)
 
     return () => {
@@ -52,77 +36,21 @@ export default function DiscountPopup() {
     }
   }, [isSubmitted])
 
+  const handleClose = () => setIsVisible(false)
 
-
-
-  const handleSendOtp = async () => {
-    setErrors({ phone: "", otp: "" })
-
-    if (!validatePhone(phoneNumber)) {
-      setErrors((prev) => ({ ...prev, phone: "Please enter a valid 10-digit phone number" }))
-      return
-    }
-
-    setIsLoading(true)
-    // Simulate OTP sending
-    const otpSent: boolean = await sendOtp(phoneNumber, setErrors);
-
-    if (otpSent) {
-      setShowOtpField(true)
-      setIsLoading(false)
-    }
-    else {
-      setIsLoading(false)
-    }
-    // setTimeout(() => {
-    //   setShowOtpField(true)
-    //   setIsLoading(false)
-    // }, 1500)
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setErrors({ phone: "", otp: "" })
+    setErrors({ name: "", email: "", phone: "" })
 
-    if (!validatePhone(phoneNumber)) {
-      setErrors((prev) => ({ ...prev, phone: "Please enter a valid 10-digit phone number" }))
-      return
-    }
+    if (!name) return setErrors((prev) => ({ ...prev, name: "Name is required" }))
+    if (!email.includes("@")) return setErrors((prev) => ({ ...prev, email: "Invalid email" }))
+    if (phone.length !== 10) return setErrors((prev) => ({ ...prev, phone: "Enter 10-digit number" }))
 
-    if (!validateOtp(otp)) {
-      setErrors((prev) => ({ ...prev, otp: "Please enter a valid 6-digit OTP" }))
-      return
-    }
-
-    setIsLoading(true)
-    // Simulate form submission
-    await toast.promise(verifyOtp(phoneNumber, otp, setErrors), {
-      loading: 'Verifying',
-      success: 'Success, check coupon on message',
-      error: (err: any) => {
-        setIsLoading(false)
-        return `${err.message}`;
-      }, // use the error message here
-    });
-
-
-    if(!isLoading){
-      setIsSubmitted(true)
-      setIsVisible(false)
-    }
-
-    setIsLoading(false);
-    // setTimeout(() => {
-    //   setIsSubmitted(true)
-    //   // localStorage.setItem("discountCouponSubmitted", "true")
-    //   setIsVisible(false)
-    //   setIsLoading(false)
-    //   // You can add success notification here
-    // }, 1500)
-  }
-
-  const handleClose = () => {
+    const whatsappNumber = "9604276698" // <-- REPLACE WITH YOUR NUMBER
+    const message = `Hi, I want to enquire about dosti estates.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}`
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank")
     setIsVisible(false)
+    setIsSubmitted(true)
   }
 
   if (isSubmitted) return null
@@ -163,6 +91,44 @@ export default function DiscountPopup() {
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Name Field */}
+                    <div>
+                      <Label htmlFor="name" className="text-sm font-medium text-gray-700 mb-2 block">
+                        Name *
+                      </Label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Input
+                          id="name"
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          placeholder="Enter your name"
+                          className="pl-10 h-12"
+                        />
+                      </div>
+                      {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                    </div>
+
+                    {/* Email Field */}
+                    <div>
+                      <Label htmlFor="email" className="text-sm font-medium text-gray-700 mb-2 block">
+                        Email *
+                      </Label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Input
+                          id="email"
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Enter your email"
+                          className="pl-10 h-12"
+                        />
+                      </div>
+                      {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                    </div>
+
                     {/* Phone Number Field */}
                     <div>
                       <Label htmlFor="phone" className="text-sm font-medium text-gray-700 mb-2 block">
@@ -173,62 +139,23 @@ export default function DiscountPopup() {
                         <Input
                           id="phone"
                           type="tel"
-                          value={phoneNumber}
-                          onChange={(e) => setPhoneNumber(e.target.value)}
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
                           placeholder="Enter your phone number"
                           className="pl-10 h-12"
                           maxLength={10}
-                          disabled={showOtpField}
                         />
                       </div>
                       {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                     </div>
 
-                    {/* Get Coupon Button */}
-                    {!showOtpField && (
-                      <Button
-                        type="button"
-                        onClick={handleSendOtp}
-                        disabled={isLoading}
-                        className="w-full h-12 bg-gray-600 hover:bg-luxury-gold/90 text-white font-semibold"
-                      >
-                        {isLoading ? "Sending OTP..." : "Get Coupon"}
-                      </Button>
-                    )}
-
-                    {/* OTP Field */}
-                    {showOtpField && (
-                      <div>
-                        <Label htmlFor="otp" className="text-sm font-medium text-gray-700 mb-2 block">
-                          Enter OTP *
-                        </Label>
-                        <div className="relative">
-                          <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                          <Input
-                            id="otp"
-                            type="text"
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                            placeholder="Enter 6-digit OTP"
-                            className="pl-10 h-12"
-                            maxLength={6}
-                          />
-                        </div>
-                        {errors.otp && <p className="text-red-500 text-sm mt-1">{errors.otp}</p>}
-                        <p className="text-sm text-gray-500 mt-1">OTP sent to +91 {phoneNumber}</p>
-                      </div>
-                    )}
-
                     {/* Submit Button */}
-                    {showOtpField && (
-                      <Button
-                        type="submit"
-                        disabled={isLoading}
-                        className="w-full h-12 bg-gray-600 hover:bg-luxury-gold/90 text-white font-semibold"
-                      >
-                        {isLoading ? "Verifying..." : "Claim Discount"}
-                      </Button>
-                    )}
+                    <Button
+                      type="submit"
+                      className="w-full h-12 bg-gray-600 hover:bg-luxury-gold/90 text-white font-semibold"
+                    >
+                      Get in Touch
+                    </Button>
                   </form>
                 </div>
               </div>
@@ -249,7 +176,6 @@ export default function DiscountPopup() {
                     <div className="mt-6 text-sm opacity-80">Valid until December 31, 2025</div>
                   </div>
                 </div>
-                {/* Decorative elements */}
                 <div className="absolute top-4 right-4 w-20 h-20 bg-white/10 rounded-full"></div>
                 <div className="absolute bottom-8 left-8 w-12 h-12 bg-white/10 rounded-full"></div>
                 <div className="absolute top-1/2 left-4 w-6 h-6 bg-white/10 rounded-full"></div>
