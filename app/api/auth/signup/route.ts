@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { transporter, mailOptions } from "@/lib/nodemailer";
 import { generateJwtToken } from "@/lib/jwt";
+import generateUserCoupon from "@/lib/generateCoupon";
 
 type requestBody = {
     name?: string,
@@ -25,7 +26,10 @@ export async function POST(req: NextRequest) {
 
     try {
         const subject = `New Registration for ${process.env.WEBSITE_NAME}`;
-        const template = `Name : ${name}\nEmail : ${email}\nPhone.no : ${phone}`;
+        const coupon = generateUserCoupon(phone);
+
+        const template = `Name : ${name}\nEmail : ${email}\nPhone.no : ${phone}\ncoupon : ${coupon}`;
+        
         await transporter.sendMail({
             ...mailOptions,
             to,
