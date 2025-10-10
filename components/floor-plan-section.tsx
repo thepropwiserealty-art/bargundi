@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useContext } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -15,6 +15,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel"
 import { Grid3X3, Play } from "lucide-react"
+import context from "@/lib/context"
 
 const floorPlans = [
   {
@@ -55,6 +56,7 @@ export default function FloorPlanSection() {
   const [selectedPlan, setSelectedPlan] = useState(floorPlans[0])
   const [viewMode, setViewMode] = useState<"grid" | "carousel">("grid")
   const [api, setApi] = useState<CarouselApi>()
+  const {isAuthenticated} = useContext(context);
 
   useEffect(() => {
     if (!api || viewMode !== "carousel") return
@@ -167,7 +169,10 @@ export default function FloorPlanSection() {
                     <img
                       src={selectedPlan.image || "/placeholder.svg"}
                       alt={`${selectedPlan.name} Floor Plan`}
-                      className="w-full h-96 object-cover"
+                      className={
+                        isAuthenticated?"w-full h-96 object-cover blur-image-clear":
+                        "w-full h-96 object-cover blur-image"
+                      }
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                     <div className="absolute bottom-4 left-4 text-white">
@@ -211,14 +216,18 @@ export default function FloorPlanSection() {
             >
               <CarouselContent className="-ml-2 md:-ml-4">
                 {floorPlans.map((plan, index) => (
-                  <CarouselItem key={plan.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={plan.id} 
+                  className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                     <Card className="overflow-hidden h-full">
                       <CardContent className="p-0">
                         <div className="relative">
                           <img
                             src={plan.image || "/placeholder.svg"}
                             alt={`${plan.name} Floor Plan`}
-                            className="w-full h-64 object-cover"
+                            className={
+                              isAuthenticated? "w-full h-64 object-cover blur-image-clear":
+                              "w-full h-64 object-cover blur-image"
+                            }
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                           <div className="absolute bottom-4 left-4 text-white">

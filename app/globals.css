@@ -1,6 +1,17 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* image blur */
+@layer utilities {
+  .blur-image {
+    @apply blur-md brightness-75 transition-all duration-500 ease-in-out;
+  }
+
+  .blur-image-clear {
+    @apply blur-none brightness-100 transition-all duration-500 ease-in-out;
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {

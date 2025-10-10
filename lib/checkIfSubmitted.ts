@@ -5,7 +5,11 @@ export async function checkIfSubmitted(setSubmitted:React.Dispatch<React.SetStat
         if(response.status === 200){
             setSubmitted(true);
         }
+        else{
+            throw new Error("not authenticated");
+        }
     } catch (error) {
         console.log(error);
+        throw error;
     }
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import LoadingScreen from "@/components/loading-screen"
 import Navigation from "@/components/navigation"
 import HeroSection from "@/components/hero-section"
@@ -15,10 +15,14 @@ import FloatingActionButtons from "@/components/floating-action-buttons"
 import DownloadBrochureButton from "@/components/download-brochure-button"
 import DiscountPopup from "@/components/discount-popup"
 import StickyForm from "@/components/StickyForm"
+import { Toaster } from 'react-hot-toast';
+import context from "@/lib/context"
+import { checkIfSubmitted } from "@/lib/checkIfSubmitted"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { isAuthenticated, setAuthenticated } = useContext(context);
 
   const handleLoadingComplete = () => {
     setIsLoading(false)
@@ -36,6 +40,10 @@ export default function Home() {
       document.body.style.overflow = "unset"
     }
   }, [isLoading])
+
+  useEffect(() => {
+    checkIfSubmitted(setIsSubmitted).then(() => setAuthenticated(true)).catch((err) => console.log(err));
+  }, []);
 
   return (
     <>
@@ -71,6 +79,16 @@ export default function Home() {
         <FloatingActionButtons />
         <DiscountPopup isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />
         <StickyForm isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />
+        <Toaster
+          position="top-center"  // default positions: top-right, top-left, bottom-right, bottom-left
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#333',
+              color: '#fff',
+            },
+          }}
+        />
       </div>
     </>
   )

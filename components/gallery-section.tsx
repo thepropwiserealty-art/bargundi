@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useContext } from "react"
 import { X, ChevronLeft, ChevronRight, Grid3X3, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -13,6 +13,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel"
+import context from "@/lib/context"
 
 const galleryImages = [
   {
@@ -74,6 +75,7 @@ export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
   const [viewMode, setViewMode] = useState<"grid" | "carousel">("grid")
   const [api, setApi] = useState<CarouselApi>()
+  const { isAuthenticated } = useContext(context);
 
   useEffect(() => {
     if (!api || viewMode !== "carousel") return
@@ -180,6 +182,10 @@ export default function GallerySection() {
               <motion.div
                 key={image.id}
                 className="relative group cursor-pointer overflow-hidden rounded-lg"
+                // className={
+                //   isAuthenticated ? "relative group cursor-pointer overflow-hidden rounded-lg blur-image" :
+                //   "relative group cursor-pointer overflow-hidden rounded-lg blur-image-clear"
+                // }
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -188,7 +194,11 @@ export default function GallerySection() {
                 <img
                   src={image.src || "/placeholder.svg"}
                   alt={image.alt}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                  // className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                  className={
+                    isAuthenticated ? "w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110 blur-image-clear" :
+                      "w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110 blur-image"
+                  }
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
@@ -226,7 +236,10 @@ export default function GallerySection() {
                       <img
                         src={image.src || "/placeholder.svg"}
                         alt={image.alt}
-                        className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-105"
+                        className={
+                          isAuthenticated? "w-full h-80 object-cover transition-transform duration-300 group-hover:scale-105 blur-image-clear":
+                          "w-full h-80 object-cover transition-transform duration-300 group-hover:scale-105 blur-image"
+                        }
                         loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
