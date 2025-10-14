@@ -57,9 +57,9 @@ export default function Navigation() {
               <div className="rounded-md flex items-center justify-center">
                 {/* <span className="text-sm font-bold text-primary-foreground">RE</span> */}
                  <img 
-                 src="/dostilogo.png" 
+                 src="/mantralogo.png" 
                  alt="Dosti Logo" 
-                 className="h-10 w-auto rounded-md"  // adjust size as needed
+                 className="h-10 w-15 rounded-md"  // adjust size as needed
          />
 
               </div>
