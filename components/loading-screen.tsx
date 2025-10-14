@@ -42,7 +42,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
       >
         {/* Animated Logo */}
         <motion.div
-          className="w-20 h-20 mx-auto mb-4 bg-primary rounded-xl flex items-center justify-center shadow-lg"
+          className="w-22 h-13 mx-auto mb-4  rounded-xl flex items-center justify-center shadow-lg"
           animate={{
             scale: [1, 1.15, 1],
             rotate: [0, 10, -10, 0],
@@ -57,7 +57,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             RE
           </span> */}
           <Image
-            src="/dostilogo.png"   
+            src="/mantralogo.png"   
             alt="Dosti Logo"
             width={110}
             height={110}
@@ -73,7 +73,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.6 }}
         >
-          Dostigreenscapes Estates
+          Mantra Realty
         </motion.h1>
 
         {/* Tagline */}
@@ -83,7 +83,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.6 }}
         >
-         Official Strategic Partners
+        Official Strategic Partners
         </motion.p>
       </motion.div>
     </div>
