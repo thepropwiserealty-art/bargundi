@@ -17,7 +17,7 @@ export default function HeroSection() {
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img src="/3617_Mantra_Mirari_Image_03.jpg" alt="Luxury Estate" className="w-full h-full object-cover" />
+        <img src="/mantrabg " alt="Luxury Estate" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
