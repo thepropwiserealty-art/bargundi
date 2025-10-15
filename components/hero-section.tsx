@@ -5,10 +5,11 @@ import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function HeroSection() {
-  const scrollToNext = () => {
-    const aboutSection = document.querySelector("#about")
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" })
+  // Scroll to a section by ID
+  const scrollToSection = (id: string) => {
+    const section = document.querySelector(`#${id}`)
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" })
     }
   }
 
@@ -16,7 +17,7 @@ export default function HeroSection() {
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img src="/dostibg.png" alt="Luxury Estate" className="w-full h-full object-cover" />
+        <img src="/3617_Mantra_Mirari_Image_03.jpg" alt="Luxury Estate" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
@@ -28,7 +29,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Discover Your Dream Home
+          Burgundy luxuries Series
         </motion.h1>
 
         <motion.p
@@ -46,22 +47,35 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-3">
-            Explore Properties
-          </Button>
+          {/* Explore Properties scrolls to #about */}
           <Button
             size="lg"
-            variant="outline"
-            className="text-lg px-8 py-3 border-white text-white hover:bg-white hover:text-primary bg-transparent"
+            className="bg-primary hover:bg-primary/90 text-lg px-8 py-3"
+            onClick={() => scrollToSection("about")}
           >
-            Schedule Tour
+            Explore Properties
           </Button>
+
+          {/* Schedule Tour opens WhatsApp */}
+          <a
+            href="https://wa.me/9604276698?text=Schedule%20me%20a%20Tour%20for%20burgundy%20series"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-lg px-8 py-3 border-white text-white hover:bg-white hover:text-primary bg-transparent"
+            >
+              Schedule Tour
+            </Button>
+          </a>
         </motion.div>
       </div>
 
       {/* Scroll Indicator */}
       <motion.button
-        onClick={scrollToNext}
+        onClick={() => scrollToSection("about")}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white hover:text-primary transition-colors"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
