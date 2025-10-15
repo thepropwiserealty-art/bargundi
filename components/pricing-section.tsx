@@ -11,37 +11,37 @@ import { Bed, Bath, Square, MapPin } from "lucide-react"
 const properties = [
   {
     id: 1,
-    title: "2 BHK",
-    location: "Near Magarpatta city",
-    price: "₹2,850,000*",
-    beds: 2,
-    baths: 1,
-    sqft: "1,200",
-    image: "2bhk.png",
-    badge: "Featured",
+    title: "Marvilla",
+    location: "Mundhwa Pune",
+    price: "₹4.5cr*",
+    beds: 5,
+    // baths: 1,
+    sqft: "5,500*",
+    image: "Marvilla-Logo.jpg",
+    badge: "Luxury Villas",
     badgeVariant: "default" as const,
   },
   {
     id: 2,
-    title: "Luxury 3BHK",
-    location: "Upper Camp Hadapsar",
-    price: "₹4,200,000*",
-    beds: 3,
-    baths: 2,
-    sqft: "2,800",
-    image: "3bhk.png",
-    badge: "New",
+    title: "Luxury 3 BHK , 4 BHK",
+    location: "Upper Koregaon Park, Mundhwa, Pune",
+    price: "₹2.14cr*",
+    beds: "3/4",
+    // baths: 2,
+    // sqft: "1500*",
+    image: "Mayfair-Logo.jpg",
+    badge: "Premium 3 BHK , 4 BHK",
     badgeVariant: "secondary" as const,
   },
   {
     id: 3,
-    title: "Luxury 4BHK",
-    location: "Hadapsar",
-    price: "₹6,750,000*",
-    beds: 4,
-    baths: 2,
-    sqft: "6,200",
-    image: "4bhk.png",
+    title: "Luxury 3BHK & 4BHK",
+    location: "Magarpatta Pune",
+    price: "₹2.9cr*",
+    beds: "3/4",
+    // baths: 2,
+    sqft: "1400-2100*",
+    image: "One Residences Final Logo-C2C-01.jpg",
     badge: "Premium",
     badgeVariant: "destructive" as const,
   },
@@ -60,7 +60,7 @@ export default function PricingSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">Exceptional Properties</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">Burgundy Series</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
             Discover our curated collection of luxury properties, each offering unique features and unparalleled
             elegance in prime locations.
