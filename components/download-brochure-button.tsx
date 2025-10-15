@@ -8,24 +8,29 @@ import toast from "react-hot-toast"
 export default function DownloadBrochureButton() {
   const downloadBrochure = async () => {
     try {
-      const response = await fetch("/api/files/brochure.pdf");
+      // ✅ NEW BEHAVIOR → open WhatsApp in a new tab with number + message
+      const phone = "9604276698"
+      const message = encodeURIComponent("Send me a brochure of Burgundy")
+      window.open(`https://wa.me/${phone}?text=${message}`, "_blank")
 
-      if (!response.ok) {
-        const err = await response.json();
-        // console.log(err);
-        throw new Error(err.error);
-      }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-
-      // Trigger brochure download from public folder
-      const link = document.createElement("a")
-      link.href = url // 👈 Place your file in /public/brochure.pdf
-      link.download = "brochure.pdf" // 👈 File name user sees
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      // ---------------- OLD LOGIC (kept in comments) ----------------
+      // const response = await fetch("/api/files/brochure.pdf");
+      //
+      // if (!response.ok) {
+      //   const err = await response.json();
+      //   throw new Error(err.error);
+      // }
+      //
+      // const blob = await response.blob();
+      // const url = window.URL.createObjectURL(blob);
+      //
+      // const link = document.createElement("a")
+      // link.href = url 
+      // link.download = "brochure.pdf"
+      // document.body.appendChild(link)
+      // link.click()
+      // document.body.removeChild(link)
+      // --------------------------------------------------------------
     } catch (error) {
       throw new Error(error?.message);
     }
@@ -41,8 +46,8 @@ export default function DownloadBrochureButton() {
       <Button
         onClick={async () => {
           toast.promise(downloadBrochure(), {
-            loading: 'Downloading',
-            success: 'Downloaded',
+            loading: 'Opening WhatsApp',
+            success: 'WhatsApp opened successfully!',
             error: (err: any) => `${err.message}`,
           });
         }}
