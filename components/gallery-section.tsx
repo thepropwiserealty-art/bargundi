@@ -14,6 +14,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel"
 import context from "@/lib/context"
+import toast from "react-hot-toast"
 
 const galleryImages = [
   {
@@ -91,6 +92,10 @@ export default function GallerySection() {
     selectedCategory === "All" ? galleryImages : galleryImages.filter((img) => img.category === selectedCategory)
 
   const openLightbox = (imageId: number) => {
+    if(!isAuthenticated){
+      toast.error("Please Login to view images");
+      return;
+    }
     setSelectedImage(imageId)
     document.body.style.overflow = "hidden"
   }
