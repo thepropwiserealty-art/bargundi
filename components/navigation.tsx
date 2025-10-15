@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import ContactPopup from "./contact-popup"
 import Image from "next/image"
 
-
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
@@ -40,6 +39,13 @@ export default function Navigation() {
     }
   }
 
+  const openWhatsApp = () => {
+    window.open(
+      "https://wa.me/919604276698?text=Give%20me%20details%20of%20Burgundy%20Series",
+      "_blank"
+    )
+  }
+
   return (
     <>
       <motion.nav
@@ -52,18 +58,16 @@ export default function Navigation() {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
+
             {/* Logo */}
             <motion.div className="flex items-center space-x-2" whileHover={{ scale: 1.05 }}>
               <div className="rounded-md flex items-center justify-center">
-                {/* <span className="text-sm font-bold text-primary-foreground">RE</span> */}
-                 <img 
-                 src="/mantralogo.png" 
-                 alt="Dosti Logo" 
-                 className="h-10 w-15 rounded-md"  // adjust size as needed
-         />
-
+                <img 
+                  src="/mantralogo.png" 
+                  alt="Dosti Logo" 
+                  className="h-10 w-15 rounded-md"
+                />
               </div>
-              {/* <span className="text-xl font-bold text-primary">Dostig</span> */}
             </motion.div>
 
             {/* Desktop Navigation */}
@@ -79,7 +83,12 @@ export default function Navigation() {
                   {item.name}
                 </motion.button>
               ))}
-              <Button className="bg-primary hover:bg-primary/90" onClick={() => setIsContactPopupOpen(true)}>
+
+              {/* Old logic: onClick={() => setIsContactPopupOpen(true)} */}
+              <Button
+                className="bg-primary hover:bg-primary/90"
+                onClick={openWhatsApp}
+              >
                 Enquire Now
               </Button>
             </div>
@@ -122,12 +131,16 @@ export default function Navigation() {
                       {item.name}
                     </button>
                   ))}
-                  <Button
-                    className="bg-primary hover:bg-primary/90 w-full mt-4"
+
+                  {/* Old logic:
                     onClick={() => {
                       setIsContactPopupOpen(true)
                       setIsMobileMenuOpen(false)
                     }}
+                  */}
+                  <Button
+                    className="bg-primary hover:bg-primary/90 w-full mt-4"
+                    onClick={openWhatsApp}
                   >
                     Contact Us
                   </Button>
@@ -138,7 +151,7 @@ export default function Navigation() {
         )}
       </AnimatePresence>
 
-      {/* ContactPopup component */}
+      {/* Keep old popup logic but not in use */}
       <ContactPopup isOpen={isContactPopupOpen} onClose={() => setIsContactPopupOpen(false)} />
     </>
   )
