@@ -11,39 +11,38 @@ import { Bed, Bath, Square, MapPin } from "lucide-react"
 const properties = [
   {
     id: 1,
-    title: "Marvilla",
+    title: "Marvilla Villas",
     location: "Mundhwa Pune",
     price: "₹4.5cr*",
     beds: 5,
-    // baths: 1,
     sqft: "5,500*",
     image: "Marvilla-Logo.jpg",
     badge: "Luxury Villas",
     badgeVariant: "default" as const,
+    phone: "9604276698",
   },
   {
     id: 2,
-    title: "Luxury 3 BHK , 4 BHK",
+    title: "Mayfair Residences",
     location: "Upper Koregaon Park, Mundhwa, Pune",
     price: "₹2.14cr*",
     beds: "3/4",
-    // baths: 2,
-    // sqft: "1500*",
     image: "Mayfair-Logo.jpg",
     badge: "Premium 3 BHK , 4 BHK",
     badgeVariant: "secondary" as const,
+    phone: "9604276698",
   },
   {
     id: 3,
-    title: "Luxury 3BHK & 4BHK",
+    title: "One Residences",
     location: "Magarpatta Pune",
     price: "₹2.9cr*",
     beds: "3/4",
-    // baths: 2,
     sqft: "1400-2100*",
     image: "One Residences Final Logo-C2C-01.jpg",
-    badge: "Premium",
+    badge: "Luxury 3BHK & 4BHK",
     badgeVariant: "destructive" as const,
+    phone: "9604276698",
   },
 ]
 
@@ -60,7 +59,9 @@ export default function PricingSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">Burgundy Series</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">
+            Burgundy Series
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
             Discover our curated collection of luxury properties, each offering unique features and unparalleled
             elegance in prime locations.
@@ -90,7 +91,9 @@ export default function PricingSection() {
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle className="text-xl text-card-foreground">{property.title}</CardTitle>
+                      <CardTitle className="text-xl text-card-foreground">
+                        {property.title}
+                      </CardTitle>
                       <div className="flex items-center text-muted-foreground mt-1">
                         <MapPin className="w-4 h-4 mr-1" />
                         <span className="text-sm">{property.location}</span>
@@ -108,17 +111,43 @@ export default function PricingSection() {
                     </div>
                     <div className="flex items-center text-muted-foreground">
                       <Bath className="w-4 h-4 mr-1" />
-                      <span className="text-sm mr-4">{property.baths} Baths</span>
+                      <span className="text-sm mr-4">{property.baths || "-"} Baths</span>
                     </div>
                     <div className="flex items-center text-muted-foreground">
                       <Square className="w-4 h-4 mr-1" />
-                      <span className="text-sm">{property.sqft} sqft</span>
+                      <span className="text-sm">{property.sqft || "-"} sqft</span>
                     </div>
                   </div>
 
                   <div className="flex gap-2">
-                    <Button className="flex-1 bg-primary hover:bg-primary/90">View Details</Button>
-                    <Button variant="outline" className="flex-1 bg-transparent">
+                    <Button
+                      className="flex-1 bg-primary hover:bg-primary/90"
+                      onClick={() => {
+                        const msg = encodeURIComponent(
+                          `I want details of ${property.title}`
+                        )
+                        window.open(
+                          `https://wa.me/${property.phone}?text=${msg}`,
+                          "_blank"
+                        )
+                      }}
+                    >
+                      View Details
+                    </Button>
+
+                    <Button
+                      variant="outline"
+                      className="flex-1 bg-transparent"
+                      onClick={() => {
+                        const msg = encodeURIComponent(
+                          `I want to schedule a tour for ${property.title}.`
+                        )
+                        window.open(
+                          `https://wa.me/${property.phone}?text=${msg}`,
+                          "_blank"
+                        )
+                      }}
+                    >
                       Schedule Tour
                     </Button>
                   </div>
