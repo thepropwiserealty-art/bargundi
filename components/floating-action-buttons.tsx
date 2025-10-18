@@ -12,20 +12,20 @@ export default function FloatingActionButtons() {
       color: "bg-green-500 hover:bg-green-600",
       action: () => {
         const message = encodeURIComponent("Hello, I want to details of Burgundy series!")
-        window.open(`https://wa.me/9604276698?text=${message}`, "_blank")
+        window.open(`https://wa.me/8237311365?text=${message}`, "_blank")
       },
     },
     {
       icon: Phone,
       label: "Call",
       color: "bg-blue-500 hover:bg-blue-600",
-      action: () => window.open("tel:+9604276698", "_self"),
+      action: () => window.open("tel:+8237311365", "_self"),
     },
     {
       icon: Car,
       label: "Uber",
       color: "bg-black hover:bg-gray-800",
-      action: () =>window.open(`https://wa.me/9604276698?text=${"Book Uber for me "}`, "_blank")
+      action: () =>window.open(`https://wa.me/8237311365?text=${"Book Uber for me "}`, "_blank")
 
     },
   ]
