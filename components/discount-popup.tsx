@@ -73,7 +73,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
         setPhone("");
         setEmail("");
 
-        const whatsappNumber = "9604276698" // <-- REPLACE WITH YOUR NUMBER
+        const whatsappNumber = "8237311365" // <-- REPLACE WITH YOUR NUMBER
         const message = `Hi, I want to enquire about dosti estates.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}`
         window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
 
