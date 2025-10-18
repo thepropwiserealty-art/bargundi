@@ -32,7 +32,6 @@ const floorPlans = [
     name: "Mayfair River residences 3BHK",
     size: "1500* sqft",
     beds: 3,
-    // baths: 2,
     price: "From ₹2.14cr*",
     image: "/mayfair3bhk.png",
     features: ["Luxuries 3 BHK ", "At Upper Koregaon Park ,Pune", "Masterfull blend of privacy and community"],
@@ -42,7 +41,6 @@ const floorPlans = [
     name: "Mayfair River residences 4BHK",
     size: "1743* sqft",
     beds: 4,
-    // baths: 2,
     price: "From ₹2.14cr*",
     image: "/mayfair4bhk.png",
     features: ["Luxuries 4 BHK ", "At Upper Koregaon Park ,Pune", "Architectural brilliance & natural beauty"],
@@ -89,7 +87,7 @@ export default function FloorPlanSection() {
 
   const openWhatsApp = (message: string) => {
     window.open(
-      `https://wa.me/9604276698?text=${encodeURIComponent(message)}`,
+      `https://wa.me/8237311365?text=${encodeURIComponent(message)}`,
       "_blank"
     )
   }

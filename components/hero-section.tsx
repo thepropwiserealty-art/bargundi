@@ -58,7 +58,7 @@ export default function HeroSection() {
 
           {/* Schedule Tour opens WhatsApp */}
           <a
-            href="https://wa.me/9604276698?text=Schedule%20me%20a%20Tour%20for%20burgundy%20series"
+            href="https://wa.me/8237311365?text=Schedule%20me%20a%20Tour%20for%20burgundy%20series"
             target="_blank"
             rel="noopener noreferrer"
           >

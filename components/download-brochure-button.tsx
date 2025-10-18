@@ -8,8 +8,7 @@ import toast from "react-hot-toast"
 export default function DownloadBrochureButton() {
   const downloadBrochure = async () => {
     try {
-      // ✅ NEW BEHAVIOR → open WhatsApp in a new tab with number + message
-      const phone = "9604276698"
+      const phone = "8237311365"
       const message = encodeURIComponent("Send me a brochure of Burgundy")
       window.open(`https://wa.me/${phone}?text=${message}`, "_blank")
 
@@ -31,8 +30,8 @@ export default function DownloadBrochureButton() {
       // link.click()
       // document.body.removeChild(link)
       // --------------------------------------------------------------
-    } catch (error) {
-      throw new Error(error?.message);
+    } catch (error: any) {
+      throw new Error(error?.message || "Something went wrong")
     }
   }
 

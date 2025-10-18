@@ -41,7 +41,7 @@ export default function Navigation() {
 
   const openWhatsApp = () => {
     window.open(
-      "https://wa.me/919604276698?text=Give%20me%20details%20of%20Burgundy%20Series",
+      "https://wa.me/918237311365?text=Give%20me%20details%20of%20Burgundy%20Series",
       "_blank"
     )
   }

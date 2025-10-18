@@ -19,7 +19,7 @@ const properties = [
     image: "Marvilla-Logo.jpg",
     badge: "Luxury Villas",
     badgeVariant: "default" as const,
-    phone: "9604276698",
+    phone: "8237311365",
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const properties = [
     image: "Mayfair-Logo.jpg",
     badge: "Premium 3 BHK , 4 BHK",
     badgeVariant: "secondary" as const,
-    phone: "9604276698",
+    phone: "8237311365",
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const properties = [
     image: "One Residences Final Logo-C2C-01.jpg",
     badge: "Luxury 3BHK & 4BHK",
     badgeVariant: "destructive" as const,
-    phone: "9604276698",
+    phone: "8237311365",
   },
 ]
 
@@ -109,10 +109,10 @@ export default function PricingSection() {
                       <Bed className="w-4 h-4 mr-1" />
                       <span className="text-sm mr-4">{property.beds} Beds</span>
                     </div>
-                    <div className="flex items-center text-muted-foreground">
+                    {/* <div className="flex items-center text-muted-foreground">
                       <Bath className="w-4 h-4 mr-1" />
                       <span className="text-sm mr-4">{property.baths || "-"} Baths</span>
-                    </div>
+                    </div> */}
                     <div className="flex items-center text-muted-foreground">
                       <Square className="w-4 h-4 mr-1" />
                       <span className="text-sm">{property.sqft || "-"} sqft</span>
