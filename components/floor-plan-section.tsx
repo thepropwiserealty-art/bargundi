@@ -20,33 +20,52 @@ import context from "@/lib/context"
 const floorPlans = [
   {
     id: 1,
-    name: "Studio Elite",
-    size: "650 sqft",
-    beds: 1,
-    baths: 1,
-    price: "From ₹1,200,000",
-    image: "/modern-studio-apartment-floor-plan-with-open-layou.jpg",
-    features: ["Open Layout", "City View", "Modern Kitchen"],
+    name: "Marvilla Villa",
+    size: "5000* sqft",
+    beds: 5,
+    price: "From ₹4.6cr*",
+    image: "/villa_floor1.png",
+    features: ["5 beds villa", "In Mundhwa ,Pune", "Masterfull engineering"],
   },
   {
     id: 2,
-    name: "Executive Suite",
-    size: "1,200 sqft",
-    beds: 2,
-    baths: 2,
-    price: "From ₹1,850,000",
-    image: "/two-bedroom-luxury-apartment-floor-plan-with-maste.jpg",
-    features: ["Master Suite", "Walk-in Closet", "Private Balcony"],
+    name: "Mayfair River residences 3BHK",
+    size: "1500* sqft",
+    beds: 3,
+    // baths: 2,
+    price: "From ₹2.14cr*",
+    image: "/mayfair3bhk.png",
+    features: ["Luxuries 3 BHK ", "At Upper Koregaon Park ,Pune", "Masterfull blend of privacy and community"],
   },
   {
     id: 3,
-    name: "Presidential",
-    size: "2,400 sqft",
+    name: "Mayfair River residences 4BHK",
+    size: "1743* sqft",
+    beds: 4,
+    // baths: 2,
+    price: "From ₹2.14cr*",
+    image: "/mayfair4bhk.png",
+    features: ["Luxuries 4 BHK ", "At Upper Koregaon Park ,Pune", "Architectural brilliance & natural beauty"],
+  },
+  {
+    id: 4,
+    name: "One Resideneces 3BHK",
+    size: "1696* sqft",
     beds: 3,
-    baths: 3,
-    price: "From ₹2,850,000",
-    image: "/three-bedroom-penthouse-floor-plan-with-spacious-l.jpg",
-    features: ["Corner Unit", "Panoramic Views", "Private Elevator"],
+    baths: 1,
+    price: "From ₹2.90cr*",
+    image: "/oneresidences3bhk.png",
+    features: ["Luxuries 3 BHK", "At Magarpatta , Pune", "Pure Elegance and Comfort"],
+  },
+  {
+    id: 5,
+    name: "One Resideneces 4BHK",
+    size: "2086* sqft",
+    beds: 3,
+    baths: 1,
+    price: "From ₹2.90cr*",
+    image: "/oneresidences4bhk.png",
+    features: ["Luxuries 4 BHK", "At Magarpatta , Pune", "Pure Elegance and Comfort"],
   },
 ]
 
@@ -56,17 +75,24 @@ export default function FloorPlanSection() {
   const [selectedPlan, setSelectedPlan] = useState(floorPlans[0])
   const [viewMode, setViewMode] = useState<"grid" | "carousel">("grid")
   const [api, setApi] = useState<CarouselApi>()
-  const {isAuthenticated} = useContext(context);
+  const { isAuthenticated } = useContext(context)
 
   useEffect(() => {
     if (!api || viewMode !== "carousel") return
 
     const interval = setInterval(() => {
       api.scrollNext()
-    }, 5000) // Auto-scroll every 5 seconds
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [api, viewMode])
+
+  const openWhatsApp = (message: string) => {
+    window.open(
+      `https://wa.me/9604276698?text=${encodeURIComponent(message)}`,
+      "_blank"
+    )
+  }
 
   return (
     <section id="floor-plan" className="py-20 bg-muted/30" ref={ref}>
@@ -170,8 +196,7 @@ export default function FloorPlanSection() {
                       src={selectedPlan.image || "/placeholder.svg"}
                       alt={`${selectedPlan.name} Floor Plan`}
                       className={
-                        isAuthenticated?"w-full h-96 object-cover blur-image-clear":
-                        "w-full h-96 object-cover blur-image"
+                        isAuthenticated ? "w-full h-96 object-cover blur-image-clear" : "w-full h-96 object-cover blur-image"
                       }
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -190,8 +215,18 @@ export default function FloorPlanSection() {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <Button className="bg-primary hover:bg-primary/90">Download Plan</Button>
-                        <Button variant="outline">Schedule Tour</Button>
+                        <Button
+                          className="bg-primary hover:bg-primary/90"
+                          onClick={() => openWhatsApp(`Send me ${selectedPlan.name} floor plan`)}
+                        >
+                          Download Plan
+                        </Button>
+                        <Button
+                          variant="outline"
+                          onClick={() => openWhatsApp(`Schedule tour for me to ${selectedPlan.name}`)}
+                        >
+                          Schedule Tour
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -215,9 +250,8 @@ export default function FloorPlanSection() {
               className="w-full"
             >
               <CarouselContent className="-ml-2 md:-ml-4">
-                {floorPlans.map((plan, index) => (
-                  <CarouselItem key={plan.id} 
-                  className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                {floorPlans.map((plan) => (
+                  <CarouselItem key={plan.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                     <Card className="overflow-hidden h-full">
                       <CardContent className="p-0">
                         <div className="relative">
@@ -225,8 +259,7 @@ export default function FloorPlanSection() {
                             src={plan.image || "/placeholder.svg"}
                             alt={`${plan.name} Floor Plan`}
                             className={
-                              isAuthenticated? "w-full h-64 object-cover blur-image-clear":
-                              "w-full h-64 object-cover blur-image"
+                              isAuthenticated ? "w-full h-64 object-cover blur-image-clear" : "w-full h-64 object-cover blur-image"
                             }
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -249,10 +282,19 @@ export default function FloorPlanSection() {
                             ))}
                           </div>
                           <div className="flex gap-2">
-                            <Button size="sm" className="bg-primary hover:bg-primary/90 flex-1">
+                            <Button
+                              size="sm"
+                              className="bg-primary hover:bg-primary/90 flex-1"
+                              onClick={() => openWhatsApp(`Send me ${plan.name} floor plan`)}
+                            >
                               Download Plan
                             </Button>
-                            <Button variant="outline" size="sm" className="flex-1 bg-transparent">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="flex-1 bg-transparent"
+                              onClick={() => openWhatsApp(`Schedule tour for me to ${plan.name}`)}
+                            >
                               Schedule Tour
                             </Button>
                           </div>
