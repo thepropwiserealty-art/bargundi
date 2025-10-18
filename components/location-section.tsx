@@ -5,38 +5,28 @@ import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { MapPin, Clock, Car, Train, Plane, Coffee, ShoppingBag, GraduationCap } from "lucide-react"
+import { MapPin } from "lucide-react"
 
-const locationFeatures = [
+const projects = [
   {
-    icon: Car,
-    title: "5 min drive",
-    description: "Maggarpatta",
+    name: "Marvilla",
+    directionsLink: "https://www.google.com/maps/dir/?api=1&destination=Mantra+Marvilla+Project+Pune",
+    mapsLink: "https://maps.app.goo.gl/1KkWvpXjm76UXLWm6",
+    embedSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.1234567890!2d73.9347218!3d18.5296492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c3c9c5819add%3A0x62892ffc1bcf1393!2sMantra%20Marvilla!5e0!3m2!1sen!2sin!4v1697654321000!5m2!1sen!2sin",
   },
   {
-    icon: Train,
-    title: "10 min drive",
-    description: "Metro Station",
+    name: "Mayfair",
+    directionsLink: "https://www.google.com/maps/dir//Mayfair+River+Residences+By+Burgundy,+93%2Fa%2F9,+Mundhwa,+Pune,+Maharashtra+411036/@18.5366233,73.9231905,17z/data=!4m17!1m7!3m6!1s0x3bc2c13c30d779e1:0x6da0163556d04b25!2sMayfair+River+Residences+By+Burgundy!8m2!3d18.5365369!4d73.9240274!16s%2Fg%2F11x1zt28c7!4m8!1m0!1m5!1m1!1s0x3bc2c13c30d779e1:0x6da0163556d04b25!2m2!1d73.9240274!2d18.5365369!3e3?entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D",
+    mapsLink: "https://maps.app.goo.gl/L5BaWCVznYcFK3ea7",
+    embedSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.1234567890!2d73.9231905!3d18.5366233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c13c30d779e1%3A0x6da0163556d04b25!2sMayfair%20River%20Residences%20By%20Burgundy!5e0!3m2!1sen!2sin!4v1697654322000!5m2!1sen!2sin",
   },
   {
-    icon: Coffee,
-    title: "3 min walk",
-    description: "Cafés & Restaurants",
-  },
-  {
-    icon: ShoppingBag,
-    title: "5 min walk",
-    description: "Premium Shopping Mall",
-  },
-  {
-    icon: GraduationCap,
-    title: "15 min drive",
-    description: "Top-rated Schools",
-  },
-  {
-    icon: Plane,
-    title: "25 min drive",
-    description: "International Airport",
+    name: "One Residences",
+    directionsLink: "https://www.google.com/maps/dir//One+residences+by+Burgundy,+Mantra+Luxury+Line,+Flyover,+opposite+Irani+Cafe,+near+Magarpatta,+Somnath+Nagar,+Magarpatta,+Mundhwa,+Pune,+Maharashtra+411036/@18.5237458,73.9264545,17z/data=!4m16!1m7!3m6!1s0x3bc2c18fd78da239:0x5071507dbaf4cc3d!2sOne+residences+by+Burgundy!8m2!3d18.5237408!4d73.9313254!16s%2Fg%2F11wc3lnk_h!4m7!1m0!1m5!1m1!1s0x3bc2c18fd78da239:0x5071507dbaf4cc3d!2m2!1d73.9313254!2d18.5237408?entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D",
+    mapsLink: "https://maps.app.goo.gl/SMkCj51RAwoL14KVA",
+    embedSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.1234567890!2d73.9313254!3d18.5237408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c18fd78da239%3A0x5071507dbaf4cc3d!2sOne%20Residences%20by%20Burgundy!5e0!3m2!1sen!2sin!4v1697654323000!5m2!1sen!2sin",
   },
 ]
 
@@ -44,137 +34,59 @@ export default function LocationSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-  const directionsLink =
-    "https://www.google.com/maps/dir/?api=1&destination=Dosti+Greenscapes,+Indian+Hume+Pipe+Compound,+Near+Kirloskar+Company,+Near+Magarpatta+City,+Solapur+Road,+Upper+Camp,+Pune+411013"
-
-  const mapsLink =
-    "https://www.google.com/maps?q=Dosti+Greenscapes,+Indian+Hume+Pipe+Compound,+Near+Kirloskar+Company,+Near+Magarpatta+City,+Solapur+Road,+Upper+Camp,+Pune+411013"
-
   return (
     <section id="location" className="py-20 bg-background" ref={ref}>
       <div className="container mx-auto px-4">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">Prime Location</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-            Strategically positioned in the heart of the city, our properties offer unparalleled access to the best
-            dining, shopping, and entertainment venues.
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary text-balance">
+            Explore Our Projects
+          </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Map */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            <Card className="overflow-hidden">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          {projects.map((project) => (
+            <Card key={project.name} className="overflow-hidden">
               <CardContent className="p-0">
-                <a href={directionsLink} target="_blank" rel="noopener noreferrer" className="block">
-                  <div className="relative h-96 bg-muted cursor-pointer">
-                    <img
-                      src="dostilocation.png"
-                      alt="Location Map"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="bg-primary text-primary-foreground p-4 rounded-full shadow-lg">
-                        <MapPin size={32} />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-lg">
-                      <div className="font-semibold text-primary">Dosti Greenscapes</div>
-                      <div className="text-sm text-muted-foreground">Satellite view</div>
-                    </div>
-                  </div>
-                </a>
-              </CardContent>
-            </Card>
-
-            <div className="mt-6 flex gap-4">
-              <a href={directionsLink} target="_blank" rel="noopener noreferrer" className="flex-1">
-                <Button className="w-full bg-primary hover:bg-primary/90">Get Directions</Button>
-              </a>
-
-              <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="flex-1">
-                <Button variant="outline" className="w-full bg-transparent">
-                  View on Google Maps
-                </Button>
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Location Features */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-2xl font-bold text-primary mb-4">Everything Within Reach</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Our prime location puts you at the center of it all. From world-class dining and shopping to business
-                  districts and transportation hubs, everything you need is just moments away.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {locationFeatures.map((feature, index) => (
-                  <motion.div
-                    key={feature.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  >
-                    <Card className="hover:shadow-md transition-shadow duration-300">
-                      <CardContent className="p-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                            <feature.icon className="w-5 h-5 text-primary" />
-                          </div>
-                          <div>
-                            <div className="font-semibold text-card-foreground">{feature.title}</div>
-                            <div className="text-sm text-muted-foreground">{feature.description}</div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Contact Info */}
-              <motion.div
-                className="bg-card p-6 rounded-xl border"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.8 }}
-              >
-                <h4 className="text-lg font-semibold text-card-foreground mb-4">Visit Our Sales Center</h4>
-                <div className="space-y-2 text-muted-foreground">
-                  <div className="flex items-center">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    <span>
-                      Dosti Greenscapes, Indian Hume Pipe Compound, Near Kirloskar Company, Near Magarpatta City,
-                      Solapur Road, Upper Camp, Pune - 411013
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <Clock className="w-4 h-4 mr-2" />
-                    <span>Mon-Sat: 9AM-7PM, Sun: 10AM-6PM</span>
+                <div className="relative h-64">
+                  <iframe
+                    src={project.embedSrc}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={project.name}
+                  ></iframe>
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded-md flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-primary" />
+                    <span className="font-semibold text-sm">{project.name}</span>
                   </div>
                 </div>
-                <Button className="w-full mt-4 bg-primary hover:bg-primary/90">Schedule Visit</Button>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
+                <div className="flex gap-2 mt-2 p-2">
+                  <a href={project.directionsLink} target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-sm">Get Directions</Button>
+                  </a>
+                  <a href={project.mapsLink} target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button variant="outline" className="w-full bg-transparent text-sm">
+                      View on Google Maps
+                    </Button>
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </motion.div>
       </div>
     </section>
   )

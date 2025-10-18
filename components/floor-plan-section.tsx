@@ -156,7 +156,13 @@ export default function FloorPlanSection() {
                       className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
                         selectedPlan.id === plan.id ? "ring-2 ring-primary bg-card" : "hover:bg-card/50"
                       }`}
-                      onClick={() => setSelectedPlan(plan)}
+                      onClick={() => {
+                        setSelectedPlan(plan)
+                        const preview = document.querySelector("#floor-plan-preview")
+                        if (preview) {
+                          preview.scrollIntoView({ behavior: "smooth", block: "start" })
+                        }
+                      }}
                     >
                       <CardContent className="p-6">
                         <div className="flex justify-between items-start mb-3">
@@ -182,6 +188,7 @@ export default function FloorPlanSection() {
             </motion.div>
 
             <motion.div
+              id="floor-plan-preview"
               className="lg:col-span-2"
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
