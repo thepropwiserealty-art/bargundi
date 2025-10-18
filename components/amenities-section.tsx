@@ -13,78 +13,56 @@ import {
   Coffee,
   TreePine,
   Users,
-  Utensils,
-  Gamepad2,
-  Sparkles,
-  Wind,
 } from "lucide-react"
 
 const amenities = [
   {
     icon: Waves,
-    title: "Infinity Pool",
-    description: "Rooftop infinity pool with panoramic city views",
+    title: "Swimming Pool",
+    description: "Relax and enjoy a refreshing swim in our pool.",
   },
   {
     icon: Dumbbell,
-    title: "Fitness Center",
-    description: "State-of-the-art gym with personal training available",
+    title: "Gym & Fitness",
+    description: "State-of-the-art fitness facilities for all residents.",
   },
   {
     icon: Car,
-    title: "Valet Parking",
-    description: "Secure underground parking with valet service",
+    title: "Parking",
+    description: "Convenient and secure parking for residents and guests.",
   },
   {
     icon: Shield,
-    title: "24/7 Security",
-    description: "Round-the-clock security and concierge services",
+    title: "Security",
+    description: "24/7 security ensuring your safety and peace of mind.",
   },
   {
     icon: Wifi,
-    title: "High-Speed WiFi",
-    description: "Complimentary fiber-optic internet throughout",
+    title: "High-Speed Internet",
+    description: "Stay connected with fast and reliable WiFi.",
   },
   {
     icon: Coffee,
-    title: "Café Lounge",
-    description: "Resident café with premium coffee and light meals",
+    title: "Café & Lounge",
+    description: "Social spaces to relax, meet friends, and enjoy refreshments.",
   },
   {
     icon: TreePine,
-    title: "Garden Terrace",
-    description: "Beautifully landscaped outdoor spaces and gardens",
+    title: "Green Spaces",
+    description: "Beautifully landscaped gardens and outdoor areas.",
   },
   {
     icon: Users,
-    title: "Event Spaces",
-    description: "Private dining and meeting rooms for residents",
-  },
-  {
-    icon: Utensils,
-    title: "Gourmet Kitchen",
-    description: "Shared chef kitchen for entertaining guests",
-  },
-  {
-    icon: Gamepad2,
-    title: "Game Room",
-    description: "Entertainment lounge with billiards and games",
-  },
-  {
-    icon: Sparkles,
-    title: "Spa Services",
-    description: "On-site spa and wellness treatments available",
-  },
-  {
-    icon: Wind,
-    title: "Climate Control",
-    description: "Smart climate control in all living spaces",
+    title: "Community Spaces",
+    description: "Event rooms and common areas for gatherings and activities.",
   },
 ]
 
 export default function AmenitiesSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const whatsappNumber = "918237311365"
 
   return (
     <section id="amenities" className="py-20 bg-background" ref={ref}>
@@ -95,10 +73,11 @@ export default function AmenitiesSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">World-Class Amenities</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">
+            Our Amenities
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-            Experience luxury living with our comprehensive suite of amenities designed to enhance your lifestyle and
-            provide unparalleled comfort.
+            Enjoy a range of amenities designed to enhance comfort, convenience, and community living.
           </p>
         </motion.div>
 
@@ -134,22 +113,35 @@ export default function AmenitiesSection() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           <div className="bg-card rounded-2xl p-8 max-w-2xl mx-auto border">
-            <h3 className="text-2xl font-bold text-card-foreground mb-4">Ready to Experience Luxury Living?</h3>
+            <h3 className="text-2xl font-bold text-card-foreground mb-4">Experience It Yourself</h3>
             <p className="text-muted-foreground mb-6">
-              Schedule a private tour and discover all the amenities that make our properties exceptional.
+              Schedule a tour to explore our amenities and see what makes our community special.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
                 className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/${whatsappNumber}?text=Schedule%20me%20tour%20of%20Burgundy%20Series`,
+                    "_blank"
+                  )
+                }
               >
                 Schedule Tour
               </motion.button>
+
               <motion.button
                 className="border border-border text-foreground px-8 py-3 rounded-lg font-medium hover:bg-muted transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/${whatsappNumber}?text=Send%20me%20the%20brochure`,
+                    "_blank"
+                  )
+                }
               >
                 Download Brochure
               </motion.button>
