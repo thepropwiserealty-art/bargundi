@@ -44,7 +44,7 @@ export default function LocationSection() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-primary text-balance">
-            Explore Our Projects
+            Prime Locations
           </h2>
         </motion.div>
 
