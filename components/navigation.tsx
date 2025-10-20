@@ -59,13 +59,16 @@ export default function Navigation() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
 
-            {/* Logo */}
+            {/* ✅ Updated Logo Section */}
             <motion.div className="flex items-center space-x-2" whileHover={{ scale: 1.05 }}>
               <div className="rounded-md flex items-center justify-center">
-                <img 
-                  src="/mantralogo.png" 
-                  alt="Dosti Logo" 
-                  className="h-10 w-15 rounded-md"
+                <Image
+                  src="/logo.png"      // Make sure this exists in /public
+                  alt="Company Logo"
+                  width={140}          // Adjust as needed
+                  height={50}
+                  className="h-10 w-auto object-contain"
+                  priority
                 />
               </div>
             </motion.div>
@@ -84,7 +87,6 @@ export default function Navigation() {
                 </motion.button>
               ))}
 
-              {/* Old logic: onClick={() => setIsContactPopupOpen(true)} */}
               <Button
                 className="bg-primary hover:bg-primary/90"
                 onClick={openWhatsApp}
@@ -132,12 +134,6 @@ export default function Navigation() {
                     </button>
                   ))}
 
-                  {/* Old logic:
-                    onClick={() => {
-                      setIsContactPopupOpen(true)
-                      setIsMobileMenuOpen(false)
-                    }}
-                  */}
                   <Button
                     className="bg-primary hover:bg-primary/90 w-full mt-4"
                     onClick={openWhatsApp}
@@ -151,7 +147,6 @@ export default function Navigation() {
         )}
       </AnimatePresence>
 
-      {/* Keep old popup logic but not in use */}
       <ContactPopup isOpen={isContactPopupOpen} onClose={() => setIsContactPopupOpen(false)} />
     </>
   )
