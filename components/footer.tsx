@@ -53,8 +53,8 @@ export default function Footer() {
             className="md:col-span-2 flex justify-between items-center px-4"
           >
             <img src="/QRf.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
-            <img src="/QRf.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
-            <img src="/QRf.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
+            <img src="/qr1.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
+            <img src="/qr2.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
           </motion.div>
         </div>
 
