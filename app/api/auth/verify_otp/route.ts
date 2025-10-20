@@ -1,6 +1,6 @@
 import { generateJwtToken } from "@/lib/jwt";
-import verifyOtp from "@/lib/otp/verifyOtp";
-import { insertRecord } from "@/lib/db";
+// import verifyOtp from "@/lib/otp/verifyOtp";
+// import { insertRecord } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
@@ -33,11 +33,11 @@ export async function GET(req: NextRequest) {
     //     );
     // }
     
-    const isPhonenoAdded = await insertRecord(name, email, phone);
+    // const isPhonenoAdded = await insertRecord(name, email, phone);
 
-    if (!isPhonenoAdded.success) {
-        return NextResponse.json({ error: isPhonenoAdded.message }, { status: 500 });
-    }
+    // if (!isPhonenoAdded.success) {
+    //     return NextResponse.json({ error: isPhonenoAdded.message }, { status: 500 });
+    // }
 
     const response = NextResponse.json({ success: true }, { status: 200 });
 
