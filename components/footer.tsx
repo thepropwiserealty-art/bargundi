@@ -1,117 +1,84 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
-
-const footerLinks = {
-  Properties: ["Luxury Homes", "Penthouses", "Condominiums", "Commercial"],
-  Services: ["Property Management", "Investment Consulting", "Market Analysis", "Financing"],
-  Company: ["About Us", "Our Team", "Careers", "Press"],
-  Support: ["Contact", "FAQ", "Documentation", "Privacy Policy"],
-}
-
-const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-]
+import { MapPin, Phone, Mail } from "lucide-react"
 
 export default function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
+      <div className="container mx-auto px-4 py-12">
+        
+        {/* ✅ TOP ROW */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+          
+          {/* ✅ LEFT — Keep as it is */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="space-y-4"
           >
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="bg-white p-2 foreground rounded-md flex items-center justify-center">
-                {/* <span className="text-sm font-bold text-primary">RE</span> */} <img 
-                 src="/logo.png" 
-                 alt="Dosti Logo" 
-                 className="h-10 w-auto rounded-md"  // adjust size as needed
-         />
+            <div className="flex items-center space-x-2">
+              <div className="bg-white p-2 rounded-md flex items-center justify-center">
+                <img
+                  src="/logo.png"
+                  alt="Mantra Burgundy Logo"
+                  className="h-14 w-auto rounded-md"
+                />
               </div>
-              {/* <span className="text-xl font-bold">Luxury Estates</span> */}
             </div>
-            <p className="text-primary-foreground/80 mb-6 leading-relaxed">
-              Redefining luxury living with exceptional properties and unparalleled service. Your dream home awaits.
-            </p>
-            <div className="space-y-2">
-              <div className="flex items-center text-primary-foreground/80">
+            <div className="space-y-2 text-primary-foreground/80 text-sm">
+              <div className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2" />
-                <span className="text-sm">Mantra Burgundy</span>
+                <span>Mantra Burgundy</span>
               </div>
-              <div className="flex items-center text-primary-foreground/80">
+              <div className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
-                <span className="text-sm">+91 8237311365</span>
+                <span>+91 8237311365</span>
               </div>
-              <div className="flex items-center text-primary-foreground/80">
+              <div className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
-                <span className="text-sm">shobhalmt@gmail.com</span>
+                <span>shobhalmt@gmail.com</span>
               </div>
             </div>
           </motion.div>
 
-          {/* Footer Links */}
-          {Object.entries(footerLinks).map(([category, links], index) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-lg font-semibold mb-4">{category}</h3>
-              <ul className="space-y-2">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-200 text-sm"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          {/* ✅ MIDDLE + RIGHT — Three QR Logos with even spacing */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="md:col-span-2 flex justify-between items-center px-4"
+          >
+            <img src="/QRf.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
+            <img src="/QRf.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
+            <img src="/QRf.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
+          </motion.div>
         </div>
 
-        {/* Bottom Section */}
-        <motion.div
-          className="border-t border-primary-foreground/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <div className="text-primary-foreground/80 text-sm mb-4 md:mb-0">
-            © 2025 Mantra Burgundy . All rights reserved.
-          </div>
-
-          {/* Social Links */}
-          <div className="flex space-x-4">
-            {socialLinks.map((social) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                className="w-10 h-10 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-primary-foreground/20 transition-colors duration-200"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label={social.label}
-              >
-                <social.icon className="w-5 h-5" />
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
+        {/* ✅ DISCLAIMER */}
+        <div className="mt-10 border-t border-primary-foreground/20 pt-6 text-center text-xs text-primary-foreground/80 leading-relaxed space-y-3">
+          <p>
+            <strong>This project is RERA registered.</strong> | Authorized Channel Partner |
+            Channel Partner RERA Number: <strong>A52100000378</strong> |
+            Project RERA Number: <strong>P52100079047</strong>
+          </p>
+          <p>
+            Please be advised that this website is not an official site and serves solely as an
+            informational portal managed by a RERA authorized real estate agent. It does not
+            constitute an offer or guarantee of any services. The prices displayed on this website
+            are subject to change without prior notice, and the availability of properties cannot
+            be guaranteed. The images showcased are for representational purposes only and may not
+            accurately reflect actual properties. We may share your data with RERA-registered
+            Developers as necessary and may send updates to the mobile number or email registered
+            with us. All rights reserved. Unauthorized use, reproduction, or distribution of the
+            site's content is prohibited and may violate applicable laws. For accurate and
+            up-to-date information, please contact us directly. Thank you for visiting.
+          </p>
+          <p className="mt-6 text-sm">© 2025 Mantra Burgundy. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   )
