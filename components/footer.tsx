@@ -30,9 +30,9 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <div className="flex items-center space-x-2 mb-6">
-              <div className="foreground rounded-md flex items-center justify-center">
+              <div className="bg-white p-2 foreground rounded-md flex items-center justify-center">
                 {/* <span className="text-sm font-bold text-primary">RE</span> */} <img 
-                 src="/dostilogo.png" 
+                 src="/logo.png" 
                  alt="Dosti Logo" 
                  className="h-10 w-auto rounded-md"  // adjust size as needed
          />
@@ -45,7 +45,7 @@ export default function Footer() {
             <div className="space-y-2">
               <div className="flex items-center text-primary-foreground/80">
                 <MapPin className="w-4 h-4 mr-2" />
-                <span className="text-sm">Dosti Greenscapes, Near Magarpatta City,Upper Camp, Pune - 411013</span>
+                <span className="text-sm">Mantra Burgundy</span>
               </div>
               <div className="flex items-center text-primary-foreground/80">
                 <Phone className="w-4 h-4 mr-2" />
@@ -93,7 +93,7 @@ export default function Footer() {
           viewport={{ once: true }}
         >
           <div className="text-primary-foreground/80 text-sm mb-4 md:mb-0">
-            © 2025 Greenscapes . All rights reserved.
+            © 2025 Mantra Burgundy . All rights reserved.
           </div>
 
           {/* Social Links */}
