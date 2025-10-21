@@ -19,7 +19,7 @@
   --background: #fff5f7; /* light blush */
   --foreground: #4b1d27; /* dark burgundy text */
   --card: #fbe8eb; /* soft pink card */
-  --card-foreground: #4b1d27; 
+  --card-foreground: #4b1d27;
   --popover: #fff5f7;
   --popover-foreground: #4b1d27;
   --primary: #6b0f1a; /* deep burgundy primary */
@@ -173,20 +173,44 @@ html {
 
 /* Scroll reveal animations */
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-50px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(50px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideInUp {
-  from { opacity: 0; transform: translateY(50px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.animate-slide-in-left { animation: slideInLeft 0.8s ease-out forwards; }
-.animate-slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
-.animate-slide-in-up { animation: slideInUp 0.8s ease-out forwards; }
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+.animate-slide-in-up {
+  animation: slideInUp 0.8s ease-out forwards;
+}

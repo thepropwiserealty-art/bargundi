@@ -5,7 +5,6 @@ import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function HeroSection() {
-  // Scroll to a section by ID
   const scrollToSection = (id: string) => {
     const section = document.querySelector(`#${id}`)
     if (section) {
@@ -14,26 +13,63 @@ export default function HeroSection() {
   }
 
   return (
-    <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img src="/mantrabg " alt="Luxury Estate" className="w-full h-full object-cover" />
+    <section
+      id="home"
+      className="
+        relative 
+        w-full min-h-screen 
+        flex items-center justify-center 
+        overflow-x-hidden overflow-y-hidden 
+        bg-black
+      "
+      style={{
+        // This ensures full-bleed layout even on mobile
+        width: '100%',
+        maxWidth: '100vw',
+      }}
+    >
+      {/* ✅ Background Image */}
+      <div
+        className="
+          absolute inset-0 z-0 
+          overflow-hidden 
+          w-full h-full
+        "
+      >
+        <img
+          src="/mantrabg"
+          alt="Luxury Estate"
+          className="
+            absolute inset-0 
+            w-full h-full 
+            object-cover 
+            object-center 
+            select-none 
+            m-0 p-0 border-0 
+            block
+          "
+          style={{
+            width: '100vw', // ensures it fills viewport
+            maxWidth: '100%',
+          }}
+          draggable={false}
+        />
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+      {/* ✅ Foreground Content */}
+      <div className="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto">
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-6 text-balance"
+          className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight text-balance"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Burgundy luxuries Series
+          Burgundy Luxuries Series
         </motion.h1>
 
         <motion.p
-          className="text-xl md:text-2xl mb-8 text-balance opacity-90"
+          className="text-base sm:text-xl md:text-2xl mb-8 text-balance opacity-90"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -47,7 +83,6 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          {/* Explore Properties scrolls to #about */}
           <Button
             size="lg"
             className="bg-primary hover:bg-primary/90 text-lg px-8 py-3"
@@ -56,7 +91,6 @@ export default function HeroSection() {
             Explore Properties
           </Button>
 
-          {/* Schedule Tour opens WhatsApp */}
           <a
             href="https://wa.me/8237311365?text=Schedule%20me%20a%20Tour%20for%20burgundy%20series"
             target="_blank"
@@ -76,9 +110,9 @@ export default function HeroSection() {
       {/* Scroll Indicator */}
       <motion.button
         onClick={() => scrollToSection("about")}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white hover:text-primary transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white hover:text-primary transition-colors"
         animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+        transition={{ duration: 2, repeat: Infinity }}
       >
         <ChevronDown size={32} />
       </motion.button>
