@@ -4,11 +4,11 @@
 /* image blur */
 @layer utilities {
   .blur-image {
-    @apply blur-md brightness-75 transition-all duration-500 ease-in-out;
+    @apply blur-md brightness-75 transition-all duration-500 ease-in-out w-full;
   }
 
   .blur-image-clear {
-    @apply blur-none brightness-100 transition-all duration-500 ease-in-out;
+    @apply blur-none brightness-100 transition-all duration-500 ease-in-out w-full;
   }
 }
 
@@ -16,21 +16,21 @@
 
 :root {
   /* Burgundy luxury theme colors */
-  --background: #fff5f7; /* light blush */
-  --foreground: #4b1d27; /* dark burgundy text */
-  --card: #fbe8eb; /* soft pink card */
+  --background: #fff5f7;
+  --foreground: #4b1d27;
+  --card: #fbe8eb;
   --card-foreground: #4b1d27;
   --popover: #fff5f7;
   --popover-foreground: #4b1d27;
-  --primary: #6b0f1a; /* deep burgundy primary */
+  --primary: #6b0f1a;
   --primary-foreground: #ffffff;
-  --secondary: #d4af37; /* gold accent */
+  --secondary: #d4af37;
   --secondary-foreground: #4b1d27;
-  --muted: #fdeff1; /* soft muted background */
+  --muted: #fdeff1;
   --muted-foreground: #6b0f1a;
-  --accent: #d4af37; /* gold accent */
+  --accent: #d4af37;
   --accent-foreground: #4b1d27;
-  --destructive: #b71c1c; /* deep red for alerts */
+  --destructive: #b71c1c;
   --destructive-foreground: #ffffff;
   --border: #e8c7cc;
   --input: #fbe8eb;
@@ -52,17 +52,17 @@
 }
 
 .dark {
-  --background: #1e0f14; /* dark burgundy */
-  --foreground: #f8e8ea; /* soft blush text */
-  --card: #2b0f1a; /* deep burgundy card */
+  --background: #1e0f14;
+  --foreground: #f8e8ea;
+  --card: #2b0f1a;
   --card-foreground: #f8e8ea;
   --popover: #2b0f1a;
   --popover-foreground: #f8e8ea;
-  --primary: #d4af37; /* gold primary for contrast */
+  --primary: #d4af37;
   --primary-foreground: #1e0f14;
-  --secondary: #f59e0b; /* optional accent gold */
+  --secondary: #f59e0b;
   --secondary-foreground: #1e0f14;
-  --muted: #4b1d27; /* dark muted */
+  --muted: #4b1d27;
   --muted-foreground: #f8e8ea;
   --accent: #d4af37;
   --accent-foreground: #1e0f14;
@@ -131,8 +131,8 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
+  body, html {
+    @apply bg-background text-foreground w-full min-w-full overflow-x-hidden;
   }
 }
 
@@ -146,8 +146,8 @@ html {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;  /* full viewport width */
+  height: 100vh; /* full viewport height */
   background: linear-gradient(135deg, #fbe8eb 0%, #fff5f7 100%);
   display: flex;
   align-items: center;
@@ -157,11 +157,13 @@ html {
 
 .logo-animation {
   animation: logoFade 2s ease-in-out;
+  width: 100%; /* full width */
+  max-width: 400px; /* optional max width for logos */
 }
 
+/* Logo fade animation */
 @keyframes logoFade {
-  0%,
-  100% {
+  0%, 100% {
     opacity: 0;
     transform: scale(0.8);
   }
@@ -173,44 +175,20 @@ html {
 
 /* Scroll reveal animations */
 @keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.animate-slide-in-left {
-  animation: slideInLeft 0.8s ease-out forwards;
-}
-.animate-slide-in-right {
-  animation: slideInRight 0.8s ease-out forwards;
-}
-.animate-slide-in-up {
-  animation: slideInUp 0.8s ease-out forwards;
-}
+.animate-slide-in-left { animation: slideInLeft 0.8s ease-out forwards; width: 100%; }
+.animate-slide-in-right { animation: slideInRight 0.8s ease-out forwards; width: 100%; }
+.animate-slide-in-up { animation: slideInUp 0.8s ease-out forwards; width: 100%; }
