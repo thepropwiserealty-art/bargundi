@@ -4,6 +4,15 @@ import { GeistMono } from 'geist/font/mono'
 import { Analytics } from '@vercel/analytics/next'
 import ContextProvider from "@/components/contextProvider";
 import './globals.css'
+import type { Viewport } from 'next'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
 
 export const metadata: Metadata = {
   title: 'Mantra Burgundy Luxuries Series',
