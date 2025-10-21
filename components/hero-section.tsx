@@ -1,8 +1,10 @@
 "use client"
 
+
 import { motion } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
 
 export default function HeroSection() {
   const scrollToSection = (id: string) => {
@@ -11,6 +13,7 @@ export default function HeroSection() {
       section.scrollIntoView({ behavior: "smooth" })
     }
   }
+
 
   return (
     <section
@@ -57,6 +60,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
+
       {/* ✅ Foreground Content */}
       <div className="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto">
         <motion.h1
@@ -68,6 +72,7 @@ export default function HeroSection() {
           Burgundy Luxuries Series
         </motion.h1>
 
+
         <motion.p
           className="text-base sm:text-xl md:text-2xl mb-8 text-balance opacity-90"
           initial={{ opacity: 0, y: 30 }}
@@ -76,6 +81,7 @@ export default function HeroSection() {
         >
           Luxury estates crafted for the discerning few. Experience unparalleled elegance and sophistication.
         </motion.p>
+
 
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
@@ -90,6 +96,7 @@ export default function HeroSection() {
           >
             Explore Properties
           </Button>
+
 
           <a
             href="https://wa.me/8237311365?text=Schedule%20me%20a%20Tour%20for%20burgundy%20series"
@@ -106,6 +113,7 @@ export default function HeroSection() {
           </a>
         </motion.div>
       </div>
+
 
       {/* Scroll Indicator */}
       <motion.button

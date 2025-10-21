@@ -6,7 +6,7 @@ import ContextProvider from "@/components/contextProvider";
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Project',
+  title: 'Mantra Burgundy Luxuries Series',
   description: 'Created with VIT student',
   generator: 'Team',
 }

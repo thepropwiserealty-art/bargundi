@@ -82,23 +82,23 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
           onClick={handleClose}
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
+            initial={{ opacity: 0, scale: 1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1 }}
             transition={{ type: "spring", duration: 0.4 }}
-            className="bg-[#f8f5f2] rounded-2xl shadow-2xl w-full max-w-[95vw] sm:max-w-xl md:max-w-4xl relative border border-[#a0522d]/20 flex flex-col md:flex-row"
+            className="bg-[#f8f5f2] rounded-2xl shadow-2xl w-full max-w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl relative border border-[#a0522d]/20 flex flex-col md:flex-row max-h-[calc(100vh-40px)] overflow-hidden p-4 sm:p-6 md:p-8"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Fixed Close Button (visible always) */}
+            {/* Close Button */}
             <button
               onClick={handleClose}
-              className="fixed top-6 right-6 z-[99] p-2 rounded-full bg-[#fff8f2]/90 hover:bg-[#fff2ea] transition-colors shadow-md
-                         md:absolute md:top-3 md:right-3 md:z-10"
+              className="absolute top-3 right-3 z-[99] p-2 rounded-full bg-[#fff8f2]/90 hover:bg-[#fff2ea] transition-colors shadow-md"
             >
               <X className="w-5 h-5 text-[#6b1d1d]" />
             </button>
-            {/* Modal Content Area (scrollable only, not the close button or overlay) */}
-            <div className="flex-1 h-full overflow-y-auto max-h-[90vh] flex flex-col md:flex-row">
+
+            {/* Modal Content Area */}
+            <div className="flex-1 overflow-y-auto flex flex-col md:flex-row min-w-0">
               {/* ℹ️ Info (Top-Left Tooltip Button) */}
               <div className="absolute top-3 left-3 z-20">
                 <div
@@ -133,8 +133,9 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
                   </AnimatePresence>
                 </div>
               </div>
+
               {/* Left Side - Form */}
-              <div className="flex-1 p-3 sm:p-6 md:p-8 flex flex-col justify-center order-2 md:order-1">
+              <div className="flex-1 p-3 sm:p-6 md:p-8 flex flex-col justify-center order-2 md:order-1 min-w-0">
                 <div className="max-w-sm mx-auto w-full">
                   <div className="text-center mb-4 sm:mb-6 md:mb-8">
                     <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-[#4a1c1c] mb-1 sm:mb-2">
@@ -210,6 +211,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
                   </form>
                 </div>
               </div>
+
               {/* Right Side - Offer Section */}
               <div className="flex-1 bg-[#800020] relative overflow-y-auto order-1 md:order-2 h-56 sm:h-72 md:h-auto">
                 <div className="absolute inset-0 bg-[#4a1c1c]/40"></div>
