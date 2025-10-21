@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect, useContext } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Phone, Mail, User } from "lucide-react"
+import { X, Info, Phone, Mail, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -23,6 +23,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [errors, setErrors] = useState({ name: "", email: "", phone: "" })
+  const [showTooltip, setShowTooltip] = useState(false)
   const { isAuthenticated, setAuthenticated } = useContext(context)
 
   useEffect(() => {
@@ -62,7 +63,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
         setPhone("")
         setEmail("")
 
-        const whatsappNumber = "8237311365" // <-- REPLACE WITH YOUR NUMBER
+        const whatsappNumber = "8237311365"
         const message = `Hi, I want to enquire about dosti estates.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}`
         window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank")
         return "success"
@@ -91,6 +92,42 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
             className="bg-[#f8f5f2] rounded-2xl shadow-2xl w-full max-w-4xl relative overflow-hidden border border-[#a0522d]/20 flex flex-col md:flex-row"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* ℹ️ Info (Top-Left Tooltip Button) */}
+            <div className="absolute top-3 left-3 z-20">
+              <div
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+                onClick={() => setShowTooltip(prev => !prev)}
+                className="relative"
+              >
+                <div className="p-2 rounded-full bg-[#fff8f2]/90 hover:bg-[#fff2ea] shadow-md cursor-pointer transition-colors">
+                  <Info className="w-5 h-5 text-[#6b1d1d]" />
+                </div>
+
+                <AnimatePresence>
+                  {showTooltip && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute top-10 left-0 w-72 bg-white border border-gray-200 rounded-xl shadow-xl p-4 text-sm text-gray-700 z-30"
+                    >
+                      <h4 className="font-semibold text-[#800020] mb-2">Terms & Conditions</h4>
+                      <ul className="list-disc pl-4 space-y-1">
+                        <li>Valid for 7 days from the date you receive this message</li>
+                        <li>Use the code on the top right-hand side, or mention it to reception during your site visit</li>
+                        <li>This is a unique & personalised code only for you</li>
+                        <li>If your visit plan changes, inform us — we’ll revise or reissue the code accordingly</li>
+                        <li>Feel free to connect for any assistance</li>
+                      </ul>
+                      <p className="text-xs mt-3 text-gray-500">Valid until December 31, 2025</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
             {/* Close Button */}
             <button
               onClick={handleClose}
@@ -182,20 +219,15 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
             </div>
 
             {/* Right Side - Offer Section */}
-            <div className="flex-1 bg-[#800020] relative overflow-hidden order-1 md:order-2 h-48 md:h-auto">
+            <div className="flex-1 bg-[#800020] relative overflow-y-auto order-1 md:order-2 h-72 md:h-auto">
               <div className="absolute inset-0 bg-[#4a1c1c]/40"></div>
-              <div className="relative h-full flex flex-col items-center justify-center p-4 md:p-8 text-center text-[#fff8f2]">
-                <div className="bg-[#fff8f2]/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 border border-[#fff8f2]/20 w-full max-w-xs md:max-w-none">
-                  <div className="text-5xl md:text-6xl font-bold mb-2 md:mb-4 text-[#f4d19b]">20%*</div>
-                  <div className="text-lg md:text-xl font-semibold mb-1 md:mb-2">OFF</div>
-                  <div className="text-xs md:text-sm opacity-90 mb-3 md:mb-4">On Premium Properties</div>
-                  <div className="bg-[#b23b3b] text-[#fff8f2] px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold">
-                    Limited Time Offer
-                  </div>
-                </div>
-                <div className="mt-3 md:mt-6 text-xs md:text-sm opacity-80">
-                  Valid until December 31, 2025
-                </div>
+              <div className="relative h-full flex flex-col items-center justify-start md:justify-center p-6 md:p-10 text-[#fff8f2] text-left">
+                <h3 className="text-xl md:text-2xl font-semibold mb-3 text-[#f4d19b]">
+                  Enjoy an Additional Privilege
+                </h3>
+                <p className="text-sm md:text-base mb-6 leading-relaxed">
+                  Enjoy an additional guaranteed privilege — your instant discount code applies over and above the final lowest offer price confirmed after your site visit.
+                </p>
               </div>
             </div>
           </motion.div>
