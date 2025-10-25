@@ -37,10 +37,7 @@ export default function Footer() {
                 <Phone className="w-4 h-4 mr-2" />
                 <span>+91 8237311365</span>
               </div>
-              <div className="flex items-center">
-                <Mail className="w-4 h-4 mr-2" />
-                <span>shobhalmt@gmail.com</span>
-              </div>
+              
             </div>
           </motion.div>
 
