@@ -15,7 +15,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: 'Mantra Burgundy Luxuries Series',
-  description: 'Created with VIT student',
+  description: '',
   generator: 'Team',
 }
 

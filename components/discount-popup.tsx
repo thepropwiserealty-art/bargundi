@@ -61,7 +61,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
         setPhone("")
         setEmail("")
         const whatsappNumber = "8237311365"
-        const message = `Hi, I want to enquire about dosti estates.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}`
+        const message = `Hi, I want to enquire about Mantra Burgundy Series.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}`
         window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank")
         return "success"
       },
@@ -121,6 +121,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
                       >
                         <h4 className="font-semibold text-[#800020] mb-2">Terms & Conditions</h4>
                         <ul className="list-disc pl-4 space-y-1">
+                          <li>Enjoy an additional guaranted privilege — your instant discount code applies over and above the final lowest offer price confirmed after your site visit.</li>
                           <li>Valid for 7 days from the date you receive this message</li>
                           <li>Use the code on the top right-hand side, or mention it to reception during your site visit</li>
                           <li>This is a unique & personalised code only for you</li>
