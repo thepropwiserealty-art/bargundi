@@ -11,7 +11,7 @@ export default function FloatingActionButtons() {
       label: "WhatsApp",
       color: "bg-green-500 hover:bg-green-600",
       action: () => {
-        const message = encodeURIComponent("Hello, I want to details of Burgundy series!")
+        const message = encodeURIComponent("Send me details of Mantra Burgundy series")
         window.open(`https://wa.me/8237311365?text=${message}`, "_blank")
       },
     },
