@@ -19,7 +19,7 @@ export default function FloatingActionButtons() {
       icon: Phone,
       label: "Call",
       color: "bg-blue-500 hover:bg-blue-600",
-      action: () => window.open("tel:+8237311365", "_self"),
+      action: () => window.open("tel:+918237311365", "_self"),
     },
     {
       icon: Car,
