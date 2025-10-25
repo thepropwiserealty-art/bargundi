@@ -13,7 +13,6 @@ export const viewport: Viewport = {
   userScalable: false,
 }
 
-
 export const metadata: Metadata = {
   title: 'Mantra Burgundy Luxuries Series',
   description: 'Created with VIT student',
