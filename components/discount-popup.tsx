@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect, useContext } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Info, Phone, Mail, User } from "lucide-react"
+import { X, Info, Phone, Mail, User ,IndianRupee} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -215,12 +215,25 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
               <div className="flex-1 bg-[#800020] relative overflow-y-auto order-1 md:order-2 h-56 sm:h-72 md:h-auto">
                 <div className="absolute inset-0 bg-[#4a1c1c]/40"></div>
                 <div className="relative h-full flex flex-col items-center justify-start md:justify-center p-4 sm:p-6 md:p-10 text-[#fff8f2] text-left">
-                  <h3 className="text-base sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-3 text-[#f4d19b]">
-                    Enjoy an Additional Privilege
-                  </h3>
-                  <p className="text-xs sm:text-sm md:text-base mb-3 sm:mb-6 leading-relaxed">
-                    Enjoy an additional guaranteed privilege — your instant discount code applies over and above the final lowest offer price confirmed after your site visit.
-                  </p>
+                     <h3 className="text-base sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 text-[#f4d19b]">
+                      We Promise
+                    </h3>
+
+      
+                  <div className="space-y-3 sm:space-y-6">
+                     <p className="flex items-center text-xs sm:text-sm md:text-base leading-relaxed">
+                     <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#f4d19b] mr-2 sm:mr-3" />
+                     Instant Call Back
+                     </p>
+                     <p className="flex items-center text-xs sm:text-sm md:text-base leading-relaxed">
+                        <User className="w-4 h-4 sm:w-5 sm:h-5 text-[#f4d19b] mr-2 sm:mr-3" />
+                       Free Site Visit
+                      </p>
+                       <p className="flex items-center text-xs sm:text-sm md:text-base leading-relaxed">
+                       <IndianRupee className="w-4 h-4 sm:w-5 sm:h-5 text-[#f4d19b] mr-2 sm:mr-3" />
+                         Lowest Price Guaranteed
+                      </p>
+</div>
                 </div>
               </div>
             </div>
