@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef, useState, useEffect, useContext } from "react"
@@ -91,6 +92,7 @@ export default function FloorPlanSection() {
       "_blank"
     )
   }
+
 
   return (
     <section id="floor-plan" className="py-20 bg-muted/30" ref={ref}>
@@ -196,13 +198,18 @@ export default function FloorPlanSection() {
             >
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
-                  <div className="relative">
-                    <img
+              
+                  <div className="relative w-full h-96">
+                    
+                    <Image
                       src={selectedPlan.image || "/placeholder.svg"}
                       alt={`${selectedPlan.name} Floor Plan`}
-                      className={
-                        isAuthenticated ? "w-full h-96 object-cover blur-image-clear" : "w-full h-96 object-cover blur-image"
+                      fill 
+                      className={ 
+                        isAuthenticated ? "object-cover blur-image-clear" : "object-cover blur-image"
                       }
+            
+                      sizes="(min-width: 1024px) 66vw, 100vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                     <div className="absolute bottom-4 left-4 text-white">
@@ -259,13 +266,18 @@ export default function FloorPlanSection() {
                   <CarouselItem key={plan.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                     <Card className="overflow-hidden h-full">
                       <CardContent className="p-0">
-                        <div className="relative">
-                          <img
+                   
+                        <div className="relative w-full h-64">
+                   
+                          <Image
                             src={plan.image || "/placeholder.svg"}
                             alt={`${plan.name} Floor Plan`}
-                            className={
-                              isAuthenticated ? "w-full h-64 object-cover blur-image-clear" : "w-full h-64 object-cover blur-image"
+                            fill 
+                            className={ 
+                              isAuthenticated ? "object-cover blur-image-clear" : "object-cover blur-image"
                             }
+                    
+                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                           <div className="absolute bottom-4 left-4 text-white">

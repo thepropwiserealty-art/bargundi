@@ -1,9 +1,12 @@
 "use client"
 
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { Award, Users, Home, Star } from "lucide-react"
+
+import luxuryInteriorImage from "./modern-luxury-living-room-with-floor-to-ceiling-wi.jpg"
 
 const stats = [
   { icon: Home, value: "500+", label: "Properties Sold" },
@@ -20,7 +23,8 @@ export default function AboutSection() {
     <section id="about" className="py-20 bg-muted/30" ref={ref}>
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
+          
+        
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -36,7 +40,7 @@ export default function AboutSection() {
               and help our clients discover not just houses, but homes where memories are made and dreams come to life.
             </p>
 
-            {/* Stats Grid */}
+            {/* Stats Grid (No Changes) */}
             <div className="grid grid-cols-2 gap-6">
               {stats.map((stat, index) => (
                 <motion.div
@@ -56,19 +60,27 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          {/* Image */}
+
           <motion.div
             className="relative"
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img src="/modern-luxury-living-room-with-floor-to-ceiling-wi.jpg" alt="Luxury Interior" className="w-full h-[500px] object-cover" />
+            
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl h-[500px]">
+        
+              <Image 
+                src={luxuryInteriorImage}
+                alt="Luxury Interior"
+                fill
+                className="object-cover"
+                placeholder="blur" // Automatic blur-up effect
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
 
-            {/* Floating Card */}
             <motion.div
               className="absolute -bottom-6 -left-6 bg-card p-6 rounded-xl shadow-lg border"
               initial={{ opacity: 0, scale: 0.8 }}
