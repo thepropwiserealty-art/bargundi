@@ -11,7 +11,7 @@ export default function FloatingActionButtons() {
       label: "WhatsApp",
       color: "bg-green-500 hover:bg-green-600",
       action: () => {
-        const message = encodeURIComponent("Hello, I want to details of Burgundy series!")
+        const message = encodeURIComponent("Send me details of Mantra Burgundy series")
         window.open(`https://wa.me/8237311365?text=${message}`, "_blank")
       },
     },
@@ -19,7 +19,7 @@ export default function FloatingActionButtons() {
       icon: Phone,
       label: "Call",
       color: "bg-blue-500 hover:bg-blue-600",
-      action: () => window.open("tel:+8237311365", "_self"),
+      action: () => window.open("tel:+918237311365", "_self"),
     },
     {
       icon: Car,
