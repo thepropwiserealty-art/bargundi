@@ -212,7 +212,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
                 </div>
               </div>
               {/* Right Side - Offer Section */}
-              <div className="flex-1 bg-[#800020] relative overflow-y-auto order-1 md:order-2 h-56 sm:h-72 md:h-auto">
+              <div className="flex-1 bg-[#800020] relative overflow-y-auto order-1 md:order-2 h-56 sm:h-72 md:h-auto rounded-2xl">
                 <div className="absolute inset-0 bg-[#4a1c1c]/40"></div>
                 <div className="relative h-full flex flex-col items-center justify-start md:justify-center p-4 sm:p-6 md:p-10 text-[#fff8f2] text-left">
                      <h3 className="text-base sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 text-[#f4d19b]">

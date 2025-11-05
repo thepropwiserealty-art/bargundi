@@ -65,7 +65,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
         >
-          Mantra Realty
+          Mantra Burgundy
         </motion.h1>
 
         {/* Tagline */}
@@ -75,7 +75,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.9, duration: 0.6, ease: "easeOut" }}
         >
-          Official Strategic Partners
+  
         </motion.p>
       </motion.div>
     </div>
