@@ -69,11 +69,9 @@ export const metadata: Metadata = {
       },
     ],
   },
-  // verification: {
-  //   google: 'your-google-verification-code',
-  //   // yandex: 'your-yandex-verification-code',
-  //   // bing: 'your-bing-verification-code',
-  // },
+  verification: {
+    google: 'G26jIDFbIHv0bLdWLPC5F9y8BvXYsoL3kzztbZAyCWE',
+  },
   
   alternates: {
     canonical: 'https://mantra-burgundy-best-deals.com/',
