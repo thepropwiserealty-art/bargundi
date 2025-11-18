@@ -1,10 +1,9 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { Analytics } from '@vercel/analytics/next'
 import ContextProvider from "@/components/contextProvider";
 import './globals.css'
-import type { Viewport } from 'next'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -15,14 +14,15 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mantra-burgundy-best-deals.com'),
-  
+
   title: {
     default: 'Burgundy Series: Luxury Properties by Mantra Realty',
-    template: '%s | Mantra Realty Burgundy Series'
-  },  
-  
-  description: 'Discover the Burgundy Series by Mantra Realty. Explore luxury 3BHK & 4BHK villas and apartments with world-class amenities in prime locations.',
-  
+    template: '%s | Mantra Realty Burgundy Series',
+  },
+
+  description:
+    'Discover the Burgundy Series by Mantra Realty. Explore luxury 3BHK & 4BHK villas and apartments with world-class amenities in prime locations.',
+
   keywords: [
     'Mantra Realty',
     'Burgundy Series',
@@ -38,8 +38,9 @@ export const metadata: Metadata = {
     'premium amenities',
     'swimming pool',
     'fitness center',
-    'luxury living'
-  ],  
+    'luxury living',
+  ],
+
   robots: {
     index: true,
     follow: true,
@@ -52,14 +53,15 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  
+
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://mantra-burgundy-best-deals.com/',
     siteName: 'Mantra Realty - Burgundy Series',
     title: 'Burgundy Series - Luxury Properties by Mantra Realty',
-    description: 'Explore luxury living with Marvilla Villas, Mayfair River Residences, and One Residences. Premium properties with exceptional amenities and thoughtfully designed floor plans.',
+    description:
+      'Explore luxury living with Marvilla Villas, Mayfair River Residences, and One Residences. Premium properties with exceptional amenities and thoughtfully designed floor plans.',
     images: [
       {
         url: '/mantralogo.png',
@@ -72,22 +74,25 @@ export const metadata: Metadata = {
   verification: {
     google: 'G26jIDFbIHv0bLdWLPC5F9y8BvXYsoL3kzztbZAyCWE',
   },
-  
   alternates: {
     canonical: 'https://mantra-burgundy-best-deals.com/',
   },
-  
   category: 'Real Estate',
 
-   // Additional metadata for single-page site
   other: {
     'article:section': 'Real Estate',
     'og:type': 'website',
   },
 
+  // avicon setup
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.png', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
 }
-
-
 
 export default function RootLayout({
   children,
@@ -97,9 +102,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <ContextProvider>
-        {children}
-        </ContextProvider>
+        <ContextProvider>{children}</ContextProvider>
+        <Analytics />
       </body>
     </html>
   )
