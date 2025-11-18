@@ -43,9 +43,9 @@ export default function LocationSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary text-balance">
-            Prime Locations
-          </h2>
+          <h1 className="text-4xl md:text-5xl font-bold text-primary text-balance">
+            Prime Locations in Pune
+          </h1>
         </motion.div>
 
         <motion.div
