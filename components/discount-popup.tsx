@@ -1,14 +1,14 @@
-
 "use client"
 
 import type React from "react"
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect, useContext, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Info, Phone, Mail, User ,IndianRupee} from "lucide-react"
+import { X, Info, Phone, Mail, User, IndianRupee } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import toast from "react-hot-toast"
+import ReCAPTCHA from "react-google-recaptcha"
 import { checkIfSubmitted } from "@/lib/checkIfSubmitted"
 import signup from "@/lib/signup"
 import context from "@/lib/context"
@@ -23,9 +23,10 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
-  const [errors, setErrors] = useState({ name: "", email: "", phone: "" })
+  const [errors, setErrors] = useState({ name: "", email: "", phone: "", recaptcha: "" })
   const [showTooltip, setShowTooltip] = useState(false)
   const { isAuthenticated, setAuthenticated } = useContext(context)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   useEffect(() => {
     checkIfSubmitted(setIsSubmitted).catch(err => console.log(err))
@@ -48,26 +49,35 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setErrors({ name: "", email: "", phone: "" })
+    setErrors({ name: "", email: "", phone: "", recaptcha: "" })
+
     if (!name) return setErrors(prev => ({ ...prev, name: "Name is required" }))
     if (!email.includes("@")) return setErrors(prev => ({ ...prev, email: "Invalid email" }))
     if (phone.length !== 10) return setErrors(prev => ({ ...prev, phone: "Enter 10-digit number" }))
-    await toast.promise(signup(name, email, phone), {
-      loading: "processing...",
-      success: () => {
-        setIsSubmitted(true)
-        setIsVisible(false)
-        setAuthenticated(true)
-        setName("")
-        setPhone("")
-        setEmail("")
-        const whatsappNumber = "8237311365"
-        const message = `Hi, I want to enquire about Mantra Burgundy Series.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}`
-        window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank")
-        return "success"
-      },
-      error: (err) => `${err.toString()}`,
-    })
+
+    const token = recaptchaRef.current?.getValue()
+    if (!token) return setErrors(prev => ({ ...prev, recaptcha: "Please verify you are not a robot" }))
+
+    await toast.promise(
+      signup(name, email, phone, token), // Pass token to signup function or send to backend for verification
+      {
+        loading: "processing...",
+        success: () => {
+          setIsSubmitted(true)
+          setIsVisible(false)
+          setAuthenticated(true)
+          setName("")
+          setPhone("")
+          setEmail("")
+          recaptchaRef.current?.reset()
+          const whatsappNumber = "8237311365"
+          const message = `Hi, I want to enquire about Mantra Burgundy Series.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}`
+          window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank")
+          return "success"
+        },
+        error: (err) => `${err.toString()}`,
+      }
+    )
   }
 
   if (isSubmitted) return null
@@ -90,17 +100,17 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
             className="bg-[#f8f5f2] rounded-2xl shadow-2xl w-full max-w-[95vw] sm:max-w-xl md:max-w-4xl relative border border-[#a0522d]/20 flex flex-col md:flex-row"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Fixed Close Button (visible always) */}
+            {/* Fixed Close Button */}
             <button
               onClick={handleClose}
-              className="fixed top-6 right-6 z-[99] p-2 rounded-full bg-[#fff8f2]/90 hover:bg-[#fff2ea] transition-colors shadow-md
-                         md:absolute md:top-3 md:right-3 md:z-10"
+              className="fixed top-6 right-6 z-[99] p-2 rounded-full bg-[#fff8f2]/90 hover:bg-[#fff2ea] transition-colors shadow-md md:absolute md:top-3 md:right-3 md:z-10"
             >
               <X className="w-5 h-5 text-[#6b1d1d]" />
             </button>
-            {/* Modal Content Area (scrollable only, not the close button or overlay) */}
+
+            {/* Modal Content */}
             <div className="flex-1 h-full overflow-y-auto max-h-[90vh] flex flex-col md:flex-row">
-              {/* ℹ️ Info (Top-Left Tooltip Button) */}
+              {/* Info Tooltip */}
               <div className="absolute top-3 left-3 z-20">
                 <div
                   onMouseEnter={() => setShowTooltip(true)}
@@ -129,12 +139,12 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
                           <li>If your visit plan changes, inform us — we’ll revise or reissue the code accordingly</li>
                           <li>Feel free to connect for any assistance</li>
                         </ul>
-                        <p className="text-xs mt-3 text-gray-500"></p>
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
               </div>
+
               {/* Left Side - Form */}
               <div className="flex-1 p-3 sm:p-6 md:p-8 flex flex-col justify-center order-2 md:order-1">
                 <div className="max-w-sm mx-auto w-full">
@@ -202,6 +212,18 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
                       </div>
                       {errors.phone && <p className="text-[#b23b3b] text-xs sm:text-sm mt-1">{errors.phone}</p>}
                     </div>
+
+                    {/* reCAPTCHA */}
+                    <div>
+                      <ReCAPTCHA
+                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                        ref={recaptchaRef}
+                      />
+                      {errors.recaptcha && (
+                        <p className="text-[#b23b3b] text-xs sm:text-sm mt-1">{errors.recaptcha}</p>
+                      )}
+                    </div>
+
                     {/* Submit Button */}
                     <Button
                       type="submit"
@@ -212,29 +234,28 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
                   </form>
                 </div>
               </div>
+
               {/* Right Side - Offer Section */}
               <div className="flex-1 bg-[#800020] relative overflow-y-auto order-1 md:order-2 h-56 sm:h-72 md:h-auto rounded-2xl">
                 <div className="absolute inset-0 bg-[#4a1c1c]/40"></div>
                 <div className="relative h-full flex flex-col items-center justify-start md:justify-center p-4 sm:p-6 md:p-10 text-[#fff8f2] text-left">
-                     <h3 className="text-base sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 text-[#f4d19b]">
-                      We Promise
-                    </h3>
-
-      
+                  <h3 className="text-base sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 text-[#f4d19b]">
+                    We Promise
+                  </h3>
                   <div className="space-y-3 sm:space-y-6">
-                     <p className="flex items-center text-xs sm:text-sm md:text-base leading-relaxed">
-                     <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#f4d19b] mr-2 sm:mr-3" />
-                     Instant Call Back
-                     </p>
-                     <p className="flex items-center text-xs sm:text-sm md:text-base leading-relaxed">
-                        <User className="w-4 h-4 sm:w-5 sm:h-5 text-[#f4d19b] mr-2 sm:mr-3" />
-                       Free Site Visit
-                      </p>
-                       <p className="flex items-center text-xs sm:text-sm md:text-base leading-relaxed">
-                       <IndianRupee className="w-4 h-4 sm:w-5 sm:h-5 text-[#f4d19b] mr-2 sm:mr-3" />
-                         Lowest Price Guaranteed
-                      </p>
-</div>
+                    <p className="flex items-center text-xs sm:text-sm md:text-base leading-relaxed">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#f4d19b] mr-2 sm:mr-3" />
+                      Instant Call Back
+                    </p>
+                    <p className="flex items-center text-xs sm:text-sm md:text-base leading-relaxed">
+                      <User className="w-4 h-4 sm:w-5 sm:h-5 text-[#f4d19b] mr-2 sm:mr-3" />
+                      Free Site Visit
+                    </p>
+                    <p className="flex items-center text-xs sm:text-sm md:text-base leading-relaxed">
+                      <IndianRupee className="w-4 h-4 sm:w-5 sm:h-5 text-[#f4d19b] mr-2 sm:mr-3" />
+                      Lowest Price Guaranteed
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
