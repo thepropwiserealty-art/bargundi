@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-import { Analytics } from '@vercel/analytics/next'
 import ContextProvider from "@/components/contextProvider";
 import './globals.css'
+import JsonLd from '@/components/JsonLd';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -143,8 +143,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+        <JsonLd />
         <ContextProvider>{children}</ContextProvider>
-        <Analytics />
       </body>
     </html>
   )

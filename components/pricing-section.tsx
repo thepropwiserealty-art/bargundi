@@ -71,6 +71,7 @@ export default function PricingSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {properties.map((property, index) => (
             <motion.div
+              id={`#${property.title.replaceAll(" ", "-")}`}
               key={property.id}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
