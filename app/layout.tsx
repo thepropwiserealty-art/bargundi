@@ -16,31 +16,49 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mantra-burgundy-best-deals.com'),
 
   title: {
-    default: 'Burgundy Series: Luxury Properties by Mantra Realty',
+    default: 'Mantra Burgundy Luxury Line | Villas & Apts in Mundhwa, Pune',
     template: '%s | Mantra Realty Burgundy Series',
   },
 
   description:
-    'Discover the Burgundy Series by Mantra Realty. Explore luxury 3BHK & 4BHK villas and apartments with world-class amenities in prime locations.',
+    "Explore Mantra's premium collection: Marvilla Villas, 1 Residences Magarpatta, & Mayfair KP Annexe. 3-5 BHK luxury homes in Mundhwa from ₹1.5 Cr*",
 
   keywords: [
-    'Mantra Realty',
-    'Burgundy Series',
-    'Marvilla Villas',
-    'Mayfair Residences',
-    'One Residences',
-    'luxury apartments',
-    'premium properties',
-    '3BHK apartments',
-    '4BHK apartments',
-    'luxury villas',
-    'real estate',
-    'premium amenities',
-    'swimming pool',
-    'fitness center',
-    'luxury living',
+    // Broad / High-Volume
+    "Mantra Properties Pune",
+    "Luxury projects in Mundhwa",
+    "Flats in Magarpatta City",
+    "New projects in Koregaon Park Annexe",
+    "3 BHK in Hadapsar",
+    "4 BHK luxury apartments Pune",
+    "5 BHK villas in Pune",
+    "Real estate Mundhwa",
+    "Mantra Burgundy collection",
+
+    // Project-Specific
+    "Mantra Marvilla Mundhwa",
+    "Mantra 1 Residences Magarpatta",
+    "Mantra Mayfair Koregaon Park Annexe",
+    "Mantra Marvilla villas price",
+    "Mantra One Residences brochure",
+    "Mantra Mayfair floor plan",
+    "Mantra Burgundy Mundhwa location",
+
+    // Intent-Based
+    "Buy luxury home Pune",
+    "Ready possession flats Mundhwa",
+    "Under construction projects Magarpatta",
+    "Gated community villas Pune",
+    "High-end real estate Pune",
+    "Mantra sales office contact"
   ],
 
+  // Authorship
+  authors: [{ name: 'Mantra Properties' }],
+  creator: 'Mantra Properties',
+  publisher: 'Mantra Properties',
+
+  // Robot directives
   robots: {
     index: true,
     follow: true,
@@ -54,37 +72,55 @@ export const metadata: Metadata = {
     },
   },
 
+  // Social Media Sharing (Facebook/WhatsApp/LinkedIn)
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_IN',
     url: 'https://mantra-burgundy-best-deals.com/',
     siteName: 'Mantra Realty - Burgundy Series',
     title: 'Burgundy Series - Luxury Properties by Mantra Realty',
     description:
-      'Explore luxury living with Marvilla Villas, Mayfair River Residences, and One Residences. Premium properties with exceptional amenities and thoughtfully designed floor plans.',
+      "Explore Mantra's premium collection: Marvilla Villas, 1 Residences Magarpatta, & Mayfair KP Annexe. 3-5 BHK luxury homes in Mundhwa.",
     images: [
       {
-        url: '/mantralogo.png',
+        // TIP: Use a render of the building here, not the logo!
+        url: '/mantrabg', 
         width: 1200,
         height: 630,
-        alt: 'Luxury Living Space - Mantra Realty Burgundy Series',
+        alt: 'Mantra Burgundy Luxury Villas and Apartments in Pune',
       },
     ],
   },
+
+  // Twitter Card (Important for large image previews)
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mantra Burgundy Luxury Line | Villas & Apts in Mundhwa',
+    description: "Premium 3-5 BHK homes in Mundhwa, Pune. Marvilla, 1 Residences & Mayfair.",
+    images: ['/mantrabg'], // Same hero image as OG
+  },
+
   verification: {
     google: 'G26jIDFbIHv0bLdWLPC5F9y8BvXYsoL3kzztbZAyCWE',
   },
+  
   alternates: {
     canonical: 'https://mantra-burgundy-best-deals.com/',
   },
+  
   category: 'Real Estate',
 
+  // Local SEO Tags
   other: {
-    'article:section': 'Real Estate',
-    'og:type': 'website',
+    // These are Geo-coordinates for Mundhwa, Pune (Approximate)
+    // Helps Google Map your site to the location
+    'geo.region': 'IN-MH',
+    'geo.placename': 'Pune',
+    'geo.position': '18.5302;73.9262', // Coordinates for Mundhwa
+    'ICBM': '18.5302, 73.9262',
   },
 
-  // favicon setup
+  // Favicon setup
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
