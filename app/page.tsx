@@ -7,7 +7,6 @@ import HeroSection from "@/components/hero-section"
 import { Toaster } from 'react-hot-toast';
 import context from "@/lib/context"
 import { checkIfSubmitted } from "@/lib/checkIfSubmitted"
-import LoadingScreen from "@/components/loading-screen"
 
 // ✅ Dynamically import components that are below the fold
 // loading: () => <p>Loading...</p> can be added if you want a skeleton state

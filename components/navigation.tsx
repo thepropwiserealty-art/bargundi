@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import ContactPopup from "./contact-popup"
 import Image from "next/image"
 
 const navItems = [
@@ -142,9 +141,6 @@ export default function Navigation() {
           </div>
         </div>
       )}
-
-      {/* Ensure ContactPopup exists or comment it out if not needed yet */}
-      <ContactPopup isOpen={isContactPopupOpen} onClose={() => setIsContactPopupOpen(false)} />
     </>
   )
 }

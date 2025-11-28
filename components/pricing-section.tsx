@@ -1,9 +1,4 @@
-"use client"
-
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
-import Image from "next/image" // ✅ Import Next.js Image
+import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -17,7 +12,6 @@ const properties = [
     price: "",
     beds: 5,
     sqft: "5,500*",
-    // Note: Ensure these images exist in your public folder (e.g., public/Marvilla-Logo.jpg)
     image: "Marvilla-Logo.jpg",
     badge: "Luxury Villas",
     badgeVariant: "default" as const,
@@ -49,18 +43,11 @@ const properties = [
 ]
 
 export default function PricingSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
   return (
-    <section id="pricing" className="py-20 bg-background" ref={ref}>
+    <section id="pricing" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
+        {/* Header */}
+        <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">
             Burgundy Series
           </h2>
@@ -68,29 +55,24 @@ export default function PricingSection() {
             Discover our curated collection of luxury properties, each offering unique features and unparalleled
             elegance in prime locations.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {properties.map((property, index) => (
-            <motion.div
-              id={`#${property.title.replaceAll(" ", "-")}`}
+        {/* Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200 fill-mode-forwards">
+          {properties.map((property) => (
+            <div
+              id={property.title.replaceAll(" ", "-")}
               key={property.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="h-full"
             >
               <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group h-full flex flex-col">
-                {/* ✅ Image Container */}
-                {/* We move the height class (h-64) here and add 'relative' so the Image with 'fill' knows its boundaries */}
+                {/* Image Container */}
                 <div className="relative h-64 w-full overflow-hidden">
                   <Image
-                    // Helper to ensure path starts with '/' if data doesn't have it
                     src={property.image.startsWith('/') ? property.image : `/${property.image}`}
                     alt={property.title}
-                    fill // Replaces width/height. Fills the relative parent.
+                    fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    // ✅ Sizes: Crucial for performance in grids
-                    // 100vw on mobile, 50vw on tablet (2 cols), 33vw on desktop (3 cols)
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   
@@ -127,40 +109,35 @@ export default function PricingSection() {
                   </div>
 
                   <div className="flex gap-2 mt-auto">
-                    <Button
-                      className="flex-1 bg-primary hover:bg-primary/90"
-                      onClick={() => {
-                        const msg = encodeURIComponent(
-                          `I want details of ${property.title}`
-                        )
-                        window.open(
-                          `https://wa.me/${property.phone}?text=${msg}`,
-                          "_blank"
-                        )
-                      }}
+                    {/* Replaced onClick with standard anchor tags */}
+                    <a 
+                      href={`https://wa.me/${property.phone}?text=${encodeURIComponent(`I want details of ${property.title}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1"
                     >
-                      View Details
-                    </Button>
+                      <Button className="w-full bg-primary hover:bg-primary/90">
+                        View Details
+                      </Button>
+                    </a>
 
-                    <Button
-                      variant="outline"
-                      className="flex-1 bg-transparent"
-                      onClick={() => {
-                        const msg = encodeURIComponent(
-                          `I want to schedule a tour for ${property.title}.`
-                        )
-                        window.open(
-                          `https://wa.me/${property.phone}?text=${msg}`,
-                          "_blank"
-                        )
-                      }}
+                    <a
+                      href={`https://wa.me/${property.phone}?text=${encodeURIComponent(`I want to schedule a tour for ${property.title}.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1"
                     >
-                      Schedule Tour
-                    </Button>
+                      <Button
+                        variant="outline"
+                        className="w-full bg-transparent"
+                      >
+                        Schedule Tour
+                      </Button>
+                    </a>
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
