@@ -1,30 +1,24 @@
-"use client"
-
-import { motion } from "framer-motion"
-import { MapPin, Phone, Mail } from "lucide-react"
+import { MapPin, Phone } from "lucide-react"
+import Image from "next/image"
 
 export default function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
         
-        {/* ✅ TOP ROW */}
+        {/* TOP ROW */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           
-          {/* ✅ LEFT — Keep as it is */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
+          {/* LEFT SECTION */}
+          <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="flex items-center space-x-2">
               <div className="bg-white p-2 rounded-md flex items-center justify-center">
-                <img
+                <Image
                   src="/logo.png"
                   alt="Mantra Burgundy Logo"
-                  className="h-14 w-auto rounded-md"
+                  width={200}
+                  height={56}
+                  className="h-14 w-auto rounded-md object-contain"
                 />
               </div>
             </div>
@@ -37,26 +31,37 @@ export default function Footer() {
                 <Phone className="w-4 h-4 mr-2" />
                 <span>+91 8237311365</span>
               </div>
-              
             </div>
-          </motion.div>
+          </div>
 
-          {/* ✅ MIDDLE + RIGHT — Three QR Logos with even spacing */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="md:col-span-2 flex justify-between items-center px-4"
-          >
-            <img src="/QRf.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
-            <img src="/qr1.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
-            <img src="/qr2.png" alt="QR Code" className="h-32 w-32 object-contain rounded-md" />
-          </motion.div>
+          {/* MIDDLE + RIGHT — QR Logos */}
+          <div className="md:col-span-2 flex justify-between items-center px-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 fill-mode-forwards">
+            <Image 
+              src="/QRf.png" 
+              alt="QR Code" 
+              width={128} 
+              height={128} 
+              className="h-32 w-32 object-contain rounded-md" 
+            />
+            <Image 
+              src="/qr1.png" 
+              alt="QR Code" 
+              width={128} 
+              height={128} 
+              className="h-32 w-32 object-contain rounded-md" 
+            />
+            <Image 
+              src="/qr2.png" 
+              alt="QR Code" 
+              width={128} 
+              height={128} 
+              className="h-32 w-32 object-contain rounded-md" 
+            />
+          </div>
         </div>
 
-        {/* ✅ DISCLAIMER */}
-        <div className="mt-10 border-t border-primary-foreground/20 pt-6 text-center text-xs text-primary-foreground/80 leading-relaxed space-y-3">
+        {/* DISCLAIMER */}
+        <div className="mt-10 border-t border-primary-foreground/20 pt-6 text-center text-xs text-primary-foreground/80 leading-relaxed space-y-3 animate-in fade-in duration-1000 delay-300 fill-mode-forwards">
           <p>
             <strong>This project is RERA registered.</strong> | Authorized Channel Partner |
             Channel Partner RERA Number: <strong>A52100000378</strong> |

@@ -3,10 +3,11 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
+import Image from "next/image" // ✅ Import Next.js Image
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Bed, Bath, Square, MapPin } from "lucide-react"
+import { Bed, Square, MapPin } from "lucide-react"
 
 const properties = [
   {
@@ -16,6 +17,7 @@ const properties = [
     price: "",
     beds: 5,
     sqft: "5,500*",
+    // Note: Ensure these images exist in your public folder (e.g., public/Marvilla-Logo.jpg)
     image: "Marvilla-Logo.jpg",
     badge: "Luxury Villas",
     badgeVariant: "default" as const,
@@ -77,14 +79,22 @@ export default function PricingSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.2 }}
             >
-              <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
-                <div className="relative">
-                  <img
-                    src={property.image || "/placeholder.svg"}
+              <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group h-full flex flex-col">
+                {/* ✅ Image Container */}
+                {/* We move the height class (h-64) here and add 'relative' so the Image with 'fill' knows its boundaries */}
+                <div className="relative h-64 w-full overflow-hidden">
+                  <Image
+                    // Helper to ensure path starts with '/' if data doesn't have it
+                    src={property.image.startsWith('/') ? property.image : `/${property.image}`}
                     alt={property.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    fill // Replaces width/height. Fills the relative parent.
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    // ✅ Sizes: Crucial for performance in grids
+                    // 100vw on mobile, 50vw on tablet (2 cols), 33vw on desktop (3 cols)
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-                  <Badge className="absolute top-4 left-4" variant={property.badgeVariant}>
+                  
+                  <Badge className="absolute top-4 left-4 z-10" variant={property.badgeVariant}>
                     {property.badge}
                   </Badge>
                 </div>
@@ -104,23 +114,19 @@ export default function PricingSection() {
                   </div>
                 </CardHeader>
 
-                <CardContent>
+                <CardContent className="flex-grow flex flex-col justify-end">
                   <div className="flex justify-between items-center mb-4">
                     <div className="flex items-center text-muted-foreground">
                       <Bed className="w-4 h-4 mr-1" />
                       <span className="text-sm mr-4">{property.beds} Beds</span>
                     </div>
-                    {/* <div className="flex items-center text-muted-foreground">
-                      <Bath className="w-4 h-4 mr-1" />
-                      <span className="text-sm mr-4">{property.baths || "-"} Baths</span>
-                    </div> */}
                     <div className="flex items-center text-muted-foreground">
                       <Square className="w-4 h-4 mr-1" />
                       <span className="text-sm">{property.sqft || "-"} sqft</span>
                     </div>
                   </div>
 
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 mt-auto">
                     <Button
                       className="flex-1 bg-primary hover:bg-primary/90"
                       onClick={() => {

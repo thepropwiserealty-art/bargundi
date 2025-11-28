@@ -1,57 +1,47 @@
 "use client"
 
 import { useState, useEffect, useContext } from "react"
-import LoadingScreen from "@/components/loading-screen"
+import dynamic from "next/dynamic"
 import Navigation from "@/components/navigation"
 import HeroSection from "@/components/hero-section"
-import AboutSection from "@/components/about-section"
-import PricingSection from "@/components/pricing-section"
-import FloorPlanSection from "@/components/floor-plan-section"
-import AmenitiesSection from "@/components/amenities-section"
-import GallerySection from "@/components/gallery-section"
-import LocationSection from "@/components/location-section"
-import Footer from "@/components/footer"
-import FloatingActionButtons from "@/components/floating-action-buttons"
-import DownloadBrochureButton from "@/components/download-brochure-button"
-import DiscountPopup from "@/components/discount-popup"
-import StickyForm from "@/components/StickyForm"
 import { Toaster } from 'react-hot-toast';
 import context from "@/lib/context"
 import { checkIfSubmitted } from "@/lib/checkIfSubmitted"
+import LoadingScreen from "@/components/loading-screen"
+
+// ✅ Dynamically import components that are below the fold
+// loading: () => <p>Loading...</p> can be added if you want a skeleton state
+const PricingSection = dynamic(() => import("@/components/pricing-section"))
+const FloorPlanSection = dynamic(() => import("@/components/floor-plan-section"))
+const AmenitiesSection = dynamic(() => import("@/components/amenities-section"))
+const GallerySection = dynamic(() => import("@/components/gallery-section"))
+const LocationSection = dynamic(() => import("@/components/location-section"))
+const Footer = dynamic(() => import("@/components/footer"))
+
+// ✅ Non-critical interactive elements can also be lazy loaded
+const FloatingActionButtons = dynamic(() => import("@/components/floating-action-buttons"), { ssr: false })
+const DownloadBrochureButton = dynamic(() => import("@/components/download-brochure-button"))
+const DiscountPopup = dynamic(() => import("@/components/discount-popup"), { ssr: false })
+const StickyForm = dynamic(() => import("@/components/StickyForm"), { ssr: false })
+
+
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { isAuthenticated, setAuthenticated } = useContext(context);
 
-  // const handleLoadingComplete = () => {
-  //   setIsLoading(false)
-  // }
-
-  // Prevent scroll during loading
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     document.body.style.overflow = "hidden"
-  //   } else {
-  //     document.body.style.overflow = "unset"
-  //   }
-
-  //   return () => {
-  //     document.body.style.overflow = "unset"
-  //   }
-  // }, [isLoading])
-
   useEffect(() => {
-    checkIfSubmitted(setIsSubmitted).then(() => setAuthenticated(true)).catch((err) => console.log(err));
+    checkIfSubmitted(setIsSubmitted).then(() => setAuthenticated(true)).catch((err)=>{});
   }, []);
 
   return (
     <>
-      {/* {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />} */}
 
       <div className={`transition-opacity duration-500`}>
         <Navigation />
+        
         <DownloadBrochureButton />
+        
         <main>
           <section id="home">
             <HeroSection />
@@ -75,12 +65,14 @@ export default function Home() {
             <LocationSection />
           </section>
         </main>
+        
         <Footer />
         <FloatingActionButtons />
         <DiscountPopup isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />
         <StickyForm isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />
+        
         <Toaster
-          position="top-center"  // default positions: top-right, top-left, bottom-right, bottom-left
+          position="top-center"
           toastOptions={{
             duration: 4000,
             style: {
