@@ -9,7 +9,7 @@ type DbQueryResult = {
 export default async function checkIfExists(email: string, phone_no: string): Promise<DbQueryResult> {
     const result: DbQueryResult = {
         statusCode: 200,
-        message: "Success"
+        message: ""
     };
 
     try {
@@ -38,6 +38,7 @@ export default async function checkIfExists(email: string, phone_no: string): Pr
     }
 
     if (existing) {
+        // console.log(existing);
         if (existing.email === email) {
             result.message = "Email already exists";
         }

@@ -5,6 +5,8 @@ import generateUserCoupon from "@/lib/generateCoupon";
 import { websiteName } from "@/lib/constans";
 import checkIfExists from "@/lib/mongoose/checkIfExists";
 import createUser from "@/lib/mongoose/createUser";
+import { validate } from "@/lib/validation/validate";
+import { userSchema } from "@/lib/validation/user.schema";
 
 type requestBody = {
     name?: string,
@@ -14,21 +16,23 @@ type requestBody = {
 
 export async function POST(req: NextRequest) {
     const body: requestBody = await req.json();
-    const { name, email, phone } = body;
+    // const { name, email, phone } = body;
     const to = process.env.CLIENT_EMAIL;
     
+    let validatedName = null;
+    let validatedEmail = null;
+    let ValidatedPhone_no = null;
+    try {
+        const {name, email, phone} = await validate(userSchema, body);
+        validatedName = name;
+        validatedEmail = email;
+        ValidatedPhone_no = phone;
 
-    if (!name) {
-        return NextResponse.json({ error: "name cannot be empty" }, { status: 400 });
-    }
-    if (!email) {
-        return NextResponse.json({ error: "email cannot be empty" }, { status: 400 });
-    }
-    if (!phone) {
-        return NextResponse.json({ error: "phone cannot be empty" }, { status: 400 });
+    } catch (err: any) {
+        return NextResponse.json({error: err.message}, {status: 400});
     }
 
-    const userExists = await checkIfExists(email, phone);
+    const userExists = await checkIfExists(validatedEmail, ValidatedPhone_no);
     // console.log(userExists);
     
     if(userExists.statusCode != 200){
@@ -37,15 +41,15 @@ export async function POST(req: NextRequest) {
 
     try {
         const subject = `New Registration for ${websiteName}`;
-        const coupon = generateUserCoupon(phone);
+        const coupon = generateUserCoupon(ValidatedPhone_no);
         
-        const addUserResult = await createUser(name, email, phone, coupon);
+        const addUserResult = await createUser(validatedName, validatedEmail, ValidatedPhone_no, coupon);
         
         if(addUserResult.statusCode != 200){
             throw new Error(addUserResult.message);
         }
 
-        const template = `Name : ${name}\nEmail : ${email}\nPhone.no : ${phone}\ncoupon : ${coupon}`;
+        const template = `Name : ${validatedName}\nEmail : ${validatedEmail}\nPhone.no : ${ValidatedPhone_no}\ncoupon : ${coupon}`;
         
         await transporter.sendMail({
             ...mailOptions,
@@ -60,7 +64,7 @@ export async function POST(req: NextRequest) {
 
     const response = NextResponse.json({ success: true }, { status: 200 });
 
-    const token = await generateJwtToken({ phone });
+    const token = await generateJwtToken({ validatedName, validatedEmail, ValidatedPhone_no });
 
     response.cookies.set("token", token, {
         httpOnly: true,
