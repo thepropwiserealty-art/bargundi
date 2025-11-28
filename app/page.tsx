@@ -24,22 +24,22 @@ export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { isAuthenticated, setAuthenticated } = useContext(context);
 
-  const handleLoadingComplete = () => {
-    setIsLoading(false)
-  }
+  // const handleLoadingComplete = () => {
+  //   setIsLoading(false)
+  // }
 
   // Prevent scroll during loading
-  useEffect(() => {
-    if (isLoading) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "unset"
-    }
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     document.body.style.overflow = "hidden"
+  //   } else {
+  //     document.body.style.overflow = "unset"
+  //   }
 
-    return () => {
-      document.body.style.overflow = "unset"
-    }
-  }, [isLoading])
+  //   return () => {
+  //     document.body.style.overflow = "unset"
+  //   }
+  // }, [isLoading])
 
   useEffect(() => {
     checkIfSubmitted(setIsSubmitted).then(() => setAuthenticated(true)).catch((err) => console.log(err));
@@ -47,9 +47,9 @@ export default function Home() {
 
   return (
     <>
-      {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
+      {/* {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />} */}
 
-      <div className={`transition-opacity duration-500 ${isLoading ? "opacity-0" : "opacity-100"}`}>
+      <div className={`transition-opacity duration-500`}>
         <Navigation />
         <DownloadBrochureButton />
         <main>

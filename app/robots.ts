@@ -6,15 +6,11 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: [
-          '/api/'
-        ],
+        disallow: ['/api/', '/_next/', '/private/'],
       },
-      // Optional: Specific rules for different bots
       {
         userAgent: 'Googlebot',
         allow: '/',
-        crawlDelay: 0,
       },
     ],
     sitemap: 'https://mantra-burgundy-best-deals.com/sitemap.xml',
