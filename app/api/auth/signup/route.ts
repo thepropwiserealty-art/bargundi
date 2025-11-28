@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { transporter, mailOptions } from "@/lib/nodemailer";
 import { generateJwtToken } from "@/lib/jwt";
 import generateUserCoupon from "@/lib/generateCoupon";
+import { websiteName } from "@/lib/constans";
+import checkIfExists from "@/lib/mongoose/checkIfExists";
+import createUser from "@/lib/mongoose/createUser";
 
 type requestBody = {
     name?: string,
@@ -13,6 +16,7 @@ export async function POST(req: NextRequest) {
     const body: requestBody = await req.json();
     const { name, email, phone } = body;
     const to = process.env.CLIENT_EMAIL;
+    
 
     if (!name) {
         return NextResponse.json({ error: "name cannot be empty" }, { status: 400 });
@@ -24,9 +28,22 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "phone cannot be empty" }, { status: 400 });
     }
 
+    const userExists = await checkIfExists(email, phone);
+    // console.log(userExists);
+    
+    if(userExists.statusCode != 200){
+        return NextResponse.json({error: userExists.message}, {status: userExists.statusCode});
+    }
+
     try {
-        const subject = `New Registration for ${process.env.WEBSITE_NAME}`;
+        const subject = `New Registration for ${websiteName}`;
         const coupon = generateUserCoupon(phone);
+        
+        const addUserResult = await createUser(name, email, phone, coupon);
+        
+        if(addUserResult.statusCode != 200){
+            throw new Error(addUserResult.message);
+        }
 
         const template = `Name : ${name}\nEmail : ${email}\nPhone.no : ${phone}\ncoupon : ${coupon}`;
         
