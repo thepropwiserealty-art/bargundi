@@ -17,7 +17,7 @@ export default function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0 w-full h-full">
         <Image
-          src="/mantrabg.jpeg"
+          src="/mantrabgg.webp"
           alt="Luxury Estate representing Burgundy Luxuries"
           fill
           priority
