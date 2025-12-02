@@ -19,25 +19,25 @@ import blurImage from "@/public/blur.jpg"
 const galleryImages = [
   {
     id: 1,
-    src: "/livingcam.jpg",
+    src: "/livingcam.webp",
     alt: "Luxury Living Room",
     category: "Marvilla",
   },
   {
     id: 2,
-    src: "/nightcam.jpg",
+    src: "/nightcam.webp",
     alt: "Night View",
     category: "Marvilla",
   },
   {
     id: 3,
-    src: "/livingcam2.jpg",
+    src: "/livingcam2.webp",
     alt: "Living Room ",
     category: "Marvilla",
   },
   {
     id: 4,
-    src: "/daycam.jpg",
+    src: "/daycam.webp",
     alt: "Day view",
     category: "Marvilla",
   },
@@ -55,7 +55,7 @@ const galleryImages = [
   },
   {
     id: 7,
-    src: "/compMayfiar00.jpg",
+    src: "/compMayfiar00.webp",
     alt: "Fitness Center",
     category: "Mayfair",
   },
@@ -85,13 +85,13 @@ const galleryImages = [
   },
   {
     id: 12,
-    src: "/private-balcony-with-outdoor-furniture-and-city-vi.jpg",
+    src: "/private-balcony-with-outdoor-furniture-and-city-vi.webp",
     alt: "Private Balcony",
     category: "Mayfair",
   },
   {
     id: 13,
-    src: "/comp3617_Mantra_Mirari_Image_13_01-min-min.jpg",
+    src: "/comp3617_Mantra_Mirari_Image_13_01-min-min.webp",
     alt: "Exterior",
     category: "Mayfair",
   },

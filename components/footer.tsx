@@ -37,21 +37,21 @@ export default function Footer() {
           {/* MIDDLE + RIGHT — QR Logos */}
           <div className="md:col-span-2 flex justify-between items-center px-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 fill-mode-forwards">
             <Image 
-              src="/QRf.png" 
+              src="/QRf.webp" 
               alt="QR Code" 
               width={128} 
               height={128} 
               className="h-32 w-32 object-contain rounded-md" 
             />
             <Image 
-              src="/qr1.png" 
+              src="/qr1.webp" 
               alt="QR Code" 
               width={128} 
               height={128} 
               className="h-32 w-32 object-contain rounded-md" 
             />
             <Image 
-              src="/qr2.png" 
+              src="/qr2.webp" 
               alt="QR Code" 
               width={128} 
               height={128} 

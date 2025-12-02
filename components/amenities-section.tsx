@@ -57,35 +57,62 @@ export default function AmenitiesSection() {
   const whatsappNumber = "918237311365"
 
   return (
-    <section id="amenities" className="py-20 bg-background">
+    <section
+      id="amenities"
+      className="py-20 bg-background"
+      aria-labelledby="amenities-heading"
+      aria-live="polite"
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">
+          <h2
+            id="amenities-heading"
+            className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance"
+          >
             Our Amenities
           </h2>
+
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
             Enjoy a range of amenities designed to enhance comfort, convenience, and community living.
           </p>
         </div>
 
+        {/* Amenities Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {amenities.map((amenity) => (
-            <div key={amenity.title}>
-              <Card className="h-full hover:shadow-lg transition-all duration-300 group hover:scale-105">
-                <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300 transform group-hover:scale-110">
-                    <amenity.icon className="w-8 h-8 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-card-foreground mb-2">
-                    {amenity.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {amenity.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          ))}
+          {amenities.map((amenity) => {
+            const id = amenity.title.toLowerCase().replace(/\s+/g, "-")
+            return (
+              <div key={amenity.title}>
+                <Card
+                  className="h-full hover:shadow-lg transition-all duration-300 group hover:scale-105"
+                  role="region"
+                  aria-labelledby={id}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div
+                      className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300 transform group-hover:scale-110"
+                    >
+                      <amenity.icon
+                        className="w-8 h-8 text-primary"
+                        aria-hidden="true"
+                      />
+                    </div>
+
+                    <h3
+                      id={id}
+                      className="text-lg font-semibold text-card-foreground mb-2"
+                    >
+                      {amenity.title}
+                    </h3>
+
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {amenity.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            )
+          })}
         </div>
 
         {/* Call to Action */}
@@ -98,11 +125,13 @@ export default function AmenitiesSection() {
               Schedule a tour to explore our amenities and see what makes our
               community special.
             </p>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href={`https://wa.me/${whatsappNumber}?text=Schedule%20me%20tour%20of%20Burgundy%20Series`}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Schedule a tour through WhatsApp"
                 className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors inline-block hover:scale-105 transform duration-200 text-center"
               >
                 Schedule Tour
@@ -112,6 +141,7 @@ export default function AmenitiesSection() {
                 href={`https://wa.me/${whatsappNumber}?text=Send%20me%20the%20brochure`}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Request the brochure through WhatsApp"
                 className="border border-border text-foreground px-8 py-3 rounded-lg font-medium hover:bg-muted transition-colors inline-block hover:scale-105 transform duration-200 text-center"
               >
                 Download Brochure

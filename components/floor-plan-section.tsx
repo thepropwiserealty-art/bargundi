@@ -23,7 +23,7 @@ const floorPlans = [
     size: "5000* sqft",
     beds: 5,
     price: "From ₹5.10Cr*",
-    image: "/villa_floor1.png",
+    image: "/villa_floor1.webp",
     features: ["5 beds villa", "In Mundhwa ,Pune", "Masterfull engineering"],
   },
   {
@@ -32,7 +32,7 @@ const floorPlans = [
     size: "1500* sqft",
     beds: 3,
     price: "From ₹2.20Cr*",
-    image: "/mayfair3bhk.png",
+    image: "/mayfair3bhk.webp",
     features: [
       "Luxuries 3 BHK ",
       "At Upper Koregaon Park ,Pune",
@@ -45,7 +45,7 @@ const floorPlans = [
     size: "1743* sqft",
     beds: 4,
     price: "From ₹2.60Cr*",
-    image: "/mayfair4bhk.png",
+    image: "/mayfair4bhk.webp",
     features: [
       "Luxuries 4 BHK ",
       "At Upper Koregaon Park ,Pune",
@@ -59,7 +59,7 @@ const floorPlans = [
     beds: 3,
     baths: 1,
     price: "From ₹2.90Cr*",
-    image: "/oneresidences3bhk.png",
+    image: "/oneresidences3bhk.webp",
     features: [
       "Luxuries 3 BHK",
       "At Magarpatta , Pune",
@@ -73,7 +73,7 @@ const floorPlans = [
     beds: 3,
     baths: 1,
     price: "From ₹2.60Cr*",
-    image: "/oneresidences4bhk.png",
+    image: "/oneresidences4bhk.webp",
     features: [
       "Luxuries 4 BHK",
       "At Magarpatta , Pune",

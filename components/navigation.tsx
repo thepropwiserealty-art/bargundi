@@ -7,13 +7,13 @@ import Image from "next/image"
 
 const navItems = [
   { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
+  { name: "About", href: "#home" },
   { name: "Pricing", href: "#floor-plan" },
   { name: "Floor Plan", href: "#floor-plan" },
   { name: "Amenities", href: "#amenities" },
   { name: "Gallery", href: "#gallery" },
   { name: "Location", href: "#location" },
-]
+] as const
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -96,9 +96,15 @@ export default function Navigation() {
                 variant="ghost" 
                 size="icon" 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="transition-transform active:scale-95"
+                className="transition-transform active:scale-95 h-10 w-10"
+                aria-label="Toggle menu"
+                aria-expanded={isMobileMenuOpen}
               >
-                {isMobileMenuOpen ? <X /> : <Menu />}
+                {isMobileMenuOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <span className="text-sm font-semibold leading-none">Menu</span>
+                )}
               </Button>
             </div>
           </div>
