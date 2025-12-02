@@ -18,6 +18,9 @@ export const userSchema = yup.object({
     .test("is-valid-indian-phone", "Invalid Indian mobile number", (value) => {
       if (!value) return false;
       const phone = parsePhoneNumberFromString(value, "IN");
-      return phone?.isValid() ?? false;
+      return (
+        Boolean(phone?.isValid()) && 
+        /^[6-9]/.test(phone?.nationalNumber || "")
+      );
     }),
 });

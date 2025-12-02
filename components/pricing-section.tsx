@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Bed, Square, MapPin } from "lucide-react"
+import blurImage from "@/public/blur.jpg"
 
 const properties = [
   {
@@ -35,7 +36,7 @@ const properties = [
     price: "",
     beds: "3/4",
     sqft: "1400-2100*",
-    image: "One Residences Final Logo-C2C-01.jpg",
+    image: "One Residences Final Logo-C2C-01.webp",
     badge: "Luxury 3BHK & 4BHK",
     badgeVariant: "destructive" as const,
     phone: "8237311365",
@@ -74,6 +75,8 @@ export default function PricingSection() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL={blurImage.blurDataURL}
                   />
                   
                   <Badge className="absolute top-4 left-4 z-10" variant={property.badgeVariant}>

@@ -5,7 +5,7 @@ import luxuryInteriorImage from "@/public/modern-luxury-living-room-with-floor-t
 
 const stats = [
   { icon: Home, value: "500+", label: "Properties Sold" },
-  { icon: Users, value: "1000+", label: "Happy Clients" },
+  { icon: Users, value: "1000+", label: "it Happy Clients" },
   { icon: Award, value: "25+", label: "Years Experience" },
   { icon: Star, value: "4.9", label: "Client Rating" },
 ]

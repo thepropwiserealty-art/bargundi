@@ -8,8 +8,8 @@ import JsonLd from '@/components/JsonLd';
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  // maximumScale: 1,
+  // userScalable: false,
 }
 
 export const metadata: Metadata = {
@@ -136,7 +136,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* ✅ REQUIRED for Google reCAPTCHA v2 checkbox */}
         <script
-          src="https://www.google.com/recaptcha/api.js"
+          src="https://www.recaptcha.net/recaptcha/api.js"
           async
           defer
         ></script>
