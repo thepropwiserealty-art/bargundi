@@ -61,7 +61,7 @@ const galleryImages = [
   },
   {
     id: 8,
-    src: "/Mantra_Mirari0.webp",
+    src: "/CMantra_Mirari.webp",
     alt: "Top View",
     category: "Mayfair",
   },

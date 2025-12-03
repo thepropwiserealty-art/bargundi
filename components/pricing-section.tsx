@@ -24,6 +24,7 @@ const properties = [
     location: "Upper Koregaon Park, Mundhwa, Pune",
     price: "",
     beds: "3/4",
+    sqft: "1500-1800*",
     image: "Mayfair-Logo.webp",
     badge: "Premium 3 BHK , 4 BHK",
     badgeVariant: "secondary" as const,
