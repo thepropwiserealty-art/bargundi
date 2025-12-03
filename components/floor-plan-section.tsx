@@ -208,7 +208,7 @@ export default function FloorPlanSection() {
                           ? "object-cover blur-image-clear transition-all duration-500"
                           : "object-cover blur-image transition-all duration-500"
                       }
-                      sizes="(min-width: 1024px) 66vw, 100vw"
+                      sizes="(max-width: 768px) 100vw, 350px"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                     <div className="absolute bottom-4 left-4 text-white">
@@ -287,7 +287,7 @@ export default function FloorPlanSection() {
                                 ? "object-cover blur-image-clear"
                                 : "object-cover blur-image"
                             }
-                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                            sizes="(max-width: 768px) 100vw, 350px"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                           <div className="absolute bottom-4 left-4 text-white">

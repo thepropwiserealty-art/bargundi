@@ -134,12 +134,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        {/* ✅ REQUIRED for Google reCAPTCHA v2 checkbox */}
-        <script
-          src="https://www.recaptcha.net/recaptcha/api.js"
-          async
-          defer
-        ></script>
       </head>
 
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>

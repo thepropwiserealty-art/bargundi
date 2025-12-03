@@ -9,7 +9,7 @@ export async function checkIfSubmitted(setSubmitted:React.Dispatch<React.SetStat
             throw new Error("not authenticated");
         }
     } catch (error) {
-        console.log(error);
-        throw error;
+        // console.log(error);
+        // throw error;
     }
 }

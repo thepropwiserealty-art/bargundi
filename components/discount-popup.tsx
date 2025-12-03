@@ -28,7 +28,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
   const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   useEffect(() => {
-    checkIfSubmitted(setIsSubmitted).catch((err) => console.log(err))
+    checkIfSubmitted(setIsSubmitted).catch((err) => {})
   }, [setIsSubmitted])
 
   useEffect(() => {
@@ -163,6 +163,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Enter your name"
                       className="pl-8 sm:pl-10 h-10 sm:h-11 md:h-12 border-[#b23b3b]/40 focus:border-[#800020] focus:ring-0 text-[#4a1c1c] placeholder-[#6b1d1d]/60 bg-[#fff8f2] w-full"
+                      autoComplete="name"
                     />
                   </div>
                   {errors.name && <p className="text-[#b23b3b] text-xs sm:text-sm mt-1">{errors.name}</p>}
@@ -181,6 +182,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
                       className="pl-8 sm:pl-10 h-10 sm:h-11 md:h-12 border-[#b23b3b]/40 focus:border-[#800020] focus:ring-0 text-[#4a1c1c] placeholder-[#6b1d1d]/60 bg-[#fff8f2] w-full"
+                      autoComplete="email"
                     />
                   </div>
                   {errors.email && <p className="text-[#b23b3b] text-xs sm:text-sm mt-1">{errors.email}</p>}
@@ -200,6 +202,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
                       placeholder="Enter your phone number"
                       className="pl-8 sm:pl-10 h-10 sm:h-11 md:h-12 border-[#b23b3b]/40 focus:border-[#800020] focus:ring-0 text-[#4a1c1c] placeholder-[#6b1d1d]/60 bg-[#fff8f2] w-full"
                       maxLength={10}
+                      autoComplete="tel"
                     />
                   </div>
                   {errors.phone && <p className="text-[#b23b3b] text-xs sm:text-sm mt-1">{errors.phone}</p>}
