@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, useEffect } from "react" // Import useState and useEffect
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { MapPin } from "lucide-react"
@@ -31,6 +34,23 @@ const projects = [
 ]
 
 export default function LocationSection() {
+  const [isMounted, setIsMounted] = useState(false)
+
+  // Trigger animation after mount
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  // --- Native Tailwind Entrance Classes ---
+  // Apply a fade-in and slide-up effect on load for the header
+  const headerEntranceClasses = `text-center mb-12 transition-all duration-700 ease-out 
+    ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`
+  
+  // Apply a fade-in and slide-up effect on load for the grid (with a slight delay)
+  const gridEntranceClasses = `grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-700 ease-out 
+    ${isMounted ? 'opacity-100 translate-y-0 delay-200' : 'opacity-0 translate-y-8'}`
+  // ----------------------------------------
+
   return (
     <section
       id="location"
@@ -39,8 +59,8 @@ export default function LocationSection() {
     >
       <div className="container mx-auto px-4">
         
-        {/* Header */}
-        <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        {/* Header - Uses native transition properties */}
+        <div className={headerEntranceClasses}>
           <h1
             id="location-heading"
             className="text-4xl md:text-5xl font-bold text-primary text-balance"
@@ -49,8 +69,8 @@ export default function LocationSection() {
           </h1>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200 fill-mode-forwards">
+        {/* Cards Grid - Uses native transition properties */}
+        <div className={gridEntranceClasses}>
           {projects.map((project) => (
             <Card
               key={project.name}

@@ -45,11 +45,13 @@ const properties = [
 ]
 
 export default function PricingSection() {
+  // Removed useState and useEffect imports and usage
+
   return (
     <section id="pricing" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        {/* Header - Now static */}
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">
             Burgundy Series
           </h2>
@@ -59,22 +61,26 @@ export default function PricingSection() {
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200 fill-mode-forwards">
+        {/* Grid - Now static */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {properties.map((property) => (
             <div
               id={property.title.replaceAll(" ", "-")}
               key={property.id}
               className="h-full"
             >
-              <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group h-full flex flex-col">
+              <Card 
+                // Removed hover, transition, and group classes
+                className="overflow-hidden h-full flex flex-col"
+              >
                 {/* Image Container */}
                 <div className="relative h-64 w-full overflow-hidden">
                   <Image
                     src={property.image.startsWith('/') ? property.image : `/${property.image}`}
                     alt={property.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    // Removed transition and group-hover classes
+                    className="object-cover" 
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     placeholder="blur"
                     blurDataURL={blurImage.blurDataURL}
@@ -113,7 +119,6 @@ export default function PricingSection() {
                   </div>
 
                   <div className="flex gap-2 mt-auto">
-                    {/* Replaced onClick with standard anchor tags */}
                     <a 
                       href={`https://wa.me/${property.phone}?text=${encodeURIComponent(`I want details of ${property.title}`)}`}
                       target="_blank"

@@ -61,7 +61,7 @@ export default function StickyForm({ isSubmitted, setIsSubmitted }: isSubmitProp
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 text-[#4a1c1c] placeholder-[#6b1d1d]/60 focus:border-[#b23b3b] focus:outline-none transition"
+            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 text-[#4a1c1c] placeholder-[#6b1d1d]/60 focus:border-[#b23b3b] focus:outline-none transition duration-150"
             autoComplete="name"
           />
           <input
@@ -72,7 +72,7 @@ export default function StickyForm({ isSubmitted, setIsSubmitted }: isSubmitProp
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 text-[#4a1c1c] placeholder-[#6b1d1d]/60 focus:border-[#b23b3b] focus:outline-none transition"
+            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 text-[#4a1c1c] placeholder-[#6b1d1d]/60 focus:border-[#b23b3b] focus:outline-none transition duration-150"
             autoComplete="email"
           />
           <input
@@ -84,7 +84,7 @@ export default function StickyForm({ isSubmitted, setIsSubmitted }: isSubmitProp
             onChange={(e) => setPhone(e.target.value)}
             required
             autoComplete="tel"
-            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 text-[#4a1c1c] placeholder-[#6b1d1d]/60 focus:border-[#b23b3b] focus:outline-none transition"
+            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 text-[#4a1c1c] placeholder-[#6b1d1d]/60 focus:border-[#b23b3b] focus:outline-none transition duration-150"
           />
           <button
             type="submit"

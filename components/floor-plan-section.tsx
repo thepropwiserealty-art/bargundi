@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { useState, useEffect, useContext } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -15,8 +14,20 @@ import {
 } from "@/components/ui/carousel"
 import { Grid3X3, Play } from "lucide-react"
 import context from "@/lib/context"
+import FloorPlanImage from "./FloorPlanImage"
 
-const floorPlans = [
+type floorPlan = {
+    id: number,
+    name: string,
+    size: string,
+    beds: number,
+    price: string,
+    image: string,
+    baths?: number,
+    features: Array<string>,
+};
+
+const floorPlans:Array<floorPlan> = [
   {
     id: 1,
     name: "Marvilla Villa",
@@ -88,6 +99,14 @@ export default function FloorPlanSection() {
   const [api, setApi] = useState<CarouselApi>()
   const { isAuthenticated } = useContext(context)
 
+  // State for native Tailwind entrance animation
+  const [isMounted, setIsMounted] = useState(false) 
+
+  // Trigger animation after mount
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   // Carousel Auto-scroll logic
   useEffect(() => {
     if (!api || viewMode !== "carousel") return
@@ -106,11 +125,21 @@ export default function FloorPlanSection() {
     )
   }
 
+  // --- Native Tailwind Entrance Classes ---
+  // Apply a fade-in and slide-up effect on load
+  const headerEntranceClasses = `text-center mb-16 transition-all duration-700 ease-out 
+    ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`
+  
+  // Apply a simple fade-in effect on load/view switch
+  const contentEntranceClasses = `transition-opacity duration-500 
+    ${isMounted ? 'opacity-100' : 'opacity-0'}`
+
+
   return (
     <section id="floor-plan" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        {/* Header Section */}
-        <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        {/* Header Section - Uses native transition and isMounted state */}
+        <div className={headerEntranceClasses}>
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">
             Thoughtfully Designed Floor Plans
           </h2>
@@ -143,9 +172,9 @@ export default function FloorPlanSection() {
           </Button>
         </div>
 
-        {/* GRID VIEW */}
+        {/* GRID VIEW - Uses native transition and isMounted state */}
         {viewMode === "grid" ? (
-          <div className="grid lg:grid-cols-3 gap-8 animate-in fade-in duration-500">
+          <div className={`grid lg:grid-cols-3 gap-8 ${contentEntranceClasses}`}>
             {/* List Selection Column */}
             <div className="lg:col-span-1 space-y-4">
               {floorPlans.map((plan) => (
@@ -199,23 +228,15 @@ export default function FloorPlanSection() {
               <Card className="overflow-hidden h-fit sticky top-8">
                 <CardContent className="p-0 h-full flex flex-col">
                   <div className="relative w-full h-96 bg-muted">
-                    <Image
-                      src={selectedPlan.image || "/placeholder.svg"}
-                      alt={`${selectedPlan.name} Floor Plan`}
-                      fill
-                      className={
-                        isAuthenticated
-                          ? "object-cover blur-image-clear transition-all duration-500"
-                          : "object-cover blur-image transition-all duration-500"
-                      }
-                      sizes="(max-width: 768px) 100vw, 350px"
+                    <FloorPlanImage 
+                      selectedPlan={selectedPlan}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                    <div className="absolute bottom-4 left-4 text-white">
+                    <div className="absolute bottom-4 left-4 text-white text-shadow-lg">
                       <h3 className="text-2xl font-bold">
                         {selectedPlan.name}
                       </h3>
-                      <p className="text-lg opacity-90">{selectedPlan.size}</p>
+                      <p className="text-lg font-semibold">{selectedPlan.size}</p>
                     </div>
                   </div>
 
@@ -259,8 +280,8 @@ export default function FloorPlanSection() {
             </div>
           </div>
         ) : (
-          /* CAROUSEL VIEW */
-          <div className="relative animate-in fade-in slide-in-from-right-8 duration-500">
+          /* CAROUSEL VIEW - Uses native transition and isMounted state */
+          <div className={`relative ${contentEntranceClasses}`}>
             <Carousel
               setApi={setApi}
               opts={{
@@ -278,21 +299,13 @@ export default function FloorPlanSection() {
                     <Card className="overflow-hidden h-full hover:shadow-lg transition-shadow duration-300">
                       <CardContent className="p-0">
                         <div className="relative w-full h-64 bg-muted">
-                          <Image
-                            src={plan.image || "/placeholder.svg"}
-                            alt={`${plan.name} Floor Plan`}
-                            fill
-                            className={
-                              isAuthenticated
-                                ? "object-cover blur-image-clear"
-                                : "object-cover blur-image"
-                            }
-                            sizes="(max-width: 768px) 100vw, 350px"
+                          <FloorPlanImage 
+                            selectedPlan={plan}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                           <div className="absolute bottom-4 left-4 text-white">
                             <h3 className="text-xl font-bold">{plan.name}</h3>
-                            <p className="text-sm opacity-90">{plan.size}</p>
+                            <p className="text-sm font-semibold">{plan.size}</p>
                           </div>
                           <Badge className="absolute top-4 right-4 bg-primary text-primary-foreground">
                             {plan.beds} Bed • {plan.baths || plan.beds} Bath

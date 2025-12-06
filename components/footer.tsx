@@ -2,6 +2,8 @@ import { MapPin, Phone } from "lucide-react"
 import Image from "next/image"
 
 export default function Footer() {
+  const entranceClasses = "transition-opacity duration-700 opacity-100"
+  
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
@@ -9,8 +11,7 @@ export default function Footer() {
         {/* TOP ROW */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           
-          {/* LEFT SECTION */}
-          <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className={`space-y-4 ${entranceClasses}`}>
             <div className="flex items-center space-x-2">
               <div className="bg-white p-2 rounded-md flex items-center justify-center">
                 <Image
@@ -34,8 +35,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* MIDDLE + RIGHT — QR Logos */}
-          <div className="md:col-span-2 flex justify-between items-center px-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 fill-mode-forwards">
+          <div className={`md:col-span-2 flex justify-between items-center px-4 ${entranceClasses}`}>
             <Image 
               src="/QRf.webp" 
               alt="QR Code" 
@@ -60,8 +60,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* DISCLAIMER */}
-        <div className="mt-10 border-t border-primary-foreground/20 pt-6 text-center text-xs text-primary-foreground/80 leading-relaxed space-y-3 animate-in fade-in duration-1000 delay-300 fill-mode-forwards">
+        {/* DISCLAIMER - Uses native transition properties */}
+        <div className={`mt-10 border-t border-primary-foreground/20 pt-6 text-center text-xs text-primary-foreground/80 leading-relaxed space-y-3 ${entranceClasses}`}>
           <p>
             <strong>This project is RERA registered.</strong> | Authorized Channel Partner |
             Channel Partner RERA Number: <strong>A52100000378</strong> |

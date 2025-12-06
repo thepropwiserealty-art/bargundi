@@ -30,7 +30,9 @@ export default function Home() {
   const { isAuthenticated, setAuthenticated } = useContext(context);
 
   useEffect(() => {
-    checkIfSubmitted(setIsSubmitted).then(() => setAuthenticated(true)).catch((err)=>{});
+    checkIfSubmitted(setIsSubmitted).then(() => setAuthenticated(true)).catch((err)=>{
+      // console.warn(err.message);
+    });
   }, []);
 
   return (

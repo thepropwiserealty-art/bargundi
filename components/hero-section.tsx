@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
 export default function HeroSection() {
+  
+  const contentBaseClasses = "relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto"
+
   return (
     <section
       id="home"
@@ -20,6 +23,7 @@ export default function HeroSection() {
           src="/mantrabgg.webp"
           alt="Luxury Estate representing Burgundy Luxuries"
           fill
+          fetchPriority="high"
           priority
           quality={75}
           className="object-cover object-center"
@@ -30,19 +34,20 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-black/40 z-10" /> 
       </div>
 
-      {/* Foreground Content */}
-      <div className="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto">
-        {/* Removed animate-in classes to ensure visibility */}
+      {/* Foreground Content - Now static */}
+      <div className={contentBaseClasses}>
+        
+        {/* Title */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight text-balance">
-          Burgundy Luxuries Series
+          Embrace Luxury in Its Purest Form
         </h1>
 
-        {/* Removed animate-in classes to ensure visibility */}
+        {/* Subtitle */}
         <p className="text-base sm:text-xl md:text-2xl mb-8 text-balance">
           Luxury estates crafted for the discerning few. Experience unparalleled elegance and sophistication.
         </p>
 
-        {/* Removed animate-in classes to ensure visibility */}
+        {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a href="#about">
             <Button
@@ -69,10 +74,10 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Indicator - Keeping standard Tailwind animate-bounce */}
+      {/* Scroll Indicator - Removed animate-bounce and transition-colors */}
       <a 
         href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white hover:text-primary transition-colors z-20 animate-bounce"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white hover:text-primary z-20"
         aria-label="Scroll to About section"
       >
         <ChevronDown size={32} />

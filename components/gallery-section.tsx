@@ -180,9 +180,16 @@ const categories = ["All", "Marvilla", "Mayfair", "One Residences"]
 export default function GallerySection() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
-  const [viewMode, setViewMode] = useState<"grid" | "carousel">("grid")
+  const [viewMode, setViewMode] = useState<"grid" | "carousel">("carousel")
   const [api, setApi] = useState<CarouselApi>()
   const { isAuthenticated } = useContext(context)
+
+  const [isMounted, setIsMounted] = useState(false) 
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
 
   useEffect(() => {
     if (!api || viewMode !== "carousel") return
@@ -236,11 +243,21 @@ export default function GallerySection() {
     ? filteredImages.find((img) => img.id === selectedImage)
     : null
 
+
+  const headerEntranceClasses = `text-center mb-16 transition-all duration-700 ease-out 
+    ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`
+  
+  const controlsEntranceClasses = `flex flex-col sm:flex-row items-center justify-between gap-4 mb-12 transition-all duration-700 ease-out delay-100
+    ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`
+
+  const contentEntranceClasses = `transition-opacity duration-500 
+    ${isMounted ? 'opacity-100' : 'opacity-0'}`
+  // ----------------------------------------
+
   return (
     <section id="gallery" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        {/* Header - Replaced Framer Motion with Tailwind Animate-in */}
-        <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className={headerEntranceClasses}>
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">
             Visual Gallery
           </h2>
@@ -251,8 +268,7 @@ export default function GallerySection() {
           </p>
         </div>
 
-        {/* Controls */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
+        <div className={controlsEntranceClasses}>
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map((category) => (
               <Button
@@ -284,6 +300,7 @@ export default function GallerySection() {
               variant={viewMode === "carousel" ? "default" : "outline"}
               size="sm"
               onClick={() => setViewMode("carousel")}
+              // Standard transition kept
               className="flex items-center gap-2 transition-transform active:scale-95"
             >
               <Play size={16} />
@@ -293,8 +310,7 @@ export default function GallerySection() {
         </div>
 
         {viewMode === "grid" ? (
-          // === GRID VIEW ===
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate-in fade-in duration-500">
+          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${contentEntranceClasses}`}>
             {filteredImages.map((image) => (
               <div
                 key={image.id}
@@ -324,8 +340,8 @@ export default function GallerySection() {
             ))}
           </div>
         ) : (
-          // === CAROUSEL VIEW ===
-          <div className="relative animate-in fade-in slide-in-from-right-8 duration-500">
+          // === CAROUSEL VIEW - Uses native transition properties ===
+          <div className={`relative ${contentEntranceClasses}`}>
             <Carousel
               setApi={setApi}
               opts={{
@@ -379,7 +395,7 @@ export default function GallerySection() {
 
         {/* === LIGHTBOX VIEW === */}
         {selectedImage && selectedImageData && (
-          <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 transition-opacity duration-300">
             <div className="relative max-w-4xl max-h-full w-full flex items-center justify-center">
               <div className="relative w-full h-auto max-h-[90vh]">
                 <Image

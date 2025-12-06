@@ -9,7 +9,7 @@ export default function DownloadBrochureButton() {
 
   return (
     <div
-      className="fixed top-20 right-4 z-40 animate-in slide-in-from-right fade-in duration-500 delay-200 fill-mode-forwards"
+      className="fixed top-20 right-4 z-40"
       aria-live="polite"
     >
       <a

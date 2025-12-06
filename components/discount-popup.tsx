@@ -27,24 +27,37 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
   const { setAuthenticated } = useContext(context)
   const recaptchaRef = useRef<ReCAPTCHA>(null)
 
+  // We need to use a separate state to handle the appearance transition when mounted
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
   useEffect(() => {
     checkIfSubmitted(setIsSubmitted).catch((err) => {})
   }, [setIsSubmitted])
 
   useEffect(() => {
     if (isSubmitted) return
-    const showPopup = () => setIsVisible(true)
+    const showPopup = () => {
+      setIsVisible(true)
+      // Small delay to ensure the modal is mounted before starting the transition
+      setTimeout(() => setIsTransitioning(true), 50)
+    }
+
     const initialTimer = setTimeout(showPopup, 20000)
     const recurringTimer = setInterval(() => {
-      if (!isSubmitted) setIsVisible(true)
+      if (!isSubmitted) showPopup()
     }, 20000)
+
     return () => {
       clearTimeout(initialTimer)
       clearInterval(recurringTimer)
     }
   }, [isSubmitted])
 
-  const handleClose = () => setIsVisible(false)
+  const handleClose = () => {
+    setIsTransitioning(false)
+    // Wait for the transition out before unmounting
+    setTimeout(() => setIsVisible(false), 300)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -63,7 +76,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
         loading: "processing...",
         success: () => {
           setIsSubmitted(true)
-          setIsVisible(false)
+          handleClose()
           setAuthenticated(true)
           setName("")
           setPhone("")
@@ -81,18 +94,27 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
 
   if (isSubmitted || !isVisible) return null
 
+  const modalClasses = `
+    bg-[#f8f5f2] rounded-2xl shadow-2xl w-full max-w-[95vw] sm:max-w-xl md:max-w-4xl relative border border-[#a0522d]/20 
+    flex flex-col md:flex-row 
+    transform transition-all duration-300 ease-out
+    ${isTransitioning ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
+  `
+  const overlayClasses = `
+    fixed inset-0 min-h-screen bg-[#4a1c1c]/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 xs:p-4 
+    transition-opacity duration-300
+    ${isTransitioning ? 'opacity-100' : 'opacity-0'}
+  `
+
   return (
-    // Overlay with fade-in animation
     <div
-      className="fixed inset-0 min-h-screen bg-[#4a1c1c]/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 xs:p-4 animate-in fade-in duration-300"
+      className={overlayClasses}
       onClick={handleClose}
     >
-      {/* Modal with zoom-in animation */}
       <div
-        className="bg-[#f8f5f2] rounded-2xl shadow-2xl w-full max-w-[95vw] sm:max-w-xl md:max-w-4xl relative border border-[#a0522d]/20 flex flex-col md:flex-row animate-in zoom-in-95 duration-300"
+        className={modalClasses}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Fixed Close Button */}
         <button
           onClick={handleClose}
           className="fixed top-6 right-6 z-[99] p-2 rounded-full bg-[#fff8f2]/90 hover:bg-[#fff2ea] transition-colors shadow-md md:absolute md:top-3 md:right-3 md:z-10"
@@ -110,12 +132,13 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
               onClick={() => setShowTooltip((prev) => !prev)}
               className="relative"
             >
+              {/* Kept 'transition-colors' (Standard Tailwind) */}
               <div className="p-2 rounded-full bg-[#fff8f2]/90 hover:bg-[#fff2ea] shadow-md cursor-pointer transition-colors">
                 <Info className="w-5 h-5 text-[#6b1d1d]" />
               </div>
-              
+
               {showTooltip && (
-                <div className="absolute top-10 left-0 w-64 sm:w-72 bg-white border border-gray-200 rounded-xl shadow-xl p-3 sm:p-4 text-xs sm:text-sm text-gray-700 z-30 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute top-10 left-0 w-64 sm:w-72 bg-white border border-gray-200 rounded-xl shadow-xl p-3 sm:p-4 text-xs sm:text-sm text-gray-700 z-30">
                   <h4 className="font-semibold text-[#800020] mb-2">Terms & Conditions</h4>
                   <ul className="list-disc pl-4 space-y-1">
                     <li>
