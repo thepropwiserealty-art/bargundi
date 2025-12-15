@@ -1,49 +1,31 @@
 "use client"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import type React from "react"
-
 import toast from "react-hot-toast"
-import signup from "@/lib/signup"
-import context from "@/lib/context"
 
-type isSubmitProps = {
-  isSubmitted: boolean
-  setIsSubmitted: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export default function StickyForm({ isSubmitted, setIsSubmitted }: isSubmitProps) {
+export default function StickyForm() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
-  const { setAuthenticated } = useContext(context)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (isSubmitted) return
-
     if (!name) return toast.error("Name is required")
-    if (!email.includes("@")) return toast.error("Invalid Email")
-    if (phone.length !== 10) return toast.error("Enter 10 digit number")
+    if (!email.includes("@")) return toast.error("Invalid email")
+    if (phone.length !== 10) return toast.error("Enter 10 digit phone number")
 
-    await toast.promise(signup(name, email, phone), {
-      loading: "processing...",
-      success: () => {
-        setIsSubmitted(true)
-        setAuthenticated(true)
+    const whatsappNumber = "918237311365" 
+    const message = `Hi, I want to enquire about Mantra Burgundy Series.
+Name: ${name}
+Email: ${email}
+Phone: ${phone}`
 
-        setName("")
-        setPhone("")
-        setEmail("")
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      message
+    )}`
 
-        const whatsappNumber = "8237311365" // <-- REPLACE WITH YOUR NUMBER
-        const message = `Hi, I want to enquire about Mantra Burgundy Series.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}`
-        window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank")
-
-        return "success"
-      },
-      error: (err) => `${err.toString()}`,
-    })
+    window.location.href = whatsappUrl
   }
 
   return (
@@ -52,45 +34,40 @@ export default function StickyForm({ isSubmitted, setIsSubmitted }: isSubmitProp
         <form
           className="flex flex-wrap items-center gap-4 py-4"
           onSubmit={handleSubmit}
-        > Enquire Now
+        >
+          <span className="font-semibold text-[#4a1c1c]">
+            Enquire Now
+          </span>
+
           <input
-            id="name"
-            name="name"
             type="text"
             placeholder="Name*"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            required
-            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 text-[#4a1c1c] placeholder-[#6b1d1d]/60 focus:border-[#b23b3b] focus:outline-none transition duration-150"
-            autoComplete="name"
+            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 focus:outline-none"
           />
+
           <input
-            id="email"
-            name="email"
             type="email"
             placeholder="Email*"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
-            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 text-[#4a1c1c] placeholder-[#6b1d1d]/60 focus:border-[#b23b3b] focus:outline-none transition duration-150"
-            autoComplete="email"
+            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 focus:outline-none"
           />
+
           <input
-            id="phone"
-            name="phone"
             type="tel"
             placeholder="Phone*"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            required
-            autoComplete="tel"
-            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 text-[#4a1c1c] placeholder-[#6b1d1d]/60 focus:border-[#b23b3b] focus:outline-none transition duration-150"
+            className="flex-1 min-w-[150px] bg-transparent border-b border-[#6b1d1d]/40 focus:outline-none"
           />
+
           <button
             type="submit"
-            className="bg-[#800020] hover:bg-[#6b1d1d] text-[#fff8f2] font-semibold px-6 py-2 rounded-md transition transform hover:-translate-y-0.5 whitespace-nowrap shadow-sm border border-[#a0522d]/20"
+            className="bg-[#800020] hover:bg-[#6b1d1d] text-white px-6 py-2 rounded-md"
           >
-            Submit
+            Enquire
           </button>
         </form>
       </div>
