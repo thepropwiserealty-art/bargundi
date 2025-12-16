@@ -33,10 +33,7 @@ const nextConfig = {
           // Content Security Policy (CSP)
           {
             key: 'Content-Security-Policy',
-            // FIX: 
-            // 1. Added "https://www.recaptcha.net" to frame-src
-            // 2. Added "https://www.google.com https://www.gstatic.com https://www.recaptcha.net" to connect-src (required for captcha validation)
-            value: "default-src 'self'; connect-src 'self' https://maps.googleapis.com https://www.google.com https://www.gstatic.com https://www.recaptcha.net; frame-src 'self' https://www.google.com https://www.recaptcha.net; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' data: https:;"
+            value: "default-src 'self'; connect-src 'self' https://maps.googleapis.com https://www.google.com https://www.gstatic.com https://www.recaptcha.net https://www.google-analytics.com https://www.googletagmanager.com https://googleads.g.doubleclick.net; frame-src 'self' https://www.google.com https://www.recaptcha.net https://www.googletagmanager.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' data: https:;"
           }
         ],
       },
