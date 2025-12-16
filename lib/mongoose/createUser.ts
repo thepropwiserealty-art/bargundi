@@ -24,12 +24,12 @@ export default async function createUser(full_name: string, email: string, phone
     }
 
     try {
-        await User.create({
+        await User.create([{
             full_name,
             email,
             phone_no,
             coupon_code
-        },
+        }],
         {
             session
         }
