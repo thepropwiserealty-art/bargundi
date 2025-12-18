@@ -71,7 +71,7 @@ export default function DiscountPopup({ isSubmitted, setIsSubmitted }: isSubmitP
     if (!token) return setErrors((prev) => ({ ...prev, recaptcha: "Please verify you are not a robot" }))
 
     await toast.promise(
-      signup(name, email, phone),
+      signup(name, email, phone, token),
       {
         loading: "processing...",
         success: () => {
