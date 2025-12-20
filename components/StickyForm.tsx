@@ -1,18 +1,12 @@
 "use client"
-import context from "@/lib/context"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import type React from "react"
 import toast from "react-hot-toast"
-import signup from "@/lib/signup"
 
-
-export default function StickyForm(
-  { setIsSubmitted }: {setIsSubmitted: React.Dispatch<React.SetStateAction<boolean>>}
-) {
+export default function StickyForm() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
-  const { setAuthenticated } = useContext(context);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -21,35 +15,17 @@ export default function StickyForm(
     if (!email.includes("@")) return toast.error("Invalid email")
     if (phone.length !== 10) return toast.error("Enter 10 digit phone number")
 
-    await toast.promise(
-      signup(name, email, phone),
-      {
-        loading: "processing...",
-        success: () => {
-          setIsSubmitted(true)
-          setAuthenticated(true)
-          setName("")
-          setPhone("")
-          setEmail("")
+    const whatsappNumber = "918237311365" 
+    const message = `Hi, I want to enquire about Mantra Burgundy Series.
+Name: ${name}
+Email: ${email}
+Phone: ${phone}`
 
-          const whatsappNumber = "918237311365"
-          const message = `Hi, I want to enquire about Mantra Burgundy Series.
-          Name: ${name}
-          Email: ${email}
-          Phone: ${phone}`
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      message
+    )}`
 
-          const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-            message
-          )}`
-
-          window.open(whatsappUrl, "_blank")
-          return "success"
-        },
-        error: (err) => `${err.toString()}`,
-      }
-    )
-
-
+    window.location.href = whatsappUrl
   }
 
   return (
