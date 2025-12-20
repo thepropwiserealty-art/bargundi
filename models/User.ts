@@ -9,7 +9,6 @@ const UserSchema = new mongoose.Schema(
       maxlength: 150,
       trim: true,
     },
-
     email: {
       type: String,
       required: true,
@@ -18,7 +17,6 @@ const UserSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
-
     phone_no: {
       type: String,
       required: true,

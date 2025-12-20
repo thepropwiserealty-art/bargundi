@@ -15,12 +15,12 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mantra-burgundy-best-deals.com'),
 
   title: {
-    default: 'Mantra Burgundy Luxury Collection | Marvilla, 1 Residences & Mayfair | Authorized Partner',
+    default: 'Mantra Burgundy Luxury Collection | Marvilla, 1 Residences & Mayfair | Exclusive Offers & Info',
     template: '%s | Mantra Burgundy Best Deals',
   },
 
   description:
-    "Authorized Sales Partner for Mantra Burgundy: Marvilla Villas, 1 Residences & Mayfair. Request Price Sheet, Brochure & Floor Plans for Mundhwa Projects.",
+    "Experience luxury at Mantra Burgundy: Marvilla Villas, 1 Residences & Mayfair.Best Deals Guaranteed.Request Price Sheet, Brochure & Floor Plans for Mundhwa Projects.",
 
   keywords: [
     // --- TOP PRIORITY PROJECTS ---
@@ -71,9 +71,9 @@ export const metadata: Metadata = {
     "Mayfair by Mantra Pune"
   ],
 
-  // Authorship - Explicitly "Authorized Partner"
-  authors: [{ name: 'Mantra Burgundy Authorized Partner' }],
-  creator: 'Mantra Sales Partner',
+  // Authorship - REPLACED to generic/descriptive names
+  authors: [{ name: 'Mantra Burgundy Best Deals' }],
+  creator: 'Pune Luxury Real Estate',
   publisher: 'Mantra Burgundy Best Deals',
 
   robots: {
@@ -93,10 +93,11 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IN',
     url: 'https://mantra-burgundy-best-deals.com/',
-    siteName: 'Mantra Burgundy - Authorized Partner',
+    siteName: 'Mantra Burgundy - Project Highlights & Deals',
     title: 'Mantra Burgundy: Marvilla, 1 Residences, Mayfair | Pricing & Availability',
     description:
-      "Request Pricing for Mantra Marvilla Villas, 1 Residences & Mayfair. 3, 4, 5 BHK in Mundhwa. Authorized Sales Partner.",
+      // REPLACED: "Authorized Sales Partner" -> "Book Your Site Visit"
+      "Request Pricing for Mantra Marvilla Villas, 1 Residences & Mayfair. 3, 4, 5 BHK in Mundhwa. Book Your Site Visit Today.",
     images: [
       {
         url: '/mantrabg',
