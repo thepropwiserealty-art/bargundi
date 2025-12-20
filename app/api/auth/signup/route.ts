@@ -7,6 +7,7 @@ import checkIfExists from "@/lib/mongoose/checkIfExists";
 import createUser from "@/lib/mongoose/createUser";
 import { validate } from "@/lib/validation/validate";
 import { userSchema } from "@/lib/validation/user.schema";
+import mongoose from "mongoose";
 
 type requestBody = {
     name?: string,
@@ -39,11 +40,14 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({error: userExists.message}, {status: userExists.statusCode});
     }
 
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
     try {
         const subject = `New Registration for ${websiteName}`;
         const coupon = generateUserCoupon(ValidatedPhone_no);
         
-        const addUserResult = await createUser(validatedName, validatedEmail, ValidatedPhone_no, coupon);
+        const addUserResult = await createUser(validatedName, validatedEmail, ValidatedPhone_no, coupon, session);
         
         if(addUserResult.statusCode != 200){
             throw new Error(addUserResult.message);
@@ -57,9 +61,14 @@ export async function POST(req: NextRequest) {
             subject,
             text: template
         });
+        await session.commitTransaction();
     } catch (error) {
         console.log("Error while sending email : ", error);
+        await session.abortTransaction();
         return NextResponse.json({ error: "Internal server Error" }, { status: 500 });
+    }
+    finally{
+        session.endSession();
     }
 
     const response = NextResponse.json({ success: true }, { status: 200 });

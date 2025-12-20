@@ -70,7 +70,7 @@ export default function Home() {
         <Footer />
         <FloatingActionButtons />
         <DiscountPopup isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />
-        <StickyForm isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />
+        <StickyForm  setIsSubmitted={setIsSubmitted} />
         
         <Toaster
           position="top-center"

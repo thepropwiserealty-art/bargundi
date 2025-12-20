@@ -6,7 +6,7 @@ type DbQueryResult = {
     message: string
 };
 
-export default async function createUser(full_name: string, email: string, phone_no: string, coupon_code: string): Promise<DbQueryResult>{
+export default async function createUser(full_name: string, email: string, phone_no: string, coupon_code: string, session:any): Promise<DbQueryResult>{
 
     const result: DbQueryResult = {
         statusCode: 200,
@@ -24,12 +24,16 @@ export default async function createUser(full_name: string, email: string, phone
     }
 
     try {
-        await User.create({
+        await User.create([{
             full_name,
             email,
             phone_no,
             coupon_code
-        });
+        }],
+        {
+            session
+        }
+        );
     } catch (error) {
         console.error("Failed to add User:\n" + error);
         result.statusCode = 500;
