@@ -120,7 +120,7 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: 'https://mantra-burgundy-best-deals.com/',
+    canonical: '/',
   },
 
   category: 'Real Estate',

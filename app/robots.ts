@@ -11,6 +11,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: 'Googlebot',
         allow: '/',
+        disallow: ['/api/', '/_next/', '/private/'], 
       },
     ],
     sitemap: 'https://mantra-burgundy-best-deals.com/sitemap.xml',
