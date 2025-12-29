@@ -7,6 +7,7 @@ import HeroSection from "@/components/hero-section"
 import { Toaster } from 'react-hot-toast';
 import context from "@/lib/context"
 import { checkIfSubmitted } from "@/lib/checkIfSubmitted"
+import PropertyDetails from "@/components/property-details"
 
 // ✅ Dynamically import components that are below the fold
 // loading: () => <p>Loading...</p> can be added if you want a skeleton state
@@ -61,6 +62,9 @@ export default function Home() {
           </section>
           <section id="gallery">
             <GallerySection />
+          </section>
+          <section id=" property-details">
+            <PropertyDetails />
           </section>
           <section id="location">
             <LocationSection />
