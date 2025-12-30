@@ -45,8 +45,13 @@ export default function Home() {
         <DownloadBrochureButton />
         
         <main>
+          
           <section id="home">
             <HeroSection />
+          </section>
+
+          <section id=" property-details">
+            <PropertyDetails />
           </section>
           {/* <section id="about">
             <AboutSection />
@@ -63,9 +68,7 @@ export default function Home() {
           <section id="gallery">
             <GallerySection />
           </section>
-          <section id=" property-details">
-            <PropertyDetails />
-          </section>
+          
           <section id="location">
             <LocationSection />
           </section>
